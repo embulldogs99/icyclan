@@ -166,7 +166,7 @@ article{
   width: 80%;
   line-height: 20px;
       text-align: center;
-    /*border: solid green 2px;*/
+  text-align: left;
 }
 
 h {
