@@ -27,6 +27,10 @@ header{
   font-weight: 900;
   background-image: url(fmi.jpg);
   background-size: 70px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 
 }
 .title{
