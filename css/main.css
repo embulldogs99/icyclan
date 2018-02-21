@@ -41,12 +41,16 @@ header{
   font-size: 40px;
   padding: 3%;
   margin-left: 3%;
+
+  /*border: 2px solid green;*/
+}
+.spacer{
   display: flex;
   flex-direction: row;
   align-items: center;
   text-align: left;
   justify-content: space-between;
-  /*border: 2px solid green;*/
+
 }
 
 .slogan{
