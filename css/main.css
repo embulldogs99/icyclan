@@ -32,6 +32,11 @@ header{
   justify-content: space-between;
 
 }
+.contents{
+  style="margin: 0px 0px 0px 90%;
+  font-size: 14px;
+  background-color: white;
+}
 .title{
   padding: 3%;
   margin-left: 3%;
