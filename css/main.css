@@ -45,6 +45,7 @@ header{
   flex-direction: row;
   align-items: center;
   text-align: left;
+  justify-content: space-between;
   /*border: 2px solid green;*/
 }
 
