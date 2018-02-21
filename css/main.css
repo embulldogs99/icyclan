@@ -33,8 +33,12 @@ header{
 
 }
 .contents{
-  style="margin: 0px 0px 0px 80%;
-  font-size: 14px;
+  style="margin: 0px 0px 0px 60%;
+  font-size: 16px;
+  background-color: rgba(255,255,255,0);
+  border-radius: 2rem;
+}
+.contents:hover{
   background-color: white;
 }
 .title{
