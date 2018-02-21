@@ -33,9 +33,10 @@ header{
 
 }
 .contents{
-  style="margin: 0px 0px 0px 60%;
+  style="margin: 0px 0px 0px 0%;
   font-size: 16px;
   background-color: rgba(255,255,255,0);
+  border: .5px solid black;
   border-radius: 2rem;
 }
 .contents:hover{
