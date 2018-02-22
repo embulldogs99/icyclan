@@ -771,6 +771,7 @@ def contentfilter():
 					if info.find(';')>0:
 						info=info[:info.find(';')]
 
+					print("preparing to determine stock info")
 					###Dynamically determining stock based on text. Assuming results may not match original search keyword
 					stock=info[info.find('(')+1:info.find(')')].replace('NYSE:','').replace('NASDAQ:','').replace('NYSE ','').replace(':','').replace(' ','')
 					grab=stock+' | '+info
@@ -823,7 +824,7 @@ def contentfilter():
 								conn.close()
 
 			except:
-				pass
+				print("didn't even try this stock")
 
 
 #run for 100 cycles of 6 hours each
