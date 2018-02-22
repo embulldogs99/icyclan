@@ -813,7 +813,7 @@ def contentfilter():
 							#########################################################
 							##############  Database Connection   ##############
 							print("about to insert a value")
-							time.sleep(5)
+
 
 							try:
 								conn = psycopg2.connect(host="localhost", dbname="postgres", user="postgres", password="rk")
@@ -821,7 +821,7 @@ def contentfilter():
 							except:
 								print(psycopg2.Error)
 							print("successfully connected")
-							time.sleep(5)
+
 							cur = conn.cursor()
 							# execute a statement
 							predreturn=str(round((value-price)/price,2))
