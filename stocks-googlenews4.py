@@ -750,10 +750,18 @@ snp500googleurls=['https://news.google.com/news/rss/search/section/q/GOOG/GOOG?h
 ]
 
 
+try:
+	conn = psycopg2.connect(dbname="postgres",user="postgres", host="localhost", password="rk")
+except:
+	print("Cannot Connect to the databse")
+
+print("successfully connected")
+
+
 
 now=datetime.datetime.now()
 
-def contentfilter():
+def contentfilter(conn):
 	with requests.Session() as c:
 		map=['']
 		urls=snp500googleurls
@@ -813,12 +821,6 @@ def contentfilter():
 							#########################################################
 							##############  Database Connection   ##############
 							print("about to insert a value")
-							try:
-								conn = psycopg2.connect(dbname="postgres",user="postgres", host="localhost", password="rk")
-							except :
-								print("Cannot Connect to the databse")
-
-							print("successfully connected")
 
 							cur = conn.cursor()
 							# execute a statement
@@ -834,6 +836,6 @@ def contentfilter():
 
 #run for 100 cycles of 6 hours each
 for i in range(1,100):
-	contentfilter()
+	contentfilter(conn)
 	print('end')
 	time.sleep(21600/2)
