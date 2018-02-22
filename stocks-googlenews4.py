@@ -815,7 +815,7 @@ def contentfilter():
 							print("about to insert a value")
 							time.sleep(5)
 
-							conn = psychopg2.connect("host='localhost' dbname='fmi' user='postgres' password='rk'")
+							conn = psycopg2.connect("host='localhost' dbname='fmi' user='postgres' password='rk'")
 							#create a cursor
 
 							print("successfully connected")
