@@ -178,14 +178,17 @@ td,th{
   background-color: yellow;
 }
 .researchlinks{
-  font-size: 18px;
   font-weight: 600;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
 }
-.researchlinks:hover{
+.researchlink{
+  font-size: 18px;
+  padding:5px;
+}
+.researchlink:hover{
   background-color: rgba(50,50,50,1);
   color:rgba(0,255,255,1);
   font-weight: 900;
