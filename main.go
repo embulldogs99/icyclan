@@ -21,6 +21,8 @@ func main() {
   http.HandleFunc("/about", serveabout)
   http.HandleFunc("/contact", servecontact)
   http.HandleFunc("/researchlinks", researchlinks)
+  http.HandleFunc("/research/roa", researchroa)
+  http.HandleFunc("/research/eps", researcheps)
   log.Fatal(s.ListenAndServe())
 }
 
@@ -38,5 +40,13 @@ func servecontact(w http.ResponseWriter, r *http.Request){
 }
 func researchlinks(w http.ResponseWriter, r *http.Request){
   tpl := template.Must(template.ParseFiles("researchlinks.gohtml","css/main.css","css/mcleod-reset.css"))
+  tpl.Execute(w, nil)
+}
+func researchroa(w http.ResponseWriter, r *http.Request){
+  tpl := template.Must(template.ParseFiles("researchroa.gohtml","css/main.css","css/mcleod-reset.css"))
+  tpl.Execute(w, nil)
+}
+func researcheps(w http.ResponseWriter, r *http.Request){
+  tpl := template.Must(template.ParseFiles("researcheps.gohtml","css/main.css","css/mcleod-reset.css"))
   tpl.Execute(w, nil)
 }
