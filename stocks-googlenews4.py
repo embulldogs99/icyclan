@@ -813,13 +813,10 @@ def contentfilter():
 							#########################################################
 							##############  Database Connection   ##############
 							print("about to insert a value")
-
-
 							try:
-								conn = psycopg2.connect(host="localhost", dbname="postgres", user="postgres", password="rk")
-							#create a cursor
-							except psycopg2.Error as e:
-								print(e.pgerror)
+								conn = psycopg2.connect(dbname="postgres",user="postgres", host="localhost", password="rk")
+							except :
+								print("Cannot Connect to the databse")
 
 							print("successfully connected")
 
