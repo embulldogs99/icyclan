@@ -814,10 +814,14 @@ def contentfilter():
 							##############  Database Connection   ##############
 							print("about to insert a value")
 							time.sleep(5)
-
-							conn = psycopg2.connect(host="localhost", dbname="postgres", user="postgres", password="rk")
+>>> try:
+...     cur.execute("SELECT * FROM barf")
+... except psycopg2.Error as e:
+							try:
+								conn = psycopg2.connect(host="localhost", dbname="postgres", user="postgres", password="rk")
 							#create a cursor
-
+							except:
+								print(psycopg2.Error)
 							print("successfully connected")
 							time.sleep(5)
 							cur = conn.cursor()
