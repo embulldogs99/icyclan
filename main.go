@@ -22,7 +22,7 @@ func main() {
   http.HandleFunc("/", serve)
   http.HandleFunc("/about", serveabout)
   http.HandleFunc("/contact", servecontact)
-  http.HandleFunc("/research", s)
+  http.HandleFunc("/researchlinks", s)
   log.Fatal(s.ListenAndServe())
 }
 
