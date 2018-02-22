@@ -814,11 +814,13 @@ def contentfilter():
 								#########################################################
 								##############  Database Connection   ##############
 								print("about to insert a value")
+								time.sleep(5)
 
-								conn = psychopq2.connect("host=localhost dbname=postgres user=postgres password=rk")
+								conn = psychopq2.connect("host=localhost:5432/postgres dbname=postgres user=postgres password=rk")
 								#create a cursor
+
 								print("successfully connected")
-								time.sleep(2)
+								time.sleep(5)
 								cur = conn.cursor()
 								# execute a statement
 								predreturn=str(round((value-price)/price,2))
