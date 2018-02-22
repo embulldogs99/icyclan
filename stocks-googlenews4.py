@@ -789,7 +789,6 @@ def contentfilter():
 					## Begin filtering the data for model output
 					## First find $$$$
 					if grab.count('$') > 0:
-						print("found money")
 						targ=int(0)
 						targ=grab.find('$')
 						value=grab[targ+1:targ+5]######## now you have the targeted value
@@ -817,7 +816,7 @@ def contentfilter():
 								print("about to insert a value")
 								time.sleep(5)
 
-								conn = psychopq2.connect("host=localhost:5432 dbname=fmi user=postgres password=rk")
+								conn = psychopq2.connect("host='localhost:5432' dbname='fmi' user='postgres' password='rk'")
 								#create a cursor
 
 								print("successfully connected")
