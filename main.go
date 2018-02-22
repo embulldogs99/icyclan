@@ -43,10 +43,10 @@ func researchlinks(w http.ResponseWriter, r *http.Request){
   tpl.Execute(w, nil)
 }
 func researchroa(w http.ResponseWriter, r *http.Request){
-  tpl := template.Must(template.ParseFiles("researchroa.gohtml","css/main.css","css/mcleod-reset.css"))
+  tpl := template.Must(template.ParseFiles("research/roa.gohtml","css/main.css","css/mcleod-reset.css"))
   tpl.Execute(w, nil)
 }
 func researcheps(w http.ResponseWriter, r *http.Request){
-  tpl := template.Must(template.ParseFiles("researcheps.gohtml","css/main.css","css/mcleod-reset.css"))
+  tpl := template.Must(template.ParseFiles("research/eps.gohtml","css/main.css","css/mcleod-reset.css"))
   tpl.Execute(w, nil)
 }
