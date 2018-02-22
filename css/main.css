@@ -2,7 +2,6 @@ body{
   background-color: rgba(0,0,0,.25);
     font-family: 'Cantarell', sans-serif;
 }
-
 .page{
   display: flex;
   flex-direction: row;
@@ -19,18 +18,14 @@ body{
   padding-right: 0px;
   background-color: rgba(0,0,0,.3);
 }
-
 header{
   /*border-bottom: 2px solid rgba(60,60,255,1);*/
-
-  /*background-color: rgba(60,150,255,.6);*/
   font-weight: 900;
   background-image: url(fmi.jpg);
   background-size: 70px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-
 }
 .contents{
   style="margin: 0px 20px 0px 0%;
@@ -47,7 +42,6 @@ header{
   font-size: 40px;
   padding: 3%;
   margin-left: 3%;
-
   /*border: 2px solid green;*/
 }
 .spacer{
@@ -56,9 +50,7 @@ header{
   align-items: center;
   text-align: left;
   justify-content: space-between;
-
 }
-
 .slogan{
   font-size: 22px;
   padding: 0% 0% 1.5% 20%;
@@ -66,7 +58,6 @@ header{
     /*border-bottom: 2px solid rgba(60,60,255,1);*/
     width: 100%;
 }
-
 .button{
   display: flex;
   flex-direction: row;
@@ -117,12 +108,10 @@ color: orange;
   color: darkorange;
   font-weight: 600;
 }
-
 .link2:hover{
   color:rgba(0,150,255,1);
   font-size: 110%;
 }
-
 .images{
   display: flex;
   flex-direction: column;
@@ -132,7 +121,6 @@ color: orange;
 img{
   padding: 20px 0px;
 }
-
 d{
   font-weight: 900;
 }
@@ -145,7 +133,6 @@ i{
 h{
   margin: 50px 0px 0px 50px;
 }
-
 svg{
   color:rgba(255,106,0,1);
   height:30px;
@@ -162,7 +149,6 @@ svg:hover{
   cursor: crosshair;
   font-size: 110%;
 }
-
 article{
   padding: 2rem 2rem;
   margin: 0rem 0rem 0rem 2rem;
@@ -172,14 +158,12 @@ article{
       text-align: center;
   text-align: left;
 }
-
 h {
   font-size: 20px;
   font-weight: 900;
   text-align: left;
   margin-left: 0px;
 }
-
 table{
   display: flex;
   flex-direction: row;
@@ -190,7 +174,15 @@ td,th{
   padding: 3px;
   border: .5px solid black;
 }
-
 #spec{
   background-color: yellow;
+}
+.researchlinks{
+  font-size: 16px;
+  font-weight: 600;
+}
+.researchlinks:hover{
+  background-color: rgba(50,50,50,1);
+  color:rgba(0,255,255,1);
+  font-weight: 900;
 }
