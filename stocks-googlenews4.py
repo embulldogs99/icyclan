@@ -775,7 +775,7 @@ def contentfilter():
 					except:
 						pass
 
-					print("preparing to determine stock info")
+
 					###Dynamically determining stock based on text. Assuming results may not match original search keyword
 					stock=info[info.find('(')+1:info.find(')')].replace('NYSE:','').replace('NASDAQ:','').replace('NYSE ','').replace(':','').replace(' ','')
 					grab=stock+' | '+info
@@ -789,6 +789,7 @@ def contentfilter():
 					## Begin filtering the data for model output
 					## First find $$$$
 					if grab.count('$') > 0:
+					print("found money")
 						targ=int(0)
 						targ=grab.find('$')
 						value=grab[targ+1:targ+5]######## now you have the targeted value
