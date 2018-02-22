@@ -821,8 +821,7 @@ def contentfilter():
 								     # close the communication with the PostgreSQL
 								cur.close()
 								conn.close()
-			except:
-				pass
+
 
 #run for 100 cycles of 6 hours each
 for i in range(1,100):
