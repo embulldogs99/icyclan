@@ -789,7 +789,7 @@ def contentfilter():
 					## Begin filtering the data for model output
 					## First find $$$$
 					if grab.count('$') > 0:
-					print("found money")
+						print("found money")
 						targ=int(0)
 						targ=grab.find('$')
 						value=grab[targ+1:targ+5]######## now you have the targeted value
