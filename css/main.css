@@ -28,7 +28,7 @@ header{
   justify-content: space-between;
 }
 .contents{
-  style="margin: 0px 20px 0px 0%;
+  margin: 0px 20px 0px 0px;
   padding: 5px;
   font-size: 16px;
   background-color: rgba(255,255,255,0);
