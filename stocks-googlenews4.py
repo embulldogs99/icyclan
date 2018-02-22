@@ -1,134 +1,49 @@
 # coding: utf-8
-#Imports
+
+#If on a new machine - will need to download modules
+#sudo apt-get install python3-bs4
+#pip install BeautifulSoup4
+#sudo apt-get install python3-pandas
+#sudo apt-get install python-setuptools python-dev build-essential
+#sudo apt-get upgrade python
+#sudo easy_install pip
+#sudo pip install --upgrade virtualenv
+
+
+
+######################################################
+####################################################
+######### Imports #####################
 
 import requests
 import bs4
 from bs4 import BeautifulSoup
 import warnings
-import pandas
 import time
 import datetime
 import json
 import pandas as pd
 import io
-import time
 from termcolor import colored
 import re
 import psycopg
+import quandl
 
 warnings.filterwarnings('ignore')
 
-
-
-
-#########################################################
-##############   Functions   ##############
-
-def grabgooglenews(c, url):
-	"""Pulls all strings from URL"""
-	x=c.get(url)
-	x=BeautifulSoup(x.content, 'html.parser')
-	x=x.body.find_all(string=True)
-	return x
-
-
-def cleanup(x):
-	cutoff=(x.index('Sorted by date')+2)
-	x=x[cutoff:len(x)]
-	x=''.join(x)
-	return x
-
-
-def countmetrics(x):
-	"""Counts instances of strings in string x """
-	stats = {
-
-	'RevGrowth': x.count('revenue growth')+x.count('Revenue growth')+x.count('Revenue Growth'),
-	'Gain': x.count('gain')+x.count('Gain'),
-	'High': x.count('high')+x.count('High'),
-	'Buy': x.count('buy')+x.count('Buy'),
-	'StrongBuy': x.count('Strong Buy')+x.count('strong buy')+x.count('String buy'),
-	'Raise': x.count('raise')+x.count('Raise')
-
-	}
-
-	return(stats)
-
-
-def run(url):
-	"""Runs the news data pull"""
-	x=countmetrics(cleanup(grabgooglenews(url)))
-	return x
-
-
-def runvisual(c, url, stock):
-	"""Runs the news data pull and displays terminal output"""
-	x=countmetrics(cleanup(grabgooglenews(c, url)))
-	for key, value in x.items():
-		print(stock+' '+key+' '+str(value))
-
-
-
-def googleurlpuller(url):
-	"""Requests url, searches for anchor tags, pulls out links, converts to list"""
-	x=requests.get(url)
-	x=BeautifulSoup(x.content, 'html.parser')
-	x=x.find_all('a')
-	x=str(x)
-	x=x.split('"')
-
-	#define initial blank list for us to append into
-	list=[]
-	for i in x:
-		if i[1:4] == 'url':
-			z=i.find('http')
-			z=i[z:len(i)]
-			list.append(z)
-	return(list)
-
-
-
-def rssgrab(c, url):
-	x=c.get(url)
-	x=BeautifulSoup(x.content)
-	titles=x.find_all('title')
-	pubdate=x.find_all('lastbuilddate')+x.find_all('pubdate')
-	desc=x.find_all('description')
-	for p,t,d in zip(pubdate[1:5],titles[1:5],desc[1:5]):
-		print(p.text,t.text)
-		print(d.text)
-
-
-
-
-
-
-def acnanalyzer(c):
-	"""Counts instances of strings in string x """
-	list=[]
-	for u in acnurls:
-		m=rssgrab(c, u)
-		if m != None:
-			lists=list.append(m)
-			return lists
-
-
-import quandl
-import datetime
+###########################################################
+##########################################################
+######## Used QUANDL Functions #########################
 
 quandl.ApiConfig.api_key = 'omQiMysF2NQ1B-xZEJBk'
 
 def quandl_stocks(symbol, start_date=(2010, 1, 1), end_date=None):
-
     query_list = ['WIKI' + '/' + symbol + '.' + str(k) for k in range(11, 12)]
-
     start_date = datetime.date(*start_date)
-
     if end_date:
         end_date = datetime.date(*end_date)
     else:
         end_date = datetime.date.today()
-
     return quandl.get(query_list,
             returns='pandas',
             start_date=start_date,
@@ -152,12 +67,6 @@ def quandl_adj_close(ticker):
 		price=int(round(data,0))
 		if price>1:
 			return price
-
-
-def quandl_price_probability_calc(ticker):
-	data=quandl_stocks(ticker)
-	hprices=data['WIKI/'+ticker+' - Adj. Close']
-
 
  ############################################################################################
  ############################################################################################
@@ -308,8 +217,6 @@ urls=['http://ir.appliedmaterials.com/corporate.rss?c=112059&Rule=Cat=news~subca
 ,'http://appleinsider.com/rss/news/'
 ,'http://appleinsider.com/rss/topic/podcast'
 ]
-
-
 
 
  ############################################################################################
