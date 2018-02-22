@@ -18,11 +18,11 @@ func main() {
   http.Handle("/pics/", http.StripPrefix("/pics/", http.FileServer(http.Dir("./pics"))))
 	http.Handle("/css/", http.StripPrefix("/css/", http.FileServer(http.Dir("./css"))))
   http.Handle("/research/", http.StripPrefix("/research/", http.FileServer(http.Dir("./research"))))
-  
+
   http.HandleFunc("/", serve)
   http.HandleFunc("/about", serveabout)
   http.HandleFunc("/contact", servecontact)
-  http.HandleFunc("/research", s(w,r,"researchlinks.gohtml"))
+  http.HandleFunc("/research", s("researchlinks.gohtml"))
   log.Fatal(s.ListenAndServe())
 }
 
