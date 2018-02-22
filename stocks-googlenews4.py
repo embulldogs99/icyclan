@@ -758,81 +758,78 @@ def contentfilter():
 		map=['']
 		urls=snp500googleurls
 		for u in urls:
-			try:
-				time.sleep(1)
-				x=c.get(u)
-				x=BeautifulSoup(x.content)
-				titles=x.find_all('title')
-				pubdate=x.find_all('lastbuilddate')+x.find_all('pubdate')
-				for p,t in zip(pubdate,titles):
-					"""Assemble our Output Variable"""
-					"""Data may be nil/missing or error prone. Going to TRY this step"""
+			time.sleep(1)
+			x=c.get(u)
+			x=BeautifulSoup(x.content)
+			titles=x.find_all('title')
+			pubdate=x.find_all('lastbuilddate')+x.find_all('pubdate')
+			for p,t in zip(pubdate,titles):
+				"""Assemble our Output Variable"""
+				"""Data may be nil/missing or error prone. Going to TRY this step"""
+				try:
+					pub=str(p.text)
+					info=str(t.text)
+					if info.find(';')>0:
+						info=info[:info.find(';')]
+				except:
+					pass
+
+
+				###Dynamically determining stock based on text. Assuming results may not match original search keyword
+				stock=info[info.find('(')+1:info.find(')')].replace('NYSE:','').replace('NASDAQ:','').replace('NYSE ','').replace(':','').replace(' ','')
+				grab=stock+' | '+info
+
+				# Save Initial Data to Raw File
+
+				f = open('rawmarketmentions.txt'+str(now.month)+'-'+str(now.day)+'-'+str(now.year)+'-UnSelected.txt', 'a')
+				f.write(grab+' | ' + pub +'\n')
+				f.close()
+
+				## Begin filtering the data for model output
+				## First find $$$$
+				if grab.count('$') > 0:
+					targ=int(0)
+					targ=grab.find('$')
+					value=grab[targ+1:targ+5]######## now you have the targeted value
+
 					try:
-						pub=str(p.text)
-						info=str(t.text)
-						if info.find(';')>0:
-							info=info[:info.find(';')]
-					except:
-						pass
-
-
-					###Dynamically determining stock based on text. Assuming results may not match original search keyword
-					stock=info[info.find('(')+1:info.find(')')].replace('NYSE:','').replace('NASDAQ:','').replace('NYSE ','').replace(':','').replace(' ','')
-					grab=stock+' | '+info
-
-					# Save Initial Data to Raw File
-
-					f = open('rawmarketmentions.txt'+str(now.month)+'-'+str(now.day)+'-'+str(now.year)+'-UnSelected.txt', 'a')
-					f.write(grab+' | ' + pub +'\n')
-					f.close()
-
-					## Begin filtering the data for model output
-					## First find $$$$
-					if grab.count('$') > 0:
-						targ=int(0)
-						targ=grab.find('$')
-						value=grab[targ+1:targ+5]######## now you have the targeted value
-
-						try:
-							value=int(round(float(value),0))
-							price=quandl_adj_close(stock)####### now you have the stock price from quandl
-							if price == None:
-								price=0
-						except:
-							value=0
+						value=int(round(float(value),0))
+						price=quandl_adj_close(stock)####### now you have the stock price from quandl
+						if price == None:
 							price=0
+					except:
+						value=0
+						price=0
 
-						if price>1 and value>0:
+					if price>1 and value>0:
 
-							if grab.find('EPS') >0 or grab.find('eps') > 0:
-								stat='EPS: '+str(value)+' | '+'Price: '+str(price)+' | '+'P/E: '+str(int(round(price/value,0)))+' | '+'E/P: '+str(round(value/price,2))+' | '
-								grab=stat+' | '+grab
-								print("missed out on EPS filtered data because of database")
+						if grab.find('EPS') >0 or grab.find('eps') > 0:
+							stat='EPS: '+str(value)+' | '+'Price: '+str(price)+' | '+'P/E: '+str(int(round(price/value,0)))+' | '+'E/P: '+str(round(value/price,2))+' | '
+							grab=stat+' | '+grab
+							print("missed out on EPS filtered data because of database")
 
-							if grab.find('arget') > 0:
+						if grab.find('arget') > 0:
 
-								#########################################################
-								##############  Database Connection   ##############
-								print("about to insert a value")
-								time.sleep(5)
+							#########################################################
+							##############  Database Connection   ##############
+							print("about to insert a value")
+							time.sleep(5)
 
-								conn = psychopq2.connect("host='localhost' dbname='fmi' user='postgres' password='rk'")
-								#create a cursor
+							conn = psychopq2.connect("host='localhost' dbname='fmi' user='postgres' password='rk'")
+							#create a cursor
 
-								print("successfully connected")
-								time.sleep(5)
-								cur = conn.cursor()
-								# execute a statement
-								predreturn=str(round((value-price)/price,2))
-								cur.execute('INSERT INTO fmi.marketmentions', (value,price,predreturn,stock,grab,pub))
-								print("inserted value")
-								conn.commit()
-								     # close the communication with the PostgreSQL
-								cur.close()
-								conn.close()
+							print("successfully connected")
+							time.sleep(5)
+							cur = conn.cursor()
+							# execute a statement
+							predreturn=str(round((value-price)/price,2))
+							cur.execute('INSERT INTO fmi.marketmentions', (value,price,predreturn,stock,grab,pub))
+							print("inserted value")
+							conn.commit()
+							     # close the communication with the PostgreSQL
+							cur.close()
+							conn.close()
 
-			except:
-				print("didn't even try this stock")
 
 
 #run for 100 cycles of 6 hours each
