@@ -2,13 +2,18 @@
 
 #If on a new machine - will need to download modules
 #sudo apt-get install python3-bs4
-#pip install BeautifulSoup4
 #sudo apt-get install python3-pandas
 #sudo apt-get install python-setuptools python-dev build-essential
 #sudo apt-get upgrade python
 #sudo easy_install pip
 #sudo pip install --upgrade virtualenv
-
+#sudo pip install BeautifulSoup4
+# sudo pip install pandas
+# sudo pip install json
+# sudo pip install io
+# sudo pip install re
+# sudo pip install psycopg
+# sudo pip install quandl
 
 
 ######################################################
@@ -24,7 +29,6 @@ import datetime
 import json
 import pandas as pd
 import io
-from termcolor import colored
 import re
 import psycopg
 import quandl
