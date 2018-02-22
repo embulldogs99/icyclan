@@ -766,10 +766,14 @@ def contentfilter():
 				pubdate=x.find_all('lastbuilddate')+x.find_all('pubdate')
 				for p,t in zip(pubdate,titles):
 					"""Assemble our Output Variable"""
-					pub=str(p.text)
-					info=str(t.text)
-					if info.find(';')>0:
-						info=info[:info.find(';')]
+					"""Data may be nil/missing or error prone. Going to TRY this step"""
+					try:
+						pub=str(p.text)
+						info=str(t.text)
+						if info.find(';')>0:
+							info=info[:info.find(';')]
+					except:
+						pass
 
 					print("preparing to determine stock info")
 					###Dynamically determining stock based on text. Assuming results may not match original search keyword
@@ -811,8 +815,10 @@ def contentfilter():
 								##############  Database Connection   ##############
 								print("about to insert a value")
 
-								conn = psychopq2.connect("host=localhost dbname=fmi user=postgres password=rk")
+								conn = psychopq2.connect("host=localhost dbname=postgres user=postgres password=rk")
 								#create a cursor
+								print("successfully connected")
+								time.sleep(2)
 								cur = conn.cursor()
 								# execute a statement
 								predreturn=str(round((value-price)/price,2))
