@@ -26,9 +26,9 @@ func main() {
   log.Fatal(s.ListenAndServe())
 }
 
-func tester(w http.ResponseWriter, r *http.Request, html string){
-  var tpl *template.Template
-  tpl = template.Must(template.ParseFiles(html,"css/main.css","css/mcleod-reset.css"))
+
+func tester(w http.ResponseWriter, r *http.Request){
+  tpl := template.Must(template.ParseFiles("researchlinks.gohtml","css/main.css","css/mcleod-reset.css"))
   tpl.Execute(w, nil)
 }
 
