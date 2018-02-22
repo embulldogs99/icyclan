@@ -780,8 +780,6 @@ def contentfilter():
 					f = open('rawmarketmentions.txt'+str(now.month)+'-'+str(now.day)+'-'+str(now.year)+'-UnSelected.txt', 'a')
 					f.write(grab+' | ' + pub +'\n')
 					f.close()
-					except:
-						pass
 
 					## Begin filtering the data for model output
 					## First find $$$$
