@@ -818,10 +818,9 @@ def contentfilter():
 							try:
 								conn = psycopg2.connect(host="localhost", dbname="postgres", user="postgres", password="rk")
 							#create a cursor
-							except:
-								psycopg2.Error as e:
-									print(e.pgerror)
-									
+							except psycopg2.Error as e:
+								print(e.pgerror)
+
 							print("successfully connected")
 
 							cur = conn.cursor()
