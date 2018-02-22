@@ -14,6 +14,7 @@
 # sudo pip install re
 # sudo pip install psycopg
 # sudo pip install quandl
+# sudo pip install psycopg2
 
 
 ######################################################
@@ -30,7 +31,7 @@ import json
 import pandas as pd
 import io
 import re
-import psycopg
+import psycopg2
 import quandl
 
 warnings.filterwarnings('ignore')
