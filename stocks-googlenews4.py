@@ -808,6 +808,7 @@ def contentfilter():
 
 								#########################################################
 								##############  Database Connection   ##############
+								print("about to insert a value")
 
 								conn = psychopq2.connect("host=localhost dbname=fmi user=postgres password=rk")
 								#create a cursor
@@ -815,6 +816,7 @@ def contentfilter():
 								# execute a statement
 								predreturn=str(round((value-price)/price,2))
 								cur.execute('INSERT INTO fmi.marketmentions', (value,price,predreturn,stock,grab,pub))
+								print("inserted value")
 								conn.commit()
 								     # close the communication with the PostgreSQL
 								cur.close()
@@ -823,7 +825,7 @@ def contentfilter():
 			except:
 				pass
 
-				
+
 #run for 100 cycles of 6 hours each
 for i in range(1,100):
 	contentfilter()
