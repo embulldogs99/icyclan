@@ -22,11 +22,11 @@ func main() {
   http.HandleFunc("/", serve)
   http.HandleFunc("/about", serveabout)
   http.HandleFunc("/contact", servecontact)
-  http.HandleFunc("/researchlinks", s)
+  http.HandleFunc("/researchlinks", tester)
   log.Fatal(s.ListenAndServe())
 }
 
-func s(w http.ResponseWriter, r *http.Request){
+func tester(w http.ResponseWriter, r *http.Request){
   var tpl *template.Template
   tpl = template.Must(template.ParseFiles("researchlinks.gohtml","css/main.css","css/mcleod-reset.css"))
   tpl.Execute(w, nil)
