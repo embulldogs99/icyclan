@@ -861,7 +861,7 @@ def contentfilter():
 
 
 						if grab.find('arget') > 0:
-							predreturn=value-price)/price
+							predreturn=(value-price)/price
 							#########################################################
 							##############  Database Connection   ###################
 							conn = psycopg2.connect("dbname='postgres' user='postgres' password='postgres' host='localhost' port='5432'")
