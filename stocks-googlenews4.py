@@ -851,14 +851,13 @@ def contentfilter():
 							targetprice=round(value*4*25,0) #using marget P/E here insteead of individual stock's p/e to avoid -p/e erro
 							epsexpreturn=(targetprice-price)/price
 							epsreference=yahooepspuller(stock)
-							grab=grab+ " | YahEPSRef:"+str(epsreference)
 
 							#########################################################
 							##############  Database Connection   ###################
 							conn = psycopg2.connect("dbname='postgres' user='postgres' password='postgres' host='localhost' port='5432'")
 							cur = conn.cursor()
 							# execute a statement
-							cur.execute("INSERT INTO fmi.marketmentions (target, price, return, ticker, note, date, eps) VALUES (%s, %s, %s, %s, %s, %s, %s)", (targetprice,price,epsexpreturn,stock,grab,pub,value))
+							cur.execute("INSERT INTO fmi.marketmentions (target, price, return, ticker, note, date, q-eps, a-eps) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)", (targetprice,price,epsexpreturn,stock,grab,pub,value,epsreference))
 							print("inserted value")
 							conn.commit()
 							# close the communication with the PostgreSQL
