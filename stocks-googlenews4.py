@@ -92,7 +92,10 @@ def yahoopepuller(ticker):
 		sn=pe.find("react-text")
 		pe=pe[sn+17:sn+24]
 		pe=pe.replace(">","").replace("!","").replace("<","")
-		pe=float(pe)
+		try:
+			pe=float(pe)
+		except:
+			pe=0
 		return pe
 
 def yahooepspuller(ticker):
