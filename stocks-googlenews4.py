@@ -793,6 +793,7 @@ def contentfilter():
 					targ=int(0)
 					targ=grab.find('$')
 					value=grab[targ+1:targ+5]######## now you have the targeted value
+					print(value)
 
 					try:
 						value=int(round(float(value),0))
@@ -809,10 +810,9 @@ def contentfilter():
 						if grab.find('EPS') >0 or grab.find('eps') > 0:
 							#########################################################
 							##############  Database Connection   ###################
-							value=round(value,4)
-							print(value)
+
 							targetprice=round(value*25,4)  #got 25 from http://www.multpl.com   may want to pull from site directly to make more dynamic
-							print(targetprice)
+
 							epsexpreturn=(targetprice-price)/price*100
 
 							conn = psycopg2.connect("dbname='postgres' user='postgres' password='postgres' host='localhost' port='5432'")
