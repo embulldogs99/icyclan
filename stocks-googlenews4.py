@@ -817,7 +817,7 @@ def contentfilter():
 
 
 							print("about to the databse")
-							conn = psycopg2.connect("dbname=postgres user=postgres password=postgres host=localhost host=/tmp/")
+							conn = psycopg2.connect("dbname=postgres user=postgres password=postgres host=localhost port=5433")
 							print("successfully connected")
 
 							cur = conn.cursor()
