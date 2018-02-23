@@ -3,6 +3,9 @@ import(
   "net/http"
   	"html/template"
     "log"
+    "database/sql"
+_ "github.com/lib/pq"
+    "fmt"
 )
 
 func main() {
