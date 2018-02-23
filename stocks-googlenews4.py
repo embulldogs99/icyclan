@@ -809,11 +809,13 @@ def contentfilter():
 						if grab.find('EPS') >0 or grab.find('eps') > 0:
 							#########################################################
 							##############  Database Connection   ##############
+							targetprice=value*25  #got 25 from http://www.multpl.com   may want to pull from site directly to make more dynamic
+							epsexpreturn=(targetprice-price)/price
 
 							conn = psycopg2.connect("dbname='postgres' user='postgres' password='postgres' host='localhost' port='5432'")
 							cur = conn.cursor()
 							# execute a statement
-							cur.execute("INSERT INTO fmi.marketmentions (price, ticker, note, date, eps) VALUES (%s, %s, %s, %s, %s, %s)", (price,stock,grab,pub,value))
+							cur.execute("INSERT INTO fmi.marketmentions (target, price, return, ticker, note, date, eps) VALUES (%s, %s, %s, %s, %s, %s)", (targetprice,price,epsexpreturn,stock,grab,pub,value))
 							print("inserted value")
 							conn.commit()
 							# close the communication with the PostgreSQL
@@ -823,7 +825,7 @@ def contentfilter():
 
 
 						if grab.find('arget') > 0:
-							predreturn=round((value-price)/price,2)
+							predreturn=(value-price)/price
 
 							#########################################################
 							##############  Database Connection   ##############
