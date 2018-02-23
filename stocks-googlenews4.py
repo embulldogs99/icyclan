@@ -826,7 +826,7 @@ def contentfilter():
 
 
 						if grab.find('arget') > 0:
-							predreturn=round((value-price)/price,2)
+							predreturn=(value-price)/price*100
 
 							#########################################################
 							##############  Database Connection   ###################
@@ -834,7 +834,7 @@ def contentfilter():
 							conn = psycopg2.connect("dbname='postgres' user='postgres' password='postgres' host='localhost' port='5432'")
 							cur = conn.cursor()
 							# execute a statement
-							cur.execute("INSERT INTO fmi.marketmentions (target, price, return, ticker, note, date) VALUES (%s, %s, %%, %s, %s, %s)", (value,price,predreturn*100,stock,grab,pub))
+							cur.execute("INSERT INTO fmi.marketmentions (target, price, return, ticker, note, date) VALUES (%s, %s, %%, %s, %s, %s)", (value,price,predreturn,stock,grab,pub))
 							print("inserted value")
 							conn.commit()
 							# close the communication with the PostgreSQL
