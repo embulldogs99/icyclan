@@ -848,7 +848,7 @@ def contentfilter():
 							targetprice=value*yahoopepuller(stock)
 							epsexpreturn=(targetprice-price)/price
 							epsreference=yahooepspuller(stock)
-							grab=grab+ " | YahEPSRef:"+str(epsrefence)
+							grab=grab+ " | YahEPSRef:"+str(epsreference)
 
 							#########################################################
 							##############  Database Connection   ###################
