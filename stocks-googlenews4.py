@@ -813,7 +813,7 @@ def contentfilter():
 							conn = psycopg2.connect("dbname='postgres' user='postgres' password='postgres' host='localhost' port='5432'")
 							cur = conn.cursor()
 							# execute a statement
-							cur.execute("INSERT INTO fmi.marketmentions (eps, price, ticker, note, date) VALUES (%s, %s, %s, %s, %s, %s)", (value,price,stock,grab,pub))
+							cur.execute("INSERT INTO fmi.marketmentions (price, ticker, note, date, eps) VALUES (%s, %s, %s, %s, %s, %s)", (price,stock,grab,pub,value))
 							print("inserted value")
 							conn.commit()
 							# close the communication with the PostgreSQL
