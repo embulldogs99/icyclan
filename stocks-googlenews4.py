@@ -847,17 +847,18 @@ def contentfilter():
 
 					if price>1 and value>0:
 
+						epsreference=yahooepspuller(stock)
+
 						if grab.find('EPS') >0 or grab.find('eps') > 0:
 							targetprice=round(value*4*25,0) #using marget P/E here insteead of individual stock's p/e to avoid -p/e erro
 							epsexpreturn=(targetprice-price)/price
-							epsreference=yahooepspuller(stock)
 
 							#########################################################
 							##############  Database Connection   ###################
 							conn = psycopg2.connect("dbname='postgres' user='postgres' password='postgres' host='localhost' port='5432'")
 							cur = conn.cursor()
 							# execute a statement
-							cur.execute("INSERT INTO fmi.marketmentions (target, price, return, ticker, note, date, q_eps, a_eps) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)", (targetprice,price,epsexpreturn,stock,grab,pub,value,epsreference))
+							cur.execute("INSERT INTO fmi.marketmentions (target, price, return, ticker, note, date, q_eps, a_eps, report) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)", (targetprice,price,epsexpreturn,stock,grab,pub,value,epsreference,'earnings'))
 							print("inserted value")
 							conn.commit()
 							# close the communication with the PostgreSQL
@@ -872,7 +873,7 @@ def contentfilter():
 							conn = psycopg2.connect("dbname='postgres' user='postgres' password='postgres' host='localhost' port='5432'")
 							cur = conn.cursor()
 							# execute a statement
-							cur.execute("INSERT INTO fmi.marketmentions (target, price, return, ticker, note, date) VALUES (%s, %s, %s, %s, %s, %s)", (value,price,predreturn,stock,grab,pub))
+							cur.execute("INSERT INTO fmi.marketmentions (target, price, return, ticker, note, date, q_eps, a_eps, report) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)", (value,price,predreturn,stock,grab,pub,None,epsreference,'analyst'))
 							print("inserted value")
 							conn.commit()
 							# close the communication with the PostgreSQL
