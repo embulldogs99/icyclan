@@ -816,11 +816,8 @@ def contentfilter():
 							##############  Database Connection   ##############
 
 
-							try:
-								conn = psycopg2.connect("dbname=postgres user=postgres password=postgres host=localhost")
-							except:
-								print("Cannot Connect to the databse")
-
+							print("about to the databse")
+							conn = psycopg2.connect("dbname=postgres user=postgres password=postgres host=localhost")
 							print("successfully connected")
 
 							cur = conn.cursor()
