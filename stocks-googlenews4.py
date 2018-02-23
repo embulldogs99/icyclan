@@ -84,7 +84,7 @@ def yahoopepuller(ticker):
 	with requests.Session() as c:
 		u="http://finance.yahoo.com/quote/"+ticker+"?p=" + ticker
 		x=c.get(u)
-		x=BeautifulSoup(x.content, "lxml")
+		x=BeautifulSoup(x.content)
 		titles=x.find_all()
 		titles=str(titles)
 		s=titles.find("PE_RATIO-value")
@@ -99,7 +99,7 @@ def yahooepspuller(ticker):
 	with requests.Session() as c:
 		u="http://finance.yahoo.com/quote/"+ticker+"?p=" + ticker
 		x=c.get(u)
-		x=BeautifulSoup(x.content, "lxml")
+		x=BeautifulSoup(x.content)
 		titles=x.find_all()
 		titles=str(titles)
 		s=titles.find("EPS_RATIO-value")
