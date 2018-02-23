@@ -807,16 +807,13 @@ def contentfilter():
 
 
 						if grab.find('EPS') >0 or grab.find('eps') > 0:
-							stat='EPS: '+str(value)+' | '+'Price: '+str(price)+' | '+'P/E: '+str(int(round(price/value,0)))+' | '+'E/P: '+str(round(value/price,2))+' | '
-							grab=stat+' | '+grab
-
 							#########################################################
 							##############  Database Connection   ##############
 
 							conn = psycopg2.connect("dbname='postgres' user='postgres' password='postgres' host='localhost' port='5432'")
 							cur = conn.cursor()
 							# execute a statement
-							cur.execute("INSERT INTO fmi.marketmentions (target, price, return, ticker, note, date) VALUES (%s, %s, %s, %s, %s, %s)", (value,price,predreturn,stock,grab,pub))
+							cur.execute("INSERT INTO fmi.marketmentions (eps, price, ticker, note, date) VALUES (%s, %s, %s, %s, %s, %s)", (value,price,stock,grab,pub))
 							print("inserted value")
 							conn.commit()
 							# close the communication with the PostgreSQL
