@@ -848,7 +848,7 @@ def contentfilter():
 					if price>1 and value>0:
 
 						if grab.find('EPS') >0 or grab.find('eps') > 0:
-							targetprice=round(value*4*yahoopepuller(stock),0)
+							targetprice=round(value*4*25,0) #using marget P/E here insteead of individual stock's p/e to avoid -p/e erro
 							epsexpreturn=(targetprice-price)/price
 							epsreference=yahooepspuller(stock)
 							grab=grab+ " | YahEPSRef:"+str(epsreference)
