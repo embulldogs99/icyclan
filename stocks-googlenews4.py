@@ -12,7 +12,7 @@
 # sudo pip install json
 # sudo pip install io
 # sudo pip install re
-# sudo pip install psycopg
+# sudo apt-get install python-psycopg2
 # sudo pip install quandl
 # sudo pip install psycopg2
 #sudo pip install psycopg2-binary
@@ -823,7 +823,7 @@ def contentfilter():
 							cur = conn.cursor()
 							# execute a statement
 							predreturn=str(round((value-price)/price,2))
-							cur.execute('INSERT INTO fmi.marketmentions', (value,price,predreturn,stock,grab,pub))
+							cur.execute("INSERT INTO fmi.marketmentions (target, price, return, ticker, note, date) VALUES (%s, %s, %s, %s, %s, %s)", (value,price,predreturn,stock,grab,pub))
 							print("inserted value")
 							conn.commit()
 							     # close the communication with the PostgreSQL
