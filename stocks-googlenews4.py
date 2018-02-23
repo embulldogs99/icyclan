@@ -821,7 +821,7 @@ def contentfilter():
 
 				###Dynamically determining stock based on text. Assuming results may not match original search keyword
 				stock=info[info.find('(')+1:info.find(')')].replace('NYSE:','').replace('NASDAQ:','').replace('NYSE ','').replace(':','').replace(' ','')
-				grab=stock+' | '+info
+				grab=info
 
 				# Save Initial Data to Raw File
 
