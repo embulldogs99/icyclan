@@ -110,7 +110,10 @@ def yahooepspuller(ticker):
 		sn=pe.find("react-text")
 		pe=pe[sn+17:sn+24]
 		pe=pe.replace(">","").replace("!","").replace("<","")
-		pe=float(pe)
+		try:
+			pe=float(pe)
+		except:
+			pe=0
 		return pe
 
  ############################################################################################
@@ -845,7 +848,7 @@ def contentfilter():
 					if price>1 and value>0:
 
 						if grab.find('EPS') >0 or grab.find('eps') > 0:
-							targetprice=value*yahoopepuller(stock)
+							targetprice=round(value*4*yahoopepuller(stock),0)
 							epsexpreturn=(targetprice-price)/price
 							epsreference=yahooepspuller(stock)
 							grab=grab+ " | YahEPSRef:"+str(epsreference)
