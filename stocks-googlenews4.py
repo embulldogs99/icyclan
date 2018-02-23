@@ -74,6 +74,42 @@ def quandl_adj_close(ticker):
 		if price>1:
 			return price
 
+
+########################################################################################
+##########################################################################################
+###############            YAHOO PE and EPS pullers    ##################################
+##########################################################################################
+
+def yahoopepuller(ticker):
+	with requests.Session() as c:
+		u="http://finance.yahoo.com/quote/"+ticker+"?p=" + ticker
+		x=c.get(u)
+		x=BeautifulSoup(x.content, "lxml")
+		titles=x.find_all()
+		titles=str(titles)
+		s=titles.find("PE_RATIO-value")
+		pe=titles[s:s+1000]
+		sn=pe.find("react-text")
+		pe=pe[sn+17:sn+24]
+		pe=pe.replace(">","").replace("!","").replace("<","")
+		pe=float(pe)
+		return pe
+
+def yahooepspuller(ticker):
+	with requests.Session() as c:
+		u="http://finance.yahoo.com/quote/"+ticker+"?p=" + ticker
+		x=c.get(u)
+		x=BeautifulSoup(x.content, "lxml")
+		titles=x.find_all()
+		titles=str(titles)
+		s=titles.find("EPS_RATIO-value")
+		pe=titles[s:s+1000]
+		sn=pe.find("react-text")
+		pe=pe[sn+17:sn+24]
+		pe=pe.replace(">","").replace("!","").replace("<","")
+		pe=float(pe)
+		return pe
+
  ############################################################################################
  ############################################################################################
  ############################################################################################
@@ -793,7 +829,6 @@ def contentfilter():
 					targ=int(0)
 					targ=grab.find('$')
 					value=grab[targ+1:targ+5]######## now you have the targeted value
-					print(value)
 
 					try:
 						value=float(value)
@@ -806,19 +841,18 @@ def contentfilter():
 
 					if price>1 and value>0:
 
-
 						if grab.find('EPS') >0 or grab.find('eps') > 0:
+							targetprice=value*yahoopepuller(stock)
+							epsexpreturn=(targetprice-price)/price
+							epsreference=yahooepspuller(stock)
+							grab=grab+ " | YahEPSRef:"+str(epsrefence)
+
 							#########################################################
 							##############  Database Connection   ###################
-
-							targetprice=round(value*25,4)  #got 25 from http://www.multpl.com   may want to pull from site directly to make more dynamic
-							print(targetprice)
-							epsexpreturn=(targetprice-price)/price*100
-
 							conn = psycopg2.connect("dbname='postgres' user='postgres' password='postgres' host='localhost' port='5432'")
 							cur = conn.cursor()
 							# execute a statement
-							cur.execute("INSERT INTO fmi.marketmentions (target, price, return, ticker, note, date, eps) VALUES (%s, %s, %s, %s, %s, %s, %s)", (targetprice,price,epsexpreturn,stock,grab,pub,str(value)))
+							cur.execute("INSERT INTO fmi.marketmentions (target, price, return, ticker, note, date, eps) VALUES (%s, %s, %s, %s, %s, %s, %s)", (targetprice,price,epsexpreturn,stock,grab,pub,value))
 							print("inserted value")
 							conn.commit()
 							# close the communication with the PostgreSQL
@@ -826,14 +860,10 @@ def contentfilter():
 							conn.close()
 
 
-
 						if grab.find('arget') > 0:
-							predreturn=round((value-price)/price*100,4)
-							print(predreturn)
-
+							predreturn=value-price)/price
 							#########################################################
 							##############  Database Connection   ###################
-
 							conn = psycopg2.connect("dbname='postgres' user='postgres' password='postgres' host='localhost' port='5432'")
 							cur = conn.cursor()
 							# execute a statement
