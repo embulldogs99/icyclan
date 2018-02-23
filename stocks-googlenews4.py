@@ -796,7 +796,7 @@ def contentfilter():
 					print(value)
 
 					try:
-						value=int(round(float(value),0))
+						value=float(value)
 						price=quandl_adj_close(stock)####### now you have the stock price from quandl
 						if price == None:
 							price=0
@@ -812,7 +812,7 @@ def contentfilter():
 							##############  Database Connection   ###################
 
 							targetprice=round(value*25,4)  #got 25 from http://www.multpl.com   may want to pull from site directly to make more dynamic
-
+							print(targetprice)
 							epsexpreturn=(targetprice-price)/price*100
 
 							conn = psycopg2.connect("dbname='postgres' user='postgres' password='postgres' host='localhost' port='5432'")
