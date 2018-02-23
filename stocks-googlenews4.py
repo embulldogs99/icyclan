@@ -811,12 +811,12 @@ def contentfilter():
 							##############  Database Connection   ###################
 							value=round(value,2)
 							targetprice=round(value*25,2)  #got 25 from http://www.multpl.com   may want to pull from site directly to make more dynamic
-							epsexpreturn=(targetprice-price)/price
+							epsexpreturn=(targetprice-price)/price*100
 
 							conn = psycopg2.connect("dbname='postgres' user='postgres' password='postgres' host='localhost' port='5432'")
 							cur = conn.cursor()
 							# execute a statement
-							cur.execute("INSERT INTO fmi.marketmentions (target, price, return, ticker, note, date, eps) VALUES (%f, %f, %f, %s, %s, %s, %f)", (targetprice,price,epsexpreturn,stock,grab,pub,value))
+							cur.execute("INSERT INTO fmi.marketmentions (target, price, return, ticker, note, date, eps) VALUES (%d, %d, %%, %s, %s, %s, %s)", (targetprice,price,epsexpreturn,stock,grab,pub,str(value)))
 							print("inserted value")
 							conn.commit()
 							# close the communication with the PostgreSQL
@@ -834,7 +834,7 @@ def contentfilter():
 							conn = psycopg2.connect("dbname='postgres' user='postgres' password='postgres' host='localhost' port='5432'")
 							cur = conn.cursor()
 							# execute a statement
-							cur.execute("INSERT INTO fmi.marketmentions (target, price, return, ticker, note, date) VALUES (%f, %f, %f, %s, %s, %s)", (value,price,predreturn,stock,grab,pub))
+							cur.execute("INSERT INTO fmi.marketmentions (target, price, return, ticker, note, date) VALUES (%f, %f, %f, %s, %s, %s)", (value,price,predreturn*100,stock,grab,pub))
 							print("inserted value")
 							conn.commit()
 							# close the communication with the PostgreSQL
