@@ -39,6 +39,7 @@ func runpypull(code string) string{
   }
 
   fmt.Println(string(out))
+  return
 }
 
 type newspoint struct {
@@ -61,8 +62,8 @@ func dbpull() newspoint {
     log.Fatalf("Unable to connect to the database")
   }
 
+  bks:=newspoint{}
   rows, err := db.Query("SELECT * FROM fmi.marketmentions")
-  checkErr(err)
   for rows.Next() {
     bk:=newspoint{}
     err := rows.Scan(&bk.Target, &bk.Price, &bk.Return, &bk.Ticker, &bk.Note, &bk.Date, &bk.Q_eps, &bk.A_eps, &bk.Report)
