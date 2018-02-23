@@ -36,12 +36,51 @@ func runpypull(code string) string{
   }
 
   fmt.Println(string(out))
+}
+
+type newspoint struct {
+	Target int
+	Price  int
+	Return float64
+	Ticker string
+  Note string
+  Date string
+  Q_eps float64
+  A_eps float64
+  Report string
+}
+
+
+func dbpull() newspoint {
+
+  db, err := sql.Open("postgres", "postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable")
+  if err != nil {
+    log.Fatalf("Unable to connect to the database")
+  }
+
+  rows, err := db.Query("SELECT * FROM fmi.marketmentions")
+  checkErr(err)
+  for rows.Next() {
+    bk:=newspoint{}
+    err := rows.Scan(&bk.Target, &bk.Price, &bk.Return, &bk.Ticker, &bk.Note, &bk.Date, &bk.Q_eps, &bk.A_eps, &bk.Report)
+    }
+		if err != nil {
+			http.Error(w, http.StatusText(500), 500)
+			log.Fatal(err)
+		}
+		// appends the rows
+	bks = append(bks, bk)
+
+  dbusers.Close()
+  return(bks)
 
 }
 
+
 func serve(w http.ResponseWriter, r *http.Request){
   tpl := template.Must(template.ParseFiles("main.gohtml","css/main.css","css/mcleod-reset.css"))
-  tpl.Execute(w, nil)
+  dataset=dbpull()
+  tpl.Execute(w, dataset)
 }
 func serveabout(w http.ResponseWriter, r *http.Request){
   tpl := template.Must(template.ParseFiles("about.gohtml","css/main.css","css/mcleod-reset.css" ))

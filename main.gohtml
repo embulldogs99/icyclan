@@ -40,20 +40,51 @@
 <body>
 <div class="page">
 <div class="posts">
+
+
 <div class="title">
   Market Mentions
 </div><br>
 <br>
-Data
+<thead>
+  <td>Target</td>
+  <td>Price</td>
+  <td>Return</td>
+  <td>Ticker</td>
+  <td>Note</td>
+  <td>Date</td>
+  <td>Q_EPS</td>
+  <td>A_EPS</td>
+  <td>REPORT</td>
+</thead>
+
+<tbody>
+<td>{{.Target}}</td>
+<td>{{.Price}}</td>
+<td>{{.Return}}</td>
+<td>{{.Ticker}}</td>
+<td>{{.Note}}</td>
+<td>{{.Date}}</td>
+<td>{{.Q_EPS}}</td>
+<td>{{.A_EPS}}</td>
+<td>{{.REPORT}}</td>
+</tbody>
+
+
 <div class="title">
   Portfolio
 </div><br>
 Data
+
+
+
 <div class="title">
+
   SnP and DOW
 </div><br>
 Data
 </div>
+
 
 <div class="sidebar">
   <d>Book List</d> <br><br>
@@ -138,9 +169,33 @@ Data
 </div>
 
 </body>
-
-
-
-
-
 </html>
+
+
+{{range .Target}}
+  {{.}}
+{{end}}
+{{range .Price}}
+  {{.}}
+{{end}}
+{{range .Return}}
+  {{.}}
+{{end}}
+{{range .Ticker}}
+  {{.}}
+{{end}}
+{{range .Note}}
+  {{.}}
+{{end}}
+{{range .Date}}
+  {{.}}
+{{end}}
+{{range .Q_eps}}
+  {{.}}
+{{end}}
+{{range .A_eps}}
+  {{.}}
+{{end}}
+{{range .Report}}
+  {{.}}
+{{end}}
