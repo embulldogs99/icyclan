@@ -810,7 +810,9 @@ def contentfilter():
 							#########################################################
 							##############  Database Connection   ###################
 							value=round(value,2)
+							print(value)
 							targetprice=round(value*25,2)  #got 25 from http://www.multpl.com   may want to pull from site directly to make more dynamic
+							print(targetprice)
 							epsexpreturn=(targetprice-price)/price*100
 
 							conn = psycopg2.connect("dbname='postgres' user='postgres' password='postgres' host='localhost' port='5432'")
@@ -827,6 +829,7 @@ def contentfilter():
 
 						if grab.find('arget') > 0:
 							predreturn=(value-price)/price*100
+							print(predreturn)
 
 							#########################################################
 							##############  Database Connection   ###################
