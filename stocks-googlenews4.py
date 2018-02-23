@@ -805,28 +805,39 @@ def contentfilter():
 
 					if price>1 and value>0:
 
+
 						if grab.find('EPS') >0 or grab.find('eps') > 0:
 							stat='EPS: '+str(value)+' | '+'Price: '+str(price)+' | '+'P/E: '+str(int(round(price/value,0)))+' | '+'E/P: '+str(round(value/price,2))+' | '
 							grab=stat+' | '+grab
-							print("missed out on EPS filtered data because of database")
-
-						if grab.find('arget') > 0:
 
 							#########################################################
 							##############  Database Connection   ##############
 
-
-							print("about to the databse")
 							conn = psycopg2.connect("dbname='postgres' user='postgres' password='postgres' host='localhost' port='5432'")
-							print("successfully connected")
-
 							cur = conn.cursor()
 							# execute a statement
-							predreturn=str(round((value-price)/price,2))
 							cur.execute("INSERT INTO fmi.marketmentions (target, price, return, ticker, note, date) VALUES (%s, %s, %s, %s, %s, %s)", (value,price,predreturn,stock,grab,pub))
 							print("inserted value")
 							conn.commit()
-							     # close the communication with the PostgreSQL
+							# close the communication with the PostgreSQL
+							cur.close()
+							conn.close()
+
+
+
+						if grab.find('arget') > 0:
+							predreturn=round((value-price)/price,2)
+
+							#########################################################
+							##############  Database Connection   ##############
+
+							conn = psycopg2.connect("dbname='postgres' user='postgres' password='postgres' host='localhost' port='5432'")
+							cur = conn.cursor()
+							# execute a statement
+							cur.execute("INSERT INTO fmi.marketmentions (target, price, return, ticker, note, date) VALUES (%s, %s, %s, %s, %s, %s)", (value,price,predreturn,stock,grab,pub))
+							print("inserted value")
+							conn.commit()
+							# close the communication with the PostgreSQL
 							cur.close()
 							conn.close()
 
