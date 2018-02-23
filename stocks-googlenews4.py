@@ -817,7 +817,7 @@ def contentfilter():
 
 
 							try:
-								conn = psycopg2.connect("dbname=fmi user=postgres password=rk host=localhost")
+								conn = psycopg2.connect("dbname=postgres user=postgres password=rk host=localhost")
 							except:
 								print("Cannot Connect to the databse")
 
