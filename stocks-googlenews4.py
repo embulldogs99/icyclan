@@ -809,9 +809,9 @@ def contentfilter():
 						if grab.find('EPS') >0 or grab.find('eps') > 0:
 							#########################################################
 							##############  Database Connection   ###################
-							value=round(value,2)
+							value=round(value,4)
 							print(value)
-							targetprice=round(value*25,2)  #got 25 from http://www.multpl.com   may want to pull from site directly to make more dynamic
+							targetprice=round(value*25,4)  #got 25 from http://www.multpl.com   may want to pull from site directly to make more dynamic
 							print(targetprice)
 							epsexpreturn=(targetprice-price)/price*100
 
@@ -828,7 +828,7 @@ def contentfilter():
 
 
 						if grab.find('arget') > 0:
-							predreturn=(value-price)/price*100
+							predreturn=round((value-price)/price*100,4)
 							print(predreturn)
 
 							#########################################################
