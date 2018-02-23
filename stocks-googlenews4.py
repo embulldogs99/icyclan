@@ -755,7 +755,7 @@ snp500googleurls=['https://news.google.com/news/rss/search/section/q/GOOG/GOOG?h
 
 now=datetime.datetime.now()
 
-def contentfilter(conn):
+def contentfilter():
 	with requests.Session() as c:
 		map=['']
 		urls=snp500googleurls
@@ -837,6 +837,6 @@ def contentfilter(conn):
 
 #run for 100 cycles of 6 hours each
 for i in range(1,100):
-	contentfilter(conn)
+	contentfilter()
 	print('end')
 	time.sleep(21600/2)
