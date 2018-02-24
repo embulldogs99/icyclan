@@ -176,12 +176,6 @@ h {
   text-align: left;
   margin-left: 0px;
 }
-table{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
 td,th{
   padding: 3px;
   border: .5px solid black;
