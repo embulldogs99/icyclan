@@ -11,14 +11,14 @@
 
 <link href="css/mcleod-reset.css" rel="stylesheet">
 <link href="css/main.css" rel="stylesheet">
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<script type="text/javascript" src="/js/jquery-latest.js"></script>
-<script type="text/javascript" src="/js/tablesorter.js"></script>
-<script>
-  $(document.ready( function() {
-    $("#myTable").tablesorter();
-  }))
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.css"/>
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.js"></script>
+<script> $(document).ready(function(){
+  $("#myTable").dataTable();
+  })
 </script>
+
 
 
   <div>
