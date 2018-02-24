@@ -35,7 +35,7 @@ type newspoint struct {
 	Returns sql.NullFloat64
 	Ticker sql.NullString
   Note sql.NullString
-  Date Time
+  Date sql.NullString
   Q_eps sql.NullFloat64
   A_eps sql.NullFloat64
   Report sql.NullString
@@ -54,7 +54,7 @@ func dbpull() []newspoint {
   bks := []newspoint{}
   for rows.Next() {
     bk := newspoint{}
-    err := rows.Scan(&bk.Target, &bk.Price, &bk.Returns, &bk.Ticker, &bk.Note, &bk.Date, &bk.Q_eps, &bk.A_eps, &bk.Report)
+    err := rows.Scan(&bk.Target, &bk.Price, &bk.Returns, &bk.Ticker, &bk.Note, &bk.Date[0:10], &bk.Q_eps, &bk.A_eps, &bk.Report)
     if err != nil {
       log.Fatal(err)
     }
