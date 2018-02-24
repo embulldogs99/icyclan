@@ -1,23 +1,4 @@
 # coding: utf-8
-
-#If on a new machine - will need to download modules
-#sudo apt-get install python3-bs4
-#sudo apt-get install python3-pandas
-#sudo apt-get install python-setuptools python-dev build-essential
-#sudo apt-get upgrade python
-#sudo easy_install pip
-#sudo pip install --upgrade virtualenv
-#sudo pip install BeautifulSoup4
-# sudo pip install pandas
-# sudo pip install json
-# sudo pip install io
-# sudo pip install re
-# sudo apt-get install python-psycopg2
-# sudo pip install quandl
-# sudo pip install psycopg2
-#sudo pip install psycopg2-binary
-
-
 ######################################################
 ####################################################
 ######### Imports #####################
