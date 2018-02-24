@@ -58,19 +58,19 @@
   <td>REPORT</td>
 </thead>
 
-
+{{range .}}
 <tbody>
-<td>{{.Target}}</td>
-<td>{{.Price}}</td>
-<td>{{.Returns}}</td>
-<td>{{.Ticker}}</td>
-<td>{{.Note}}</td>
-<td>{{.Date}}</td>
-<td>{{.Q_eps}}</td>
-<td>{{.A_eps}}</td>
-<td>{{.Report}}</td>
+<td>{{.Target.Value}}</td>
+<td>{{.Price.Value}}</td>
+<td>{{.Returns.Value}}</td>
+<td>{{.Ticker.Value}}</td>
+<td>{{.Note.Value}}</td>
+<td>{{.Date.Value}}</td>
+<td>{{.Q_eps.Value}}</td>
+<td>{{.A_eps.Value}}</td>
+<td>{{.Report.Value}}</td>
 </tbody>
-
+{{end}}
 
 <div class="title">
   Portfolio
@@ -172,8 +172,7 @@ Data
 </body>
 
 
-{{.}}
-{{range .Target}}
+<!-- {{range .Target}}
   {{.}}
 {{end}}
 {{range .Price}}
@@ -199,6 +198,6 @@ Data
 {{end}}
 {{range .Report}}
   {{.}}
-{{end}}
+{{end}} -->
 
 </html>
