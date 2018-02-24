@@ -28,7 +28,7 @@ header{
   justify-content: space-between;
 }
 
-table.sortable th {
+#sortable{
     background-color:#eee;
     color:#666666;
     font-weight: bold;
