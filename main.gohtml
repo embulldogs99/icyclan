@@ -29,7 +29,7 @@
 <header>
 
   <div>
-  <div class="spacer"> <div class="title">Free Market Insights</div> <a href="/researchlinks" class="contents">Research</a></div><br>
+  <div class="spacer"> <div class="title">Free Market Insights</div>
   <div class="slogan">A Rational Approach to an Irrational Market</div>
   </div>
 
@@ -39,6 +39,7 @@
     <a href="https://www.paypal.me/embulldogs99" class="buttons"> Donate </a>
     <a href="mailto:freemarketinsights@gmail.com" class="buttons"> Contact </a>
     <a href="/investors" class="buttons"> Invest </a>
+    <a href="/researchlinks" class="buttons">Research</a></div><br>
   </div>
 
 </header>
@@ -61,9 +62,8 @@
         <th>Ticker</th>
         <th>Note</th>
         <th>Date</th>
-        <th>Q_EPS</th>
-        <th>A_EPS</th>
-        <th>REPORT</th>
+        <th>Qtd_EPS</th>
+        <th>Anul_EPS</th>
       </tr>
     </thead>
 
@@ -79,7 +79,6 @@
         <td>{{.Date.Value}}</td>
         <td>{{.Q_eps.Value}}</td>
         <td>{{.A_eps.Value}}</td>
-        <td>{{.Report.Value}}</td>
       </tr>
       {{end}}
 
