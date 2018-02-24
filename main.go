@@ -52,7 +52,7 @@ func dbpull() []newspoint {
   bks := []newspoint{}
   for rows.Next() {
     bk := newspoint{}
-    err := rows.Scan(&bk.target, &bk.price, &bk.returns, &bk.ticker, &bk.note, &bk.date, &bk.q_eps, &bk.a_eps, &bk.report)
+    err := rows.Scan(&bk.Target, &bk.Price, &bk.Returns, &bk.Ticker, &bk.Note, &bk.Date, &bk.q_Eps, &bk.a_Eps, &bk.Report)
     if err != nil {
       log.Fatal(err)
     }
