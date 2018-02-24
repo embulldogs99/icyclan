@@ -48,7 +48,9 @@ func dbpull() []newspoint {
   if err != nil {
     log.Fatalf("Unable to connect to the database")
   }
-  rows, _ := db.Query("SELECT * FROM fmi.marketmentions")
+
+
+  rows, _ := db.Query("SELECT * FROM fmi.marketmentions WHERE date_trunc('day', Date) = '24'")
   bks := []newspoint{}
   for rows.Next() {
     bk := newspoint{}
