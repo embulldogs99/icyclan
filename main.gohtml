@@ -61,21 +61,24 @@
       </tr>
   </thead>
 
-
   {{range .}}
-  <tr>
-    <td>{{.Target}}</td>
-    <td>{{.Price}}</td>
-    <td>{{.Returns.Value}}</td>
-    <td>{{.Ticker.Value}}</td>
-    <td>{{.Note.Value}}</td>
-    <td>{{.Date.Value}}</td>
-    <td>{{.Q_eps.Value}}</td>
-    <td>{{.A_eps.Value}}</td>
-    <td>{{.Report.Value}}</td>
-  </tr>
-  {{end}}
+  <tbody>
+    <tr>
+      <td>{{.Target}}</td>
+      <td>{{.Price}}</td>
+      <td>{{.Returns.Value}}</td>
+      <td>{{.Ticker.Value}}</td>
+      <td>{{.Note.Value}}</td>
+      <td>{{.Date.Value}}</td>
+      <td>{{.Q_eps.Value}}</td>
+      <td>{{.A_eps.Value}}</td>
+      <td>{{.Report.Value}}</td>
+    </tr>
+  </tbody>
+
 </table>
+
+{{end}}
 
 <div class="title">
   Portfolio
