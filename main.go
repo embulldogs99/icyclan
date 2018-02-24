@@ -32,7 +32,7 @@ func main() {
 type newspoint struct {
 	Target int
 	Price  int
-	Return float32
+	Returns float32
 	Ticker sql.NullString
   Note sql.NullString
   Date sql.NullString
