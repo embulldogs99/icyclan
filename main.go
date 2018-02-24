@@ -35,7 +35,7 @@ type newspoint struct {
 	Returns sql.NullFloat64
 	Ticker sql.NullString
   Note sql.NullString
-  Date string
+  Date sql.NullString
   Q_eps sql.NullFloat64
   A_eps sql.NullFloat64
   Report sql.NullString
