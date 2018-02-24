@@ -42,7 +42,7 @@ type newspoint struct {
 }
 
 
-func dbpull(w http.ResponseWriter, r *http.Request) []newspoint {
+func dbpull() []newspoint {
 
   db, err := sql.Open("postgres", "postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable")
   if err != nil {
@@ -75,7 +75,7 @@ func dbpull(w http.ResponseWriter, r *http.Request) []newspoint {
 
 func serve(w http.ResponseWriter, r *http.Request){
   tpl := template.Must(template.ParseFiles("main.gohtml","css/main.css","css/mcleod-reset.css"))
-  dataset:=dbpull(w,r)
+  dataset:=dbpull()
   tpl.Execute(w, dataset)
 }
 func serveabout(w http.ResponseWriter, r *http.Request){
