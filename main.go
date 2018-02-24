@@ -32,7 +32,7 @@ func main() {
 type newspoint struct {
 	Target int
 	Price  int
-	Return float64
+	Return float32
 	Ticker string
   Note string
   Date string
@@ -55,12 +55,13 @@ func dbpull() newspoint {
   for rows.Next() {
 
     _ = rows.Scan(&bk.Target, &bk.Price, &bk.Return, &bk.Ticker, &bk.Note, &bk.Date, &bk.Q_eps, &bk.A_eps, &bk.Report)
+    print(&bk.Target)
 
 		if err != nil {
 			log.Fatal(err)
 		}
 		// appends the rows
-    bks = append(bks, bk)
+    // bks = append(bks, bk)
 
   db.Close()
   return(bks)
