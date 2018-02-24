@@ -36,7 +36,7 @@ header{
 #sortable{
     background-color:#eee;
     color:#666666;
-    font-weight: bold;
+    font-weight: 500;
     cursor: default;
     padding: 3px;
     border: .5px solid black;
