@@ -61,9 +61,10 @@
       </tr>
   </thead>
 
-  {{range .}}
+
   <tbody>
     <tr>
+      {{range .}}
       <td>{{.Target}}</td>
       <td>{{.Price}}</td>
       <td>{{.Returns.Value}}</td>
@@ -73,12 +74,13 @@
       <td>{{.Q_eps.Value}}</td>
       <td>{{.A_eps.Value}}</td>
       <td>{{.Report.Value}}</td>
+      {{end}}
     </tr>
   </tbody>
 
 </table>
 
-{{end}}
+
 
 <div class="title">
   Portfolio
