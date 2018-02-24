@@ -50,7 +50,7 @@ func dbpull() []newspoint {
   }
 
 
-  rows, _ := db.Query("SELECT * FROM fmi.marketmentions WHERE Date > current_timestamp - interval '1 day'")
+  rows, _ := db.Query("SELECT * FROM fmi.marketmentions WHERE Date > current_timestamp - interval '1 day' AND Report='analyst'")
   bks := []newspoint{}
   for rows.Next() {
     bk := newspoint{}
