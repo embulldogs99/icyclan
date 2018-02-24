@@ -6,7 +6,12 @@
 
 body{
   background-color: rgba(0,0,0,.25);
-
+}
+.page{
+  display: flex;
+  flex-direction: row;
+  /*border: 2px solid black;*/
+}
 .posts{
   display: flex;
   flex-direction: column;
