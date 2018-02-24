@@ -70,7 +70,8 @@ th{
 }
 .slogan{
   font-size: 30px;
-  padding: 0% 0% 1.5% 20%;
+  font-family: 'Calibri', sans-serif;
+  padding: 1% 0% 1.5% 20%;
   font-weight: 400;
     /*border-bottom: 2px solid rgba(60,60,255,1);*/
     width: 100%;
