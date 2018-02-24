@@ -5,7 +5,6 @@ import(
     "log"
     "database/sql"
 _ "github.com/lib/pq"
-    "fmt"
 )
 
 func main() {
@@ -57,13 +56,12 @@ func dbpull() newspoint {
     err := rows.Scan(&bk.Target, &bk.Price, &bk.Return, &bk.Ticker, &bk.Note, &bk.Date, &bk.Q_eps, &bk.A_eps, &bk.Report)
     }
 		if err != nil {
-			http.Error(w, http.StatusText(500), 500)
 			log.Fatal(err)
 		}
 		// appends the rows
-	bks = append(bks, bk)
+	  bks = append(bks, bk)
 
-  dbusers.Close()
+  db.Close()
   return(bks)
 
 }
@@ -71,7 +69,7 @@ func dbpull() newspoint {
 
 func serve(w http.ResponseWriter, r *http.Request){
   tpl := template.Must(template.ParseFiles("main.gohtml","css/main.css","css/mcleod-reset.css"))
-  dataset=dbpull()
+  dataset:=dbpull()
   tpl.Execute(w, dataset)
 }
 func serveabout(w http.ResponseWriter, r *http.Request){
