@@ -27,6 +27,14 @@ header{
   flex-direction: column;
   justify-content: space-between;
 }
+
+table.sortable th {
+    background-color:#eee;
+    color:#666666;
+    font-weight: bold;
+    cursor: default;
+}
+
 .contents{
   margin: 0px 10% 0px 0px;
   padding: 5px;
