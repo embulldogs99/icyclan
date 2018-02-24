@@ -29,9 +29,7 @@ header{
   background-image: url(fmi.jpg);
   background-size: 70px;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: left;
+  text-align: left;
   font-family: 'raitons', sans-serif;
 }
 
