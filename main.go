@@ -10,7 +10,7 @@ _ "github.com/lib/pq"
 func main() {
 
   s := &http.Server{
-    Addr:    ":8080",
+    Addr:    ":80",
     Handler: nil,
   }
 
