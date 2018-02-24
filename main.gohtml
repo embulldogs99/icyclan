@@ -15,10 +15,32 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.css"/>
 <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.js"></script>
+
+<!--- javascript -->
 <script type="text/javascript">
   $(document).ready(function(){
-    $('#sortable').dataTable();})
+    var table = $('#sortable').dataTable();
+
+    var filteredData = table
+    .columns( 5 )
+    .data()
+    .flatten()
+    .filter( function ( value, index ) {
+        var today = new Date();
+        var todayday = today.getDate();
+
+        var stringdate = value
+        var dataday = new Date(stringdate)
+        var pullday = today.getDate();
+
+
+        return  todayday=pullday? true : false;
+
+          } );
+  })
 </script>
+
+
 </head>
 
 <header>
@@ -63,7 +85,7 @@
     </thead>
 
     <tbody>
-      
+
       {{range .}}
       <tr>
         <td>{{.Target}}</td>
