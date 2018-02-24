@@ -858,7 +858,7 @@ def contentfilter():
 							conn = psycopg2.connect("dbname='postgres' user='postgres' password='postgres' host='localhost' port='5432'")
 							cur = conn.cursor()
 							# execute a statement
-							cur.execute("INSERT INTO fmi.marketmentions (target, price, return, ticker, note, date, q_eps, a_eps, report) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)", (targetprice,price,epsexpreturn,stock,grab,pub,value,epsreference,'earnings'))
+							cur.execute("INSERT INTO fmi.marketmentions (target, price, returns, ticker, note, date, q_eps, a_eps, report) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)", (targetprice,price,epsexpreturn,stock,grab,pub,value,epsreference,'earnings'))
 							print("inserted value")
 							conn.commit()
 							# close the communication with the PostgreSQL
@@ -873,7 +873,7 @@ def contentfilter():
 							conn = psycopg2.connect("dbname='postgres' user='postgres' password='postgres' host='localhost' port='5432'")
 							cur = conn.cursor()
 							# execute a statement
-							cur.execute("INSERT INTO fmi.marketmentions (target, price, return, ticker, note, date, q_eps, a_eps, report) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)", (value,price,predreturn,stock,grab,pub,None,epsreference,'analyst'))
+							cur.execute("INSERT INTO fmi.marketmentions (target, price, returns, ticker, note, date, q_eps, a_eps, report) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)", (value,price,predreturn,stock,grab,pub,None,epsreference,'analyst'))
 							print("inserted value")
 							conn.commit()
 							# close the communication with the PostgreSQL
