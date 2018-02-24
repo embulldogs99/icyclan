@@ -1,4 +1,7 @@
 <!doctype html>
+<html>
+
+<header>
 
 <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
@@ -8,13 +11,13 @@
 
 <link href="css/mcleod-reset.css" rel="stylesheet">
 <link href="css/main.css" rel="stylesheet">
-
-
-
-<html>
-
-<header>
-
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="/js/jquery-latest.js"></script>
+<script type="text/javascript" src="/js/tablesorter.js"></script>
+<script>
+  $(document.ready( function() {
+    $("#myTable").tablesorter();
+  }))
 
 
   <div>
@@ -176,7 +179,7 @@ Data
 
 </body>
 
-<script src="sorttable.js"></script>
+
 <!-- {{range .Target}}
   {{.}}
 {{end}}
