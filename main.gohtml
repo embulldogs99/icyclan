@@ -19,25 +19,9 @@
 <!--- javascript -->
 <script type="text/javascript">
   $(document).ready(function(){
-    var table = $('#sortable').dataTable();
+    $('#sortable').dataTable();
 
-    var filteredData = table
-    .columns( 5 )
-    .data()
-    .flatten()
-    .filter( function ( value, index ) {
-        var today = new Date();
-        var todayday = today.getDate();
-
-        var stringdate = value
-        var dataday = new Date(stringdate)
-        var pullday = today.getDate();
-        window.print(pullday);
-
-
-        return  todayday==pullday? true : false;
-
-          } );
+        
   })
 </script>
 
