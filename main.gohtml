@@ -58,7 +58,7 @@
   <td>REPORT</td>
 </thead>
 
-{{.}}
+
 <tbody>
 <td>{{.Target}}</td>
 <td>{{.Price}}</td>
@@ -170,9 +170,9 @@ Data
 </div>
 
 </body>
-</html>
 
 
+{{.}}
 {{range .Target}}
   {{.}}
 {{end}}
@@ -200,3 +200,5 @@ Data
 {{range .Report}}
   {{.}}
 {{end}}
+
+</html>
