@@ -29,18 +29,6 @@ func main() {
   log.Fatal(s.ListenAndServe())
 }
 
-func runpypull(code string) string{
-  cmd := exec.Command("stocks-googlenews4.py")
-  out, err := cmd.Output()
-
-  if err != nil {
-      println(err.Error())
-      return
-  }
-
-  fmt.Println(string(out))
-  return
-}
 
 type newspoint struct {
 	Target int
