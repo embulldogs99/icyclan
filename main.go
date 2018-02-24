@@ -55,13 +55,13 @@ func dbpull() newspoint {
   for rows.Next() {
 
     _ = rows.Scan(&bk.Target, &bk.Price, &bk.Return, &bk.Ticker, &bk.Note, &bk.Date, &bk.Q_eps, &bk.A_eps, &bk.Report)
-    }
+
 		if err != nil {
 			log.Fatal(err)
 		}
 		// appends the rows
-	  bks = append(bks, bk)
-   
+    bks = append(bks, bk)
+
   db.Close()
   return(bks)
 
