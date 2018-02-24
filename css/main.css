@@ -37,7 +37,10 @@ header{
     border: .5px solid black;
     width: 80%;
 }
-
+th{
+  font-weight: 900;
+  font-size: 120%;
+}
 
 
 .contents{
