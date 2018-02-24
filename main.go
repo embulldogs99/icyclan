@@ -60,8 +60,8 @@ func dbpull() newspoint {
 			log.Fatal(err)
 		}
 		// appends the rows
-	 bks = append(bks, bk)
-
+	 // bks = append(bks, bk)
+   print(bk)
   db.Close()
   return(bks)
 
