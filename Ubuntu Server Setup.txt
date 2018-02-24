@@ -1,20 +1,24 @@
-#### Quick UBUTNTU SERVER STARTUP
+#### Debeian Stretch 9 Server Deployment
 sudo apt-get update
 sudo apt-get install git
 sudo apt-get update
+wget https://storage.googleapis.com/golang/go1.8.3.linux-amd64.tar.gz
+tar -xvf go1.8.3.linux-amd64.tar.gz
+
+
 sudo apt-get install golang
 sudo apt-get update
 sudo apt-get install postgresql-9.6
 sudo apt-get update
+sudo apt-get install libpq-dev
 go get github.com/lib/pq
 sudo su - postgres
 psql
 ALTER USER postgres WITH PASSWORD 'rk';
+ALTER USER postgres PASSWORD 'rk';
 CREATE schema rfgg;
 CREATE table rfgg.members(email VARCHAR(500), pass VARCHAR(500), ppal boolean, wins integer, losses integer, heat integer, refers integer, memberflag VARCHAR(500), credits NUMERIC, grade integer );
-insert into rfgg.members values('embulldogs99@yahoo.com','rumble','t',0,0,0,0,'y',200,0 );
-insert into rfgg.members values('wulfhausstudios@gmail.com','Fallout2','t',0,0,0,0,'y',200,0 );
-insert into rfgg.members values('odathunder2023@gmail.com','thunder8','t',0,0,0,0,'y',200,0 );
+
 \q
 
 ###Hit control D
