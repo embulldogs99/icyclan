@@ -50,7 +50,7 @@ func dbpull() []newspoint {
   }
 
 
-  rows, _ := db.Query("SELECT * FROM fmi.marketmentions WHERE date_trunc('day', Date) = '24'")
+  rows, _ := db.Query("SELECT * FROM fmi.marketmentions WHERE date_trunc('day', Date) = 'YYYY-MM-DD'")
   bks := []newspoint{}
   for rows.Next() {
     bk := newspoint{}
