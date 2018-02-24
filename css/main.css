@@ -39,6 +39,15 @@ table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sor
     content: " \25B4\25BE"
 }
 
+table{
+  display: flex;
+}
+td,th{
+  padding: 3px;
+  border: .5px solid black;
+}
+
+
 .contents{
   margin: 0px 10% 0px 0px;
   padding: 5px;
@@ -176,10 +185,7 @@ h {
   text-align: left;
   margin-left: 0px;
 }
-td,th{
-  padding: 3px;
-  border: .5px solid black;
-}
+
 #spec{
   background-color: yellow;
 }
