@@ -2,11 +2,11 @@ body{
   background-color: rgba(0,0,0,.25);
     font-family: 'Cantarell', sans-serif;
 }
-/* .page{
+.page{
   display: flex;
   flex-direction: row;
   /*border: 2px solid black;*/
-} */
+}
 .posts{
   display: flex;
   flex-direction: column;
@@ -33,6 +33,7 @@ table.sortable th {
     color:#666666;
     font-weight: bold;
     cursor: default;
+
 }
 table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sorttable_nosort):after {
     content: " \25B4\25BE"
