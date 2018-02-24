@@ -54,7 +54,7 @@ func dbpull() newspoint {
   rows, err := db.Query("SELECT * FROM fmi.marketmentions")
   for rows.Next() {
 
-    err := rows.Scan(&bk.Target, &bk.Price, &bk.Return, &bk.Ticker, &bk.Note, &bk.Date, &bk.Q_eps, &bk.A_eps, &bk.Report)
+    _ = rows.Scan(&bk.Target, &bk.Price, &bk.Return, &bk.Ticker, &bk.Note, &bk.Date, &bk.Q_eps, &bk.A_eps, &bk.Report)
     }
 		if err != nil {
 			log.Fatal(err)
