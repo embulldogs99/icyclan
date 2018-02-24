@@ -6,12 +6,7 @@
 
 body{
   background-color: rgba(0,0,0,.25);
-}
-.page{
-  display: flex;
-  flex-direction: row;
-  /*border: 2px solid black;*/
-}
+
 .posts{
   display: flex;
   flex-direction: column;
@@ -114,15 +109,13 @@ th{
 .sidebar{
 display: flex;
 flex-direction: column;
-height: 70%;
 text-align: center;
 align-items: center;
 justify-content: center;
-width: 30%;
 padding: 2rem .5rem 10rem .5rem;
 font-weight: 600;
 /*border: solid red 5px;*/
-font-family: 'raitons', sans-serif;
+font-family: 'Calibri', sans-serif;
 }
 .sidebar:link{
 color: orange;
