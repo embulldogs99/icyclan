@@ -33,6 +33,10 @@ table.sortable th {
     color:#666666;
     font-weight: bold;
     cursor: default;
+    display: flex;
+    display: column;
+    justify-content: center;
+    align-items: center;
 }
 table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sorttable_nosort):after {
     content: " \25B4\25BE"
