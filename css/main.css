@@ -1,6 +1,6 @@
 @font-face {
-  font-family: 'rations';
-  src:  url('raitons.ttf')  format('truetype');
+  font-family: 'raitons';
+  src:url('raitons.ttf')  format('truetype');
 }
 
 body{
