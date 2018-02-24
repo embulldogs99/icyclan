@@ -51,6 +51,7 @@ th{
   font-size: 90px;
   margin: 40px 0% 0% 3%;
   font-family: 'raitons', sans-serif;
+  white-space: nowrap;
   /*border: 2px solid green;*/
 }
 .posttitle{
@@ -58,6 +59,7 @@ th{
   padding: 3%;
   margin-left: 3%;
   font-family: 'raitons', sans-serif;
+  white-space: nowrap;
   /*border: 2px solid green;*/
 
 }
