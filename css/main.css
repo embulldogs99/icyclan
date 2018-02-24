@@ -40,7 +40,7 @@ table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sor
 }
 
 table{
-
+padding: 3px;
 }
 td,th{
   padding: 3px;
