@@ -64,7 +64,7 @@ func dbpull() newspoint {
     // bks = append(bks, bk)
 
   db.Close()
-  return bks
+  return //bks
 
 }
 }
