@@ -31,3 +31,4 @@ pip install BeautifulSoup4
 pip install pandas
 apt-get install python-psycopg2
 pip install quandl
+apt-get install npm
