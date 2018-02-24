@@ -46,31 +46,33 @@
   Market Mentions
 </div><br>
 <br>
-<tr>
-  <th>Target</th>
-  <th>Price</th>
-  <th>Return</th>
-  <th>Ticker</th>
-  <!-- <th>Note</th> -->
-  <th>Date</th>
-  <th>Q_EPS</th>
-  <th>A_EPS</th>
-  <th>REPORT</th>
-</tr>
+  <table>
+  <tr>
+    <th>Target</th>
+    <th>Price</th>
+    <th>Return</th>
+    <th>Ticker</th>
+    <!-- <th>Note</th> -->
+    <th>Date</th>
+    <th>Q_EPS</th>
+    <th>A_EPS</th>
+    <th>REPORT</th>
+  </tr>
 
-{{range .}}
-<tr>
-  <td>{{.Target}}</td>
-  <td>{{.Price}}</td>
-  <td>{{.Returns.Value}}</td>
-  <td>{{.Ticker.Value}}</td>
-  <!-- <td>{{.Note.Value}}</td> -->
-  <td>{{.Date.Value}}</td>
-  <td>{{.Q_eps.Value}}</td>
-  <td>{{.A_eps.Value}}</td>
-  <td>{{.Report.Value}}</td>
-</tr>
-{{end}}
+  {{range .}}
+  <tr>
+    <td>{{.Target}}</td>
+    <td>{{.Price}}</td>
+    <td>{{.Returns.Value}}</td>
+    <td>{{.Ticker.Value}}</td>
+    <!-- <td>{{.Note.Value}}</td> -->
+    <td>{{.Date.Value}}</td>
+    <td>{{.Q_eps.Value}}</td>
+    <td>{{.A_eps.Value}}</td>
+    <td>{{.Report.Value}}</td>
+  </tr>
+  {{end}}
+</table>
 
 <div class="title">
   Portfolio
