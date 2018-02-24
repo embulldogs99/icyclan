@@ -60,6 +60,7 @@ th{
   margin-left: 3%;
   font-family: 'raitons', sans-serif;
   white-space: nowrap;
+  text-decoration: underline;
   /*border: 2px solid green;*/
 
 }
