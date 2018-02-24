@@ -48,12 +48,14 @@ func dbpull() []newspoint {
   if err != nil {
     log.Fatalf("Unable to connect to the database")
   }
-
-  rows, err := db.Query("SELECT * FROM fmi.marketmentions")
-  bks := make([]newspoint, 0)
+  rows, _ := db.Query("SELECT * FROM fmi.marketmentions")
+  bks := []newspoint{}
   for rows.Next() {
     bk := newspoint{}
-    _ = rows.Scan(&bk.Target, &bk.Price, &bk.Return, &bk.Ticker, &bk.Note, &bk.Date, &bk.Q_eps, &bk.A_eps, &bk.Report)
+    err := rows.Scan(&bk.target, &bk.price, &bk.return, &bk.ticker, &bk.note, &bk.date, &bk.q_eps, &bk.a_eps, &bk.report)
+    if err != nil {
+      log.Fatal(err)
+    }
 		// appends the rows
     bks = append(bks, bk)
   }
