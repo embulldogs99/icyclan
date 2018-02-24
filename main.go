@@ -66,19 +66,9 @@ func dbpull() []newspoint {
 
 
 
-
-
-
-
-
-
-
-
-
 func serve(w http.ResponseWriter, r *http.Request){
   tpl := template.Must(template.ParseFiles("main.gohtml","css/main.css","css/mcleod-reset.css"))
-  dataset:=dbpull()
-  tpl.Execute(w, dataset)
+  tpl.Execute(w, dbpull())
 }
 func serveabout(w http.ResponseWriter, r *http.Request){
   tpl := template.Must(template.ParseFiles("about.gohtml","css/main.css","css/mcleod-reset.css" ))
