@@ -61,13 +61,13 @@
 <tbody>
 <td>{{.Target}}</td>
 <td>{{.Price}}</td>
-<td>{{.Return}}</td>
+<td>{{.Returns}}</td>
 <td>{{.Ticker}}</td>
 <td>{{.Note}}</td>
 <td>{{.Date}}</td>
-<td>{{.Q_EPS}}</td>
-<td>{{.A_EPS}}</td>
-<td>{{.REPORT}}</td>
+<td>{{.Q_eps}}</td>
+<td>{{.A_eps}}</td>
+<td>{{.Report}}</td>
 </tbody>
 
 
@@ -178,7 +178,7 @@ Data
 {{range .Price}}
   {{.}}
 {{end}}
-{{range .Return}}
+{{range .Returns}}
   {{.}}
 {{end}}
 {{range .Ticker}}
