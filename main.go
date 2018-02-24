@@ -66,6 +66,7 @@ func dbpull() newspoint {
   return(bks)
 
 }
+}
 
 
 func serve(w http.ResponseWriter, r *http.Request){
