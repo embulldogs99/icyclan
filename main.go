@@ -10,7 +10,7 @@ _ "github.com/lib/pq"
 func main() {
 
   s := &http.Server{
-    Addr:    ":80",
+    Addr:    ":8080",
     Handler: nil,
   }
 
@@ -33,46 +33,49 @@ type newspoint struct {
 	Target int
 	Price  int
 	Return float32
-	Ticker string
-  Note string
-  Date string
+	Ticker sql.NullString
+  Note sql.NullString
+  Date sql.NullString
   Q_eps float64
   A_eps float64
-  Report string
+  Report sql.NullString
 }
 
 
-func dbpull() newspoint {
+func dbpull(w http.ResponseWriter, r *http.Request) []newspoint {
 
   db, err := sql.Open("postgres", "postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable")
   if err != nil {
     log.Fatalf("Unable to connect to the database")
   }
 
-  bks:=newspoint{}
-  bk:=newspoint{}
   rows, err := db.Query("SELECT * FROM fmi.marketmentions")
+  bks := make([]newspoint, 0)
   for rows.Next() {
-
+    bk := newspoint{}
     _ = rows.Scan(&bk.Target, &bk.Price, &bk.Return, &bk.Ticker, &bk.Note, &bk.Date, &bk.Q_eps, &bk.A_eps, &bk.Report)
-    print(&bk.Target)
-
-		if err != nil {
-			log.Fatal(err)
-		}
 		// appends the rows
-    // bks = append(bks, bk)
-
+    bks = append(bks, bk)
+  }
   db.Close()
-  return //bks
+  return bks
+}
 
-}
-}
+
+
+
+
+
+
+
+
+
+
 
 
 func serve(w http.ResponseWriter, r *http.Request){
   tpl := template.Must(template.ParseFiles("main.gohtml","css/main.css","css/mcleod-reset.css"))
-  dataset:=dbpull()
+  dataset:=dbpull(w,r)
   tpl.Execute(w, dataset)
 }
 func serveabout(w http.ResponseWriter, r *http.Request){
