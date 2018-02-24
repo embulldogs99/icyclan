@@ -79,7 +79,7 @@ th{
 
 .banner{
   font-weight: 900;
-  font-size: 15px; 
+  font-size: 15px;
   background-size: 100%;
   font-family: 'Calibri', Fallback, sans-serif;
   display: flex;
@@ -103,7 +103,6 @@ th{
   text-align: center;
   align-items: center;
   border-radius: 20rem;
-  font-size: 30px;
   height: 80%;
 }
 .buttons:hover{
