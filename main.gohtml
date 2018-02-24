@@ -49,6 +49,7 @@
 </div><br>
 <br>
   <table class="sortable" id="myTable">
+    <thead>
       <tr>
         <th>Target</th>
         <th>Price</th>
@@ -60,8 +61,9 @@
         <th>A_EPS</th>
         <th>REPORT</th>
       </tr>
+    </thead>
 
-
+  <tbody>
     <tr>
       {{range .}}
       <td>{{.Target}}</td>
@@ -74,6 +76,7 @@
       <td>{{.A_eps.Value}}</td>
       <td>{{.Report.Value}}</td>
     </tr>
+  </tobody>
     {{end}}
 
 
