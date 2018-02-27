@@ -15,8 +15,7 @@ psql
 ALTER USER postgres WITH PASSWORD 'rk';
 ALTER USER postgres PASSWORD 'rk';
 CREATE schema rfgg;
-CREATE table fmi.marketmentions(email VARCHAR(500), pass VARCHAR(500),
-ppal boolean, wins integer, losses integer);
+CREATE table fmi.marketmentions(target int, price int, returns NUMERIC(7,2), note VARCHAR(500), date date, q_eps NUMERIC(7,2), a_eps NUMERIC(7,2),report VARCHAR(10));
 
 
 #############################################

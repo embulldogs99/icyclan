@@ -59,9 +59,9 @@
   <table id="sortable">
     <thead>
       <tr>
-        <th>Target</th>
-        <th>Price</th>
-        <th>Return</th>
+        <th>Target Price</th>
+        <th>Today's Price</th>
+        <th>Exp Return</th>
         <th>Ticker</th>
         <th>News Title</th>
         <th>Qtd_EPS</th>
@@ -75,6 +75,7 @@
       <tr>
         <td>{{.Target}}</td>
         <td>{{.Price}}</td>
+        <!-- Must return .Value because we are ranging over a NullString which is a 2 variable type -->
         <td>{{.Returns.Value}}</td>
         <td>{{.Ticker.Value}}</td>
         <td>{{.Note.Value}}</td>

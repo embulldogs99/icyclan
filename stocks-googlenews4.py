@@ -867,4 +867,4 @@ def contentfilter():
 for i in range(1,100):
 	contentfilter()
 	print('end')
-	time.sleep(21600/2)
+	time.sleep(86400/2)
