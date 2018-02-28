@@ -215,7 +215,10 @@ h {
 .sidebyside{
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  align-items: space-between
+  justify-content: center;
+  align-items: center;
 
+}
+form{
+  padding: 20px;
 }
