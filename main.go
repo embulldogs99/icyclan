@@ -104,10 +104,10 @@ func profile(w http.ResponseWriter, r *http.Request){
     if membercheck(emailcheck,passcheck)==false{
         http.Redirect(w, r, "/signup", http.StatusSeeOther)
     }else{
-    var email sql.NullString
-    var pass sql.NullString
-    var balance sql.NullFloat64
-    var memberflag sql.NullString
+    var email string
+    var pass string
+    var balance float64
+    var memberflag string
 
 
     dbusers, _ := sql.Open("postgres", "postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable")
