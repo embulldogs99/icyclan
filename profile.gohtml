@@ -26,17 +26,15 @@
 <body>
     <div class="posttitle">Investment Account Balance</div>
 
+{{range .}}
+
 
 Balance:{{.Balance}}<br>
 Balance:{{.Value}}<br>
 Balance:{{.Balance.Value}}<br>
 Balance:{{.}}<br>
-
+{{end}}
 
 
 </body>
 </html>
-
-{{range .Balance}}
-    {{.Value}}
-{{end}}
