@@ -86,7 +86,7 @@ func signup(w http.ResponseWriter, r *http.Request){
       if err != nil {
         http.Redirect(w, r, "/login", http.StatusSeeOther)
     }
-    fmt.Printf("Added User: "+str(email)+" At Time : "+time.Now().Format("2006-01-02 15:04:05"))
+    fmt.Printf("Added User: "+email.String+" At Time : "+time.Now().Format("2006-01-02 15:04:05"))
     http.Redirect(w, r, "/profile", http.StatusSeeOther)
     }
   }
@@ -112,7 +112,7 @@ func profile(w http.ResponseWriter, r *http.Request){
 
     dbusers, _ := sql.Open("postgres", "postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable")
     _ = dbusers.QueryRow("SELECT * FROM fmi.members WHERE email=$1 AND pass=$2",emailcheck,passcheck).Scan(&email, &pass, &balance, &memberflag)
-    data:=Member{email, pass, balance}
+    data:=Member{email, pass, balance, memberflag}
     fmt.Println(email.String + " logged on")
     var tpl *template.Template
     tpl = template.Must(template.ParseFiles("profile.gohtml","css/main.css","css/mcleod-reset.css"))
