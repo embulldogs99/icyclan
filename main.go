@@ -5,6 +5,7 @@ import(
     "log"
     "database/sql"
 _ "github.com/lib/pq"
+  "time"
 )
 
 func main() {
@@ -25,6 +26,8 @@ func main() {
   http.HandleFunc("/researchlinks", researchlinks)
   http.HandleFunc("/research/roa", researchroa)
   http.HandleFunc("/research/eps", researcheps)
+  http.HandleFunc("/signup", signup)
+  http.HandleFunc("/profile", profile)
   log.Fatal(s.ListenAndServe())
 }
 
@@ -40,6 +43,94 @@ type newspoint struct {
   A_eps sql.NullFloat64
   Report sql.NullString
 }
+
+
+type Member struct{
+  Email NullString
+  Pass NullString
+  Balance NullFloat64
+  Memberflag NullString
+}
+
+func membercheck(e string, p string) bool{
+  emailcheck = r.FormValue("email")
+  passcheck = r.FormValue("pass")
+  dbusers, err := sql.Open("postgres", "postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable")
+  if err != nil {
+    log.Fatalf("Unable to connect to the database")
+  }
+  u, err = dbusers.Exec(`SELECT * FROM fmi.members WHERE email=$1 AND pass=$2;`, e,p)
+  if u == nil {
+    dbusers.Close()
+    return false
+  } else {
+  dbusers.Close()
+  return true
+}
+}
+
+
+func signup(w http.ResponseWriter, r *http.Request) bool{
+  if r.Method == http.MethodPost {
+    email := r.FormValue("email")
+    pass := r.FormValue("pass")
+    if membercheck(email,pass) == true{
+      profile(w,r)
+    }else{
+      _, err = dbusers.Exec(`INSERT INTO fmi.members (email, pass, balance, memberflag ) VALUES ($1, $2, $3, $4);`, email, pass, 0, 'p')
+      if err != nil {
+        http.Redirect(w, r, "/login", http.StatusSeeOther)
+    }
+    fmt.Printf("Added User: "+str(email)+" At Time : "+str(Now()))
+    http.Redirect(w, r, "/profile", http.StatusSeeOther)
+    }
+  }
+  var tpl *template.Template
+  tpl = template.Must(template.ParseFiles("signup.gohtml","css/main.css","css/mcleod-reset.css",))
+  tpl.Execute(w, nil)
+}
+
+
+
+
+
+func profile(w http.ResponseWriter, r *http.Request){
+  if r.Method == http.MethodPost {
+    emailcheck := r.FormValue("email")
+    passcheck := r.FormValue("pass")
+    if membercheck(emailcheck,passcheck)==false{
+        http.Redirect(w, r, "/signup", http.StatusSeeOther)
+    }else{
+    var email NullString
+    var pass NullString
+    var balance NullFloat64
+    var memberflag NullString
+
+
+    dbusers, _ := sql.Open("postgres", "postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable")
+    _ = dbusers.QueryRow("SELECT * FROM fmi.members WHERE email=$1 AND pass=$2",emailcheck,passcheck).Scan(&email, &pass, &balance, &memberflag)
+    data:=Data{email, pass, balance}
+    fmt.Println(email + " logged on")
+    var tpl *template.Template
+    tpl = template.Must(template.ParseFiles("profile.gohtml","css/main.css","css/mcleod-reset.css"))
+
+    tpl.Execute(w,data)
+      }
+      }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 func dbpull() []newspoint {
