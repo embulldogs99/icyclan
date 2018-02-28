@@ -212,3 +212,10 @@ h {
   color:rgba(0,255,255,1);
   font-weight: 900;
 }
+.sidebyside{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: space-between
+
+}

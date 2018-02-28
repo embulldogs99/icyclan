@@ -6,7 +6,7 @@
 <html>
 <body>
   <header>
-    
+
     <div class="banner">
       <a href="/" class="buttons"> Home </a>
       <a href="/about" class="buttons"> About </a>
@@ -26,6 +26,16 @@
   </header>
 <article>
   <p>
+    <div class="sidebyside">
+    <form action="/profile" method="POST">
+      email:<br>
+      <input type="email" name="email" value="" required><br>
+      password:<br>
+      <input type="password" name="pass" value="" required><br>
+      <br><br>
+      <input type="submit" style="color: black; background-color:white; font-family: 'raitons', Fallback, sans-serif;" value="Sign Up">
+
+    </form>
 
     <form action="/profile" method="POST">
       email:<br>
@@ -33,10 +43,10 @@
       password:<br>
       <input type="password" name="pass" value="" required><br>
       <br><br>
-      <input type="submit" style="color: black; background-color:white; font-family: 'MyWebFont', Fallback, sans-serif;" value="Sign Up">
+      <input type="submit" style="color: black; background-color:white; font-family: 'raitons', Fallback, sans-serif;" value="Login">
 
     </form>
-
+  </div>
 
 
 
