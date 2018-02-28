@@ -86,7 +86,7 @@ func signup(w http.ResponseWriter, r *http.Request){
       if err != nil {
         http.Redirect(w, r, "/login", http.StatusSeeOther)
     }
-    fmt.Printf("Added User: "+email.String+" At Time : "+time.Now().Format("2006-01-02 15:04:05"))
+    fmt.Printf("Added User: "+email+" At Time : "+time.Now().Format("2006-01-02 15:04:05"))
     http.Redirect(w, r, "/profile", http.StatusSeeOther)
     }
   }
