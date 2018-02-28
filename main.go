@@ -53,8 +53,6 @@ type Member struct{
 }
 
 func membercheck(e string, p string) bool{
-  emailcheck := r.FormValue("email")
-  passcheck := r.FormValue("pass")
   dbusers, err := sql.Open("postgres", "postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable")
   if err != nil {
     log.Fatalf("Unable to connect to the database")
