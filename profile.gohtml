@@ -4,8 +4,7 @@
 <link href="/css/main.css" rel="stylesheet">
 
 <html>
-<body>
-  <header>
+<header>
 
     <div class="banner">
       <a href="/" class="buttons"> Home </a>
@@ -22,15 +21,15 @@
       <div class="slogan">Your Profile</div>
     </div>
 
+</header>
 
-  </header>
-<article>
-  <p>
+<body>
+
 {{range .}}
 
 Balance:{{.Balance.Value}}<br>
 
 {{end}}
-</article>
+
 </body>
 </html>
