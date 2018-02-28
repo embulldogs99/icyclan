@@ -57,7 +57,7 @@ func membercheck(e string, p string) bool{
   if err != nil {
     log.Fatalf("Unable to connect to the database")
   }
-  u, err = dbusers.Exec(`SELECT * FROM fmi.members WHERE email=$1 AND pass=$2;`, e,p)
+  u, err := dbusers.Exec(`SELECT * FROM fmi.members WHERE email=$1 AND pass=$2;`, e,p)
   if u == nil {
     dbusers.Close()
     return false
