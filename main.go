@@ -70,7 +70,7 @@ func membercheck(e string, p string) bool{
 }
 
 
-func signup(w http.ResponseWriter, r *http.Request) bool{
+func signup(w http.ResponseWriter, r *http.Request){
   var tpl *template.Template
   tpl = template.Must(template.ParseFiles("signup.gohtml","css/main.css","css/mcleod-reset.css",))
   tpl.Execute(w, nil)
@@ -81,6 +81,7 @@ func signup(w http.ResponseWriter, r *http.Request) bool{
     if membercheck(email,pass) == true{
       profile(w,r)
     }else{
+      dbusers, _ := sql.Open("postgres", "postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable")
       _, err := dbusers.Exec(`INSERT INTO fmi.members (email, pass, balance, memberflag ) VALUES ($1, $2, $3, $4);`, email, pass, 0, 'p')
       if err != nil {
         http.Redirect(w, r, "/login", http.StatusSeeOther)
@@ -111,8 +112,8 @@ func profile(w http.ResponseWriter, r *http.Request){
 
     dbusers, _ := sql.Open("postgres", "postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable")
     _ = dbusers.QueryRow("SELECT * FROM fmi.members WHERE email=$1 AND pass=$2",emailcheck,passcheck).Scan(&email, &pass, &balance, &memberflag)
-    data:=Data{email, pass, balance}
-    fmt.Println(email + " logged on")
+    data:=Member{email, pass, balance}
+    fmt.Println(email.String + " logged on")
     var tpl *template.Template
     tpl = template.Must(template.ParseFiles("profile.gohtml","css/main.css","css/mcleod-reset.css"))
 
