@@ -71,6 +71,10 @@ func membercheck(e string, p string) bool{
 
 
 func signup(w http.ResponseWriter, r *http.Request) bool{
+  var tpl *template.Template
+  tpl = template.Must(template.ParseFiles("signup.gohtml","css/main.css","css/mcleod-reset.css",))
+  tpl.Execute(w, nil)
+
   if r.Method == http.MethodPost {
     email := r.FormValue("email")
     pass := r.FormValue("pass")
@@ -81,13 +85,11 @@ func signup(w http.ResponseWriter, r *http.Request) bool{
       if err != nil {
         http.Redirect(w, r, "/login", http.StatusSeeOther)
     }
-    fmt.Printf("Added User: "+str(email)+" At Time : "+time.Now().Format("2006-01-02 15:04:05")))
+    fmt.Printf("Added User: "+str(email)+" At Time : "+time.Now().Format("2006-01-02 15:04:05"))
     http.Redirect(w, r, "/profile", http.StatusSeeOther)
     }
   }
-  var tpl *template.Template
-  tpl = template.Must(template.ParseFiles("signup.gohtml","css/main.css","css/mcleod-reset.css",))
-  tpl.Execute(w, nil)
+
 }
 
 
