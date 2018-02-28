@@ -6,6 +6,8 @@ import(
     "database/sql"
 _ "github.com/lib/pq"
   "time"
+  "fmt"
+
 )
 
 func main() {
@@ -75,11 +77,11 @@ func signup(w http.ResponseWriter, r *http.Request) bool{
     if membercheck(email,pass) == true{
       profile(w,r)
     }else{
-      _, err = dbusers.Exec(`INSERT INTO fmi.members (email, pass, balance, memberflag ) VALUES ($1, $2, $3, $4);`, email, pass, 0, 'p')
+      _, err := dbusers.Exec(`INSERT INTO fmi.members (email, pass, balance, memberflag ) VALUES ($1, $2, $3, $4);`, email, pass, 0, 'p')
       if err != nil {
         http.Redirect(w, r, "/login", http.StatusSeeOther)
     }
-    fmt.Printf("Added User: "+str(email)+" At Time : "+str(time.Now()))
+    fmt.Printf("Added User: "+str(email)+" At Time : "+time.Now().Format("2006-01-02 15:04:05")))
     http.Redirect(w, r, "/profile", http.StatusSeeOther)
     }
   }
@@ -99,10 +101,10 @@ func profile(w http.ResponseWriter, r *http.Request){
     if membercheck(emailcheck,passcheck)==false{
         http.Redirect(w, r, "/signup", http.StatusSeeOther)
     }else{
-    var email NullString
-    var pass NullString
-    var balance NullFloat64
-    var memberflag NullString
+    var email sql.NullString
+    var pass sql.NullString
+    var balance sql.NullFloat64
+    var memberflag sql.NullString
 
 
     dbusers, _ := sql.Open("postgres", "postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable")
