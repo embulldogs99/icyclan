@@ -46,10 +46,10 @@ type newspoint struct {
 
 
 type Member struct{
-  Email NullString
-  Pass NullString
-  Balance NullFloat64
-  Memberflag NullString
+  Email sql.NullString
+  Pass sql.NullString
+  Balance sql.NullFloat64
+  Memberflag sql.NullString
 }
 
 func membercheck(e string, p string) bool{
@@ -81,7 +81,7 @@ func signup(w http.ResponseWriter, r *http.Request) bool{
       if err != nil {
         http.Redirect(w, r, "/login", http.StatusSeeOther)
     }
-    fmt.Printf("Added User: "+str(email)+" At Time : "+str(Now()))
+    fmt.Printf("Added User: "+str(email)+" At Time : "+str(time.Now()))
     http.Redirect(w, r, "/profile", http.StatusSeeOther)
     }
   }
