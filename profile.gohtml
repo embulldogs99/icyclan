@@ -26,14 +26,7 @@
 <body>
     <div class="posttitle">Investment Account Balance</div>
 <table>
-    {{range .}}
-    <tr>
-      <td>{{.Email}}</td>
-      <td>{{.Pass}}</td>
-      <!-- Must return .Value because we are ranging over a NullString which is a 2 variable type -->
-      <td>{{.Balance.Value}}</td>
-    </tr>
-    {{end}}
+{{.}}
 </table>
 
 
