@@ -19,7 +19,9 @@
 <!--- javascript -->
 <script type="text/javascript">
   $(document).ready(function(){
-    $('#sortable').dataTable();
+    $('#sortable').dataTable(
+      "pageLength": 100
+    );
   })
 </script>
 
