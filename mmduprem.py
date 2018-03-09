@@ -9,7 +9,7 @@ cur.execute("CREATE TABLE fmi.marketmentions_temp (LIKE fmi.marketmentions);")
 conn.commit()
 cur.execute("INSERT into fmi.marketmentions_temp(target,price,returns,ticker,note,date,q_eps,a_eps,report)"
 "SELECT DISTINCT ON (ticker,date) "
-"target,price,returns,ticker,note,date,q_eps,a_eps,report"
+"target,price,returns,ticker,note,date,q_eps,a_eps,report "
 "FROM fmi.marketmentions;")
 conn.commit()
 cur.execute("DROP TABLE fmi.marketmentions;")
