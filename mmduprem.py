@@ -14,7 +14,7 @@ cur.execute("INSERT into fmi.marketmentions_temp(target,price,returns,ticker,not
 conn.commit()
 cur.execute("DROP TABLE fmi.marketmentions;")
 conn.commit()
-cur.execute("ALTER TABLE fmi.marketmentions_temp RENAME TO fmi.marketmentions;")
+cur.execute("ALTER TABLE fmi.marketmentions_temp RENAME TO marketmentions;")
 conn.commit()
 # close the communication with the PostgreSQL
 cur.close()
