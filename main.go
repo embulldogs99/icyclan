@@ -24,6 +24,8 @@ func main() {
   //create 1 time use user variables
   var email string
   var pass string
+  var balance float64
+  var memberflag bool
   //pulls users from database
   dbusers, err := sql.Open("postgres", "postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable")
   if err != nil {log.Fatalf("Unable to connect to the database")}
