@@ -14,20 +14,25 @@ type user struct {
   Email string
   Pass string
 }
-  //creates user database map variable
-var dbu = map[string]user{} //user id, stores users
-var dbs = map[string]string{} //session id, stores userids
-var email string
-var pass string
-//pulls users from database
-dbusers, err := sql.Open("postgres", "postgres://postgres:rk@localhost:5432/postgres?sslmode=disable")
-if err != nil {log.Fatalf("Unable to connect to the database")}
-err = dbusers.QueryRow("SELECT * FROM rfgg.members ").Scan(&email, &pass, &ppal, &wins, &losses, &heat, &refers, &memberflag,&credits,&grade,&epicusername,&gamertag)
-if err != nil {log.Fatalf("Could not Scan User Data")}
-
-dbu[email] = user{email,pass}
 
 func main() {
+
+
+    //creates user database map variable
+  var dbu = map[string]user{} //user id, stores users
+  var dbs = map[string]string{} //session id, stores userids
+  var email string
+  var pass string
+  //pulls users from database
+  dbusers, err := sql.Open("postgres", "postgres://postgres:rk@localhost:5432/postgres?sslmode=disable")
+  if err != nil {log.Fatalf("Unable to connect to the database")}
+  err = dbusers.QueryRow("SELECT * FROM rfgg.members ").Scan(&email, &pass, &ppal, &wins, &losses, &heat, &refers, &memberflag,&credits,&grade,&epicusername,&gamertag)
+  if err != nil {log.Fatalf("Could not Scan User Data")}
+
+  dbu[email] = user{email,pass}
+
+
+//Begin Serving the FIles
 
   s := &http.Server{
     Addr:    ":80",
