@@ -278,7 +278,7 @@ func dbpull(daysback int) newspoint {
   }
 
 
-  bks := newspoint{target,price,returns,ticker,note,date,q_eps&a_eps,report}
+  bks := newspoint{target,price,returns,ticker,note,date,q_eps,a_eps,report}
 
   // bks := []newspoint{}
   // for rows.Next() {
