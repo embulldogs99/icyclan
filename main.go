@@ -15,12 +15,13 @@ type user struct {
   Pass string
 }
 
+//creates global userid and sessionid hashtables
+var dbu = map[string]user{} //user id, stores users
+var dbs = map[string]string{} //session id, stores userids
+
 func main() {
 
-
-    //creates user database map variable
-  var dbu = map[string]user{} //user id, stores users
-  var dbs = map[string]string{} //session id, stores userids
+  //create 1 time use user variables
   var email string
   var pass string
   //pulls users from database
