@@ -267,8 +267,8 @@ func dbpull(daysback int) newspoint {
   var ticker sql.NullString
   var note sql.NullString
   var date sql.NullString
-  var q_eps sql.NullFloat64
-  var a_eps sql.NullFloat64
+  var q_eps sql.NullString
+  var a_eps sql.NullString
   var report sql.NullString
 
   err = db.QueryRow("SELECT * FROM fmi.marketmentions WHERE report='analyst' AND date > current_timestamp - interval '$1 day'",daysback).Scan(&target,&price,&returns,&ticker,&note,&date,&q_eps,&a_eps,&report)
