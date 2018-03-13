@@ -258,7 +258,10 @@ func dbpull(daysback int) []newspoint {
   }
 
 
-  rows, _ := db.Query("SELECT * FROM fmi.marketmentions WHERE report='analyst' AND date > current_timestamp - interval '%s day'",daysback)
+  rows, err := db.Query("SELECT * FROM fmi.marketmentions WHERE report='analyst' AND date > current_timestamp - interval '%s day'",daysback)
+  if err != nil{
+    log.Println(err)
+  }
   bks := []newspoint{}
   for rows.Next() {
     bk := newspoint{}
