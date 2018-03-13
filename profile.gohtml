@@ -24,11 +24,11 @@
 </header>
 
 <body>
-  {{range .Balance}}
+
     <div class="posttitle">Investment Account Balance<br>
       ${{.}}
     </div>
-    {{end}}
+
 
 <br><br><br><br>
 <a href="/marketmentions">All Market Mentions Data</a>
@@ -36,3 +36,6 @@
 
 </body>
 </html>
+
+{{range .Balance}}
+{{end}}
