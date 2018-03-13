@@ -261,15 +261,15 @@ func dbpull(daysback int) newspoint {
     log.Fatalf("Unable to connect to the database")
   }
 
-  var target string
-  var price float64
-  var returns float64
-  var ticker string
-  var note string
-  var date string
-  var q_eps float64
-  var a_eps float64
-  var report string
+  var target int
+  var price int
+  var returns sql.Nullfloat64
+  var ticker sql.Nullstring
+  var note sql.Nullstring
+  var date sql.Nullstring
+  var q_eps sql.Nullfloat64
+  var a_eps sql.Nullfloat64
+  var report sql.Nullstring
 
   err = db.QueryRow("SELECT * FROM fmi.marketmentions WHERE report='analyst' AND date > current_timestamp - interval '$1 day'",daysback).Scan(&target,&price,&returns,&ticker,&note,&date,&q_eps,&a_eps,&report)
 
