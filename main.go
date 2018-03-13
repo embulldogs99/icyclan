@@ -33,7 +33,7 @@ func main() {
   err = dbusers.QueryRow("SELECT * FROM fmi.members").Scan(&email, &pass,&balance,&memberflag)
   if err != nil {log.Fatalf("Could not Scan User Data")}
 
-  dbu[email] = user{email,pass,balance,memberflag}
+  dbu[email] = user{email,pass}
   dbusers.Close()
 
 
@@ -264,7 +264,7 @@ func dbpull(daysback string) []newspoint {
 
   rows, err := db.Query("SELECT * FROM fmi.marketmentions WHERE report='analyst' AND date > current_timestamp - interval '$1 day'",daysback)
   if err != nil{
-    fmt.Println(err)
+    log.Fatalf("failed to select marketmentions data")
   }
   bks := []newspoint{}
   for rows.Next() {
