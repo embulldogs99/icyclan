@@ -254,29 +254,43 @@ func profile(w http.ResponseWriter, r *http.Request){
 
 
 
-func dbpull() []newspoint {
+func dbpull(daysback int) newspoint {
 
   db, err := sql.Open("postgres", "postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable")
   if err != nil {
     log.Fatalf("Unable to connect to the database")
   }
 
-  rows, err := db.Query("SELECT * FROM fmi.marketmentions WHERE report='analyst' AND date > current_timestamp - interval '2 day'")
+  var target string
+  var price float64
+  var returns float64
+  var ticker string
+  var note string
+  var date string
+  var q_eps float64
+  var a_eps float64
+  var report string
+
+  err = db.QueryRow("SELECT * FROM fmi.marketmentions WHERE report='analyst' AND date > current_timestamp - interval '$1 day'",daysback).Scan(&target,&price,&returns,&ticker,&note,&date,&q_eps,&a_eps,&report)
 
   if err != nil{
     log.Fatalf("failed to select marketmentions data")
   }
-  bks := []newspoint{}
-  for rows.Next() {
-    bk := newspoint{}
-    err := rows.Scan(&bk.Target, &bk.Price, &bk.Returns, &bk.Ticker, &bk.Note, &bk.Date, &bk.Q_eps, &bk.A_eps, &bk.Report)
 
-    if err != nil {
-      log.Fatal(err)
-    }
-		// appends the rows
-    bks = append(bks, bk)
-  }
+
+  bks := newspoint{target,price,returns,ticker,note,date,q_eps&a_eps,report}
+
+  // bks := []newspoint{}
+  // for rows.Next() {
+  //   bk := newspoint{}
+  //   err := rows.Scan(&bk.Target, &bk.Price, &bk.Returns, &bk.Ticker, &bk.Note, &bk.Date, &bk.Q_eps, &bk.A_eps, &bk.Report)
+  //
+  //   if err != nil {
+  //     log.Fatal(err)
+  //   }
+	// 	// appends the rows
+  //   bks = append(bks, bk)
+  // }
   db.Close()
   return bks
 }
