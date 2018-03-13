@@ -10,6 +10,23 @@ _ "github.com/lib/pq"
 
 )
 
+type user struct {
+  Email string
+  Pass string
+}
+  //creates user database map variable
+var dbu = map[string]user{} //user id, stores users
+var dbs = map[string]string{} //session id, stores userids
+var email string
+var pass string
+//pulls users from database
+dbusers, err := sql.Open("postgres", "postgres://postgres:rk@localhost:5432/postgres?sslmode=disable")
+if err != nil {log.Fatalf("Unable to connect to the database")}
+err = dbusers.QueryRow("SELECT * FROM rfgg.members ").Scan(&email, &pass, &ppal, &wins, &losses, &heat, &refers, &memberflag,&credits,&grade,&epicusername,&gamertag)
+if err != nil {log.Fatalf("Could not Scan User Data")}
+
+dbu[email] = user{email,pass}
+
 func main() {
 
   s := &http.Server{
@@ -30,6 +47,8 @@ func main() {
   http.HandleFunc("/research/roa", researchroa)
   http.HandleFunc("/research/eps", researcheps)
   http.HandleFunc("/signup", signup)
+  http.HandleFunc("/login", login)
+  http.HandleFunc("/logout", logout)
   http.HandleFunc("/profile", profile)
   log.Fatal(s.ListenAndServe())
 }
@@ -75,22 +94,113 @@ func signup(w http.ResponseWriter, r *http.Request){
   var tpl *template.Template
   tpl = template.Must(template.ParseFiles("signup.gohtml","css/main.css","css/mcleod-reset.css",))
   tpl.Execute(w, nil)
-
-  if r.Method == http.MethodPost {
-    email := r.FormValue("email")
-    pass := r.FormValue("pass")
-    if membercheck(email,pass) == true{
-      profile(w,r)
-    }else{
-      dbusers, _ := sql.Open("postgres", "postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable")
-      _, err := dbusers.Exec(`INSERT INTO fmi.members (email, pass, balance, memberflag ) VALUES ($1, $2, $3, $4);`, email, pass, 0, 'p')
-      if err != nil {
-        http.Redirect(w, r, "/login", http.StatusSeeOther)
+  if alreadyLoggedIn(w,r)==false{
+    if r.Method == http.MethodPost {
+      email := r.FormValue("email")
+      pass := r.FormValue("pass")
+      if membercheck(email,pass) == true{
+        profile(w,r)
+      }else{
+        dbusers, _ := sql.Open("postgres", "postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable")
+        _, err := dbusers.Exec(`INSERT INTO fmi.members (email, pass, balance, memberflag ) VALUES ($1, $2, $3, $4);`, email, pass, 0, 'p')
+        if err != nil {
+          http.Redirect(w, r, "/login", http.StatusSeeOther)
+      }
+      fmt.Printf("Added User: "+email+" At Time : "+time.Now().Format("2006-01-02 15:04:05"))
+      http.Redirect(w, r, "/profile", http.StatusSeeOther)
+      }
     }
-    fmt.Printf("Added User: "+email+" At Time : "+time.Now().Format("2006-01-02 15:04:05"))
+  }else{
     http.Redirect(w, r, "/profile", http.StatusSeeOther)
-    }
   }
+}
+
+
+
+func alreadyLoggedIn(req *http.Request) bool {
+	c, err := req.Cookie("session")
+	if err != nil {
+		return false
+	}
+  email := dbs[c.Value]
+	_, ok := dbu[email]
+	return ok
+}
+
+func login(w http.ResponseWriter, r *http.Request) {
+	//if already logged in send to home page
+	if alreadyLoggedIn(r) {
+		http.Redirect(w, r, "/profile", http.StatusSeeOther)}
+	//grab posted form information
+	if r.Method == http.MethodPost {
+		email := r.FormValue("email")
+		pass := r.FormValue("pass")
+		//defines u as dbu user info (email,pass) then matches form email with stored email
+		u, ok := dbu[email]
+		if !ok {
+			http.Error(w, "Username and/or password not found", http.StatusForbidden)
+			return
+		}
+		//pulls password from u and checks it with stored password
+		if pass != u.Pass {
+			http.Error(w, "Username and/or password not found", http.StatusForbidden)
+			return
+		}
+		//create new session (cookie) to identify user
+		sID, _ := uuid.NewV4()
+		c := &http.Cookie{
+			Name:  "session",
+			Value: sID.String(),
+		}
+		http.SetCookie(w, c)
+		dbs[c.Value] = email
+    http.Redirect(w, r, "/profile", http.StatusSeeOther)
+
+	}else{	//html template
+    var tpl *template.Template
+    tpl = template.Must(template.ParseFiles("login.gohtml","css/main.css","css/mcleod-reset.css",))
+    tpl.Execute(w, nil)}
+
+}
+
+
+func logout(w http.ResponseWriter, r *http.Request) {
+	if !alreadyLoggedIn(r) {http.Redirect(w, r, "/login", http.StatusSeeOther)}
+	c, _ := r.Cookie("session")
+	//delete the session
+	delete(dbs, c.Value)
+	//remove the cookie
+	c = &http.Cookie{
+		Name:  "session",
+		Value: "",
+		//max avge value of less than 0 means delete the cookie now
+		MaxAge: -1,
+	}
+	http.SetCookie(w, c)
+	http.Redirect(w, r, "/login", http.StatusSeeOther)
+}
+
+func getUser(w http.ResponseWriter, r *http.Request) user {
+	//gets cookie
+	c, err := r.Cookie("session")
+	if err != nil {
+		sID, _ := uuid.NewV4()
+		c = &http.Cookie{
+			Name:  "session",
+			Value: sID.String(),
+		}
+	}
+	//sets max age of cookie (time available to be logged in) and creates a cookie
+	const cookieLength int = 14400
+	c.MaxAge = cookieLength
+	http.SetCookie(w, c)
+
+	//if user already exists, get user
+	var u user
+	if email, ok := dbs[c.Value]; ok {
+		u = dbu[email]
+	}
+	return u
 
 }
 
@@ -122,13 +232,6 @@ func profile(w http.ResponseWriter, r *http.Request){
       }
       }
 }
-
-
-
-
-
-
-
 
 
 
@@ -169,8 +272,11 @@ func serve(w http.ResponseWriter, r *http.Request){
   tpl.Execute(w, dbpull(2))
 }
 func servemarketmentions(w http.ResponseWriter, r *http.Request){
+  z:=getUser(w,r)
+  if membercheck(z.Email,z.Pass) == true{
   tpl := template.Must(template.ParseFiles("marketmentions.gohtml","css/main.css","css/mcleod-reset.css"))
   tpl.Execute(w, dbpull(365))
+  }else{http.Redirect(w, r, "/", http.StatusSeeOther)}
 }
 func serveabout(w http.ResponseWriter, r *http.Request){
   tpl := template.Must(template.ParseFiles("about.gohtml","css/main.css","css/mcleod-reset.css" ))
