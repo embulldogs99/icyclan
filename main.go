@@ -253,7 +253,7 @@ func profile(w http.ResponseWriter, r *http.Request){
 
 
 
-func dbpull(daysback int) []newspoint {
+func dbpull(daysback string) []newspoint {
 
   db, err := sql.Open("postgres", "postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable")
   if err != nil {
@@ -261,7 +261,7 @@ func dbpull(daysback int) []newspoint {
   }
 
 
-  rows, err := db.Query("SELECT * FROM fmi.marketmentions WHERE report='analyst' AND date > current_timestamp - interval '$1 day'",daysback)
+  rows, err := db.Query("SELECT * FROM fmi.marketmentions WHERE report='analyst' AND date > current_timestamp - interval '$1 day'",str(daysback))
   if err != nil{
     fmt.Println(err)
   }
@@ -285,13 +285,13 @@ func dbpull(daysback int) []newspoint {
 
 func serve(w http.ResponseWriter, r *http.Request){
   tpl := template.Must(template.ParseFiles("main.gohtml","css/main.css","css/mcleod-reset.css"))
-  tpl.Execute(w, dbpull(2))
+  tpl.Execute(w, dbpull(str(2)))
 }
 func servemarketmentions(w http.ResponseWriter, r *http.Request){
   z:=getUser(w,r)
   if membercheck(z.Email,z.Pass) == true{
   tpl := template.Must(template.ParseFiles("marketmentions.gohtml","css/main.css","css/mcleod-reset.css"))
-  tpl.Execute(w, dbpull(365))
+  tpl.Execute(w, dbpull(str(365)))
   }else{http.Redirect(w, r, "/", http.StatusSeeOther)}
 }
 func serveabout(w http.ResponseWriter, r *http.Request){
