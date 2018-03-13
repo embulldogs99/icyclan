@@ -7,7 +7,7 @@ import(
 _ "github.com/lib/pq"
   "time"
   "fmt"
-
+    	"github.com/satori/go.uuid"
 )
 
 type user struct {
@@ -97,10 +97,10 @@ func membercheck(e string, p string) bool{
 
 
 func signup(w http.ResponseWriter, r *http.Request){
-  var tpl *template.Template
-  tpl = template.Must(template.ParseFiles("signup.gohtml","css/main.css","css/mcleod-reset.css",))
-  tpl.Execute(w, nil)
-  if alreadyLoggedIn(w,r)==false{
+  if alreadyLoggedIn(r)==false{
+    var tpl *template.Template
+    tpl = template.Must(template.ParseFiles("signup.gohtml","css/main.css","css/mcleod-reset.css",))
+    tpl.Execute(w, nil)
     if r.Method == http.MethodPost {
       email := r.FormValue("email")
       pass := r.FormValue("pass")
