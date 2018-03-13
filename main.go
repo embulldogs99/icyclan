@@ -33,6 +33,7 @@ func main() {
   if err != nil {log.Fatalf("Could not Scan User Data")}
 
   dbu[email] = user{email,pass}
+  dbusers.Close()
 
 
 //Begin Serving the FIles
@@ -111,6 +112,7 @@ func signup(w http.ResponseWriter, r *http.Request){
       }else{
         dbusers, _ := sql.Open("postgres", "postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable")
         _, err := dbusers.Exec(`INSERT INTO fmi.members (email, pass, balance, memberflag ) VALUES ($1, $2, $3, $4);`, email, pass, 0, 'p')
+        dbusers.Close()
         if err != nil {
           http.Redirect(w, r, "/login", http.StatusSeeOther)
       }
@@ -235,6 +237,7 @@ func profile(w http.ResponseWriter, r *http.Request){
     _ = dbusers.QueryRow("SELECT * FROM fmi.members WHERE email=$1 AND pass=$2",emailcheck,passcheck).Scan(&email, &pass, &balance, &memberflag)
     data:=Member{email, pass, balance, memberflag}
     fmt.Println(email.String + " logged on")
+    dbusers.Close()
     var tpl *template.Template
     tpl = template.Must(template.ParseFiles("profile.gohtml","css/main.css","css/mcleod-reset.css"))
 
