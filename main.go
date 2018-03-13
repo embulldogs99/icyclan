@@ -8,6 +8,7 @@ _ "github.com/lib/pq"
   "time"
   "fmt"
     	"github.com/satori/go.uuid"
+  "strconv"
 )
 
 type user struct {
@@ -261,7 +262,7 @@ func dbpull(daysback string) []newspoint {
   }
 
 
-  rows, err := db.Query("SELECT * FROM fmi.marketmentions WHERE report='analyst' AND date > current_timestamp - interval '$1 day'",str(daysback))
+  rows, err := db.Query("SELECT * FROM fmi.marketmentions WHERE report='analyst' AND date > current_timestamp - interval '$1 day'",daysback)
   if err != nil{
     fmt.Println(err)
   }
@@ -285,13 +286,13 @@ func dbpull(daysback string) []newspoint {
 
 func serve(w http.ResponseWriter, r *http.Request){
   tpl := template.Must(template.ParseFiles("main.gohtml","css/main.css","css/mcleod-reset.css"))
-  tpl.Execute(w, dbpull(str(2)))
+  tpl.Execute(w, dbpull(strconv.Itoa(2)))
 }
 func servemarketmentions(w http.ResponseWriter, r *http.Request){
   z:=getUser(w,r)
   if membercheck(z.Email,z.Pass) == true{
   tpl := template.Must(template.ParseFiles("marketmentions.gohtml","css/main.css","css/mcleod-reset.css"))
-  tpl.Execute(w, dbpull(str(365)))
+  tpl.Execute(w, dbpull(strconv.Itoa(365)))
   }else{http.Redirect(w, r, "/", http.StatusSeeOther)}
 }
 func serveabout(w http.ResponseWriter, r *http.Request){
