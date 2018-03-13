@@ -23,6 +23,7 @@ func main() {
   http.Handle("/research/", http.StripPrefix("/research/", http.FileServer(http.Dir("./research"))))
 
   http.HandleFunc("/", serve)
+  http.HandleFunc("/marketmentions", servemarketmentions)
   http.HandleFunc("/about", serveabout)
   http.HandleFunc("/contact", servecontact)
   http.HandleFunc("/researchlinks", researchlinks)
