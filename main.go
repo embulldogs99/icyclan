@@ -33,7 +33,7 @@ func main() {
   err = dbusers.QueryRow("SELECT * FROM fmi.members").Scan(&email, &pass,&balance,&memberflag)
   if err != nil {log.Fatalf("Could not Scan User Data")}
 
-  dbu[email] = user{email,pass}
+  dbu[email] = user{email,pass,balance,memberflag}
   dbusers.Close()
 
 
