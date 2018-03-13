@@ -136,7 +136,7 @@ func profile(w http.ResponseWriter, r *http.Request){
 
 
 
-func dbpull() []newspoint {
+func dbpull(daysback) []newspoint {
 
   db, err := sql.Open("postgres", "postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable")
   if err != nil {
@@ -144,7 +144,7 @@ func dbpull() []newspoint {
   }
 
 
-  rows, _ := db.Query("SELECT * FROM fmi.marketmentions WHERE report='analyst' AND date > current_timestamp - interval '2 day'")
+  rows, _ := db.Query("SELECT * FROM fmi.marketmentions WHERE report='analyst' AND date > current_timestamp - interval ''{0}' day'".format(daysback))
   bks := []newspoint{}
   for rows.Next() {
     bk := newspoint{}
@@ -165,7 +165,11 @@ func dbpull() []newspoint {
 
 func serve(w http.ResponseWriter, r *http.Request){
   tpl := template.Must(template.ParseFiles("main.gohtml","css/main.css","css/mcleod-reset.css"))
-  tpl.Execute(w, dbpull())
+  tpl.Execute(w, dbpull(2))
+}
+func servemarketmentions(w http.ResponseWriter, r *http.Request){
+  tpl := template.Must(template.ParseFiles("marketmentions.gohtml","css/main.css","css/mcleod-reset.css"))
+  tpl.Execute(w, dbpull(365))
 }
 func serveabout(w http.ResponseWriter, r *http.Request){
   tpl := template.Must(template.ParseFiles("about.gohtml","css/main.css","css/mcleod-reset.css" ))
