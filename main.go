@@ -24,9 +24,9 @@ func main() {
   var email string
   var pass string
   //pulls users from database
-  dbusers, err := sql.Open("postgres", "postgres://postgres:rk@localhost:5432/postgres?sslmode=disable")
+  dbusers, err := sql.Open("postgres", "postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable")
   if err != nil {log.Fatalf("Unable to connect to the database")}
-  err = dbusers.QueryRow("SELECT * FROM rfgg.members ").Scan(&email, &pass, &ppal, &wins, &losses, &heat, &refers, &memberflag,&credits,&grade,&epicusername,&gamertag)
+  err = dbusers.QueryRow("SELECT * FROM fmi.members").Scan(&email, &pass)
   if err != nil {log.Fatalf("Could not Scan User Data")}
 
   dbu[email] = user{email,pass}
