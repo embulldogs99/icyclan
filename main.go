@@ -261,7 +261,7 @@ func dbpull(daysback string) []newspoint {
     log.Fatalf("Unable to connect to the database")
   }
 
-
+  fmt.Println(daysback)
   rows, err := db.Query("SELECT * FROM fmi.marketmentions WHERE report='analyst' AND date > current_timestamp - interval '$1 day'",daysback)
   if err != nil{
     log.Fatalf("failed to select marketmentions data")
