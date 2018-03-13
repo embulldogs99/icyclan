@@ -8,7 +8,7 @@ _ "github.com/lib/pq"
   "time"
   "fmt"
     	"github.com/satori/go.uuid"
-  "strconv"
+
 )
 
 type user struct {
