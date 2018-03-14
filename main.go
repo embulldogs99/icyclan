@@ -255,7 +255,7 @@ func profile(w http.ResponseWriter, r *http.Request){
 
 
 
-func dbpull(daysback int) newspoint {
+func dbpull2() newspoint {
 
   db, err := sql.Open("postgres", "postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable")
   if err != nil {
@@ -272,8 +272,7 @@ func dbpull(daysback int) newspoint {
   var a_eps sql.NullFloat64
   var report sql.NullString
 
-
-  sqlstatmt:="SELECT * FROM fmi.marketmentions WHERE report='analyst' AND date > current_timestamp - INTERVAL '"+strconv.Itoa(daysback)+" days'"
+  sqlstatmt:="SELECT * FROM fmi.marketmentions WHERE report='analyst' AND date > current_timestamp - INTERVAL '2 days'"
   // fmt.Println(sqlstatmt)
   err = db.QueryRow(sqlstatmt).Scan(&target,&price,&returns,&ticker,&note,&date,&q_eps,&a_eps,&report)
 
@@ -281,36 +280,65 @@ func dbpull(daysback int) newspoint {
     log.Fatalf("failed to select marketmentions data")
   }
 
-
   bks := newspoint{target,price,returns,ticker,note,date,q_eps,a_eps,report}
 
-  // bks := []newspoint{}
-  // for rows.Next() {
-  //   bk := newspoint{}
-  //   err := rows.Scan(&bk.Target, &bk.Price, &bk.Returns, &bk.Ticker, &bk.Note, &bk.Date, &bk.Q_eps, &bk.A_eps, &bk.Report)
-  //
-  //   if err != nil {
-  //     log.Fatal(err)
-  //   }
-	// 	// appends the rows
-  //   bks = append(bks, bk)
-  // }
   db.Close()
   return bks
 }
 
+func dbpull365() newspoint {
 
+  db, err := sql.Open("postgres", "postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable")
+  if err != nil {
+    log.Fatalf("Unable to connect to the database")
+  }
+
+  var target int
+  var price int
+  var returns sql.NullFloat64
+  var ticker sql.NullString
+  var note sql.NullString
+  var date sql.NullString
+  var q_eps sql.NullFloat64
+  var a_eps sql.NullFloat64
+  var report sql.NullString
+
+  sqlstatmt:="SELECT * FROM fmi.marketmentions WHERE report='analyst' AND date > current_timestamp - INTERVAL '365 days'"
+  // fmt.Println(sqlstatmt)
+  err = db.QueryRow(sqlstatmt).Scan(&target,&price,&returns,&ticker,&note,&date,&q_eps,&a_eps,&report)
+
+  if err != nil{
+    log.Fatalf("failed to select marketmentions data")
+  }
+
+  bks := newspoint{target,price,returns,ticker,note,date,q_eps,a_eps,report}
+
+  db.Close()
+  return bks
+}
+
+// bks := []newspoint{}
+// for rows.Next() {
+//   bk := newspoint{}
+//   err := rows.Scan(&bk.Target, &bk.Price, &bk.Returns, &bk.Ticker, &bk.Note, &bk.Date, &bk.Q_eps, &bk.A_eps, &bk.Report)
+//
+//   if err != nil {
+//     log.Fatal(err)
+//   }
+// 	// appends the rows
+//   bks = append(bks, bk)
+// }
 
 
 func serve(w http.ResponseWriter, r *http.Request){
   tpl := template.Must(template.ParseFiles("main.gohtml","css/main.css","css/mcleod-reset.css"))
-  tpl.Execute(w, dbpull(2))
+  tpl.Execute(w, dbpull2())
 }
 func servemarketmentions(w http.ResponseWriter, r *http.Request){
   z:=getUser(w,r)
   if membercheck(z.Email,z.Pass) == true{
   tpl := template.Must(template.ParseFiles("marketmentions.gohtml","css/main.css","css/mcleod-reset.css"))
-  tpl.Execute(w, dbpull(365))
+  tpl.Execute(w, dbpull365())
   }else{http.Redirect(w, r, "/", http.StatusSeeOther)}
 }
 func serveabout(w http.ResponseWriter, r *http.Request){
