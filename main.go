@@ -273,7 +273,7 @@ func dbpull(daysback int) newspoint {
   var report sql.NullString
 
 
-  sqlstatmt:="SELECT * FROM fmi.marketmentions WHERE report='analyst' AND date > current_timestamp - "+strconv.Itoa(daysback)+" * INTERVAL '1 day'"
+  sqlstatmt:="SELECT * FROM fmi.marketmentions WHERE report='analyst' AND date > current_timestamp - INTERVAL '"+strconv.Itoa(daysback)+" days'"
   fmt.Println(sqlstatmt)
   err = db.QueryRow(sqlstatmt).Scan(&target,&price,&returns,&ticker,&note,&date,&q_eps,&a_eps,&report)
 
