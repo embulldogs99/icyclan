@@ -287,32 +287,33 @@ func dbpull2() []Newspoint {
   return bks
 }
 
-func dbpull365() Newspoint {
+func dbpull365() []Newspoint {
 
   db, err := sql.Open("postgres", "postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable")
   if err != nil {
     log.Fatalf("Unable to connect to the database")
   }
 
-  var target int
-  var price int
-  var returns sql.NullFloat64
-  var ticker sql.NullString
-  var note sql.NullString
-  var date sql.NullString
-  var q_eps sql.NullFloat64
-  var a_eps sql.NullFloat64
-  var report sql.NullString
-
   sqlstatmt:="SELECT * FROM fmi.marketmentions WHERE report='analyst' AND date > current_timestamp - INTERVAL '365 days';"
   // fmt.Println(sqlstatmt)
-  err = db.QueryRow(sqlstatmt).Scan(&target,&price,&returns,&ticker,&note,&date,&q_eps,&a_eps,&report)
+  rows, err := db.Query(sqlstatmt)
 
   if err != nil{
     log.Fatalf("failed to select marketmentions data")
   }
 
-  bks := Newspoint{target,price,returns,ticker,note,date,q_eps,a_eps,report}
+  bks := []Newspoint{}
+  for rows.Next() {
+    bk := Newspoint{}
+    err := rows.Scan(&bk.Target, &bk.Price, &bk.Returns, &bk.Ticker, &bk.Note, &bk.Date, &bk.Q_eps, &bk.A_eps, &bk.Report)
+
+    if err != nil {
+      log.Fatal(err)
+    }
+  	// appends the rows
+    bks = append(bks, bk)
+  }
+
 
   db.Close()
   return bks
