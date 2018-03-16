@@ -262,16 +262,6 @@ func dbpull2() []Newspoint {
     log.Fatalf("Unable to connect to the database")
   }
 
-  var target int
-  var price int
-  var returns sql.NullFloat64
-  var ticker sql.NullString
-  var note sql.NullString
-  var date sql.NullString
-  var q_eps sql.NullFloat64
-  var a_eps sql.NullFloat64
-  var report sql.NullString
-
   sqlstatmt:="SELECT * FROM fmi.marketmentions WHERE report='analyst' AND date > current_timestamp - INTERVAL '2 days';"
   // fmt.Println(sqlstatmt)
   rows, err := db.Query(sqlstatmt)
