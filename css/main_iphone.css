@@ -1,0 +1,227 @@
+@font-face {
+  font-family: 'raitons';
+  src:url('raitons.ttf')  format('truetype');
+}
+
+
+body{
+  background-color: rgba(0,0,0,.25);
+}
+.page{
+  display: flex;
+  flex-direction: row;
+  /*border: 2px solid black;*/
+}
+.posts{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  /*border: solid 2px orange;*/
+  margin-right: 0px;
+  padding-right: 0px;
+  background-color: rgba(0,0,0,.3);
+}
+header{
+  /*border-bottom: 2px solid rgba(60,60,255,1);*/
+  font-weight: 900;
+  background-image: url(fmi.jpg);
+  background-size: 70px;
+  display: flex;
+  text-align: left;
+  font-family: 'raitons', sans-serif;
+}
+
+#sortable{
+    background-color:#eee;
+    color:#666666;
+    font-weight: 600;
+    cursor: crosshair;
+    padding: 3px;
+    border: .5px solid black;
+    width: 90%;
+}
+th{
+  font-weight: 900;
+  font-size: 120%;
+}
+
+.title{
+  font-size: 30px;
+  margin: 50px 0% 0% 3%;
+  font-family: 'raitons', sans-serif;
+  white-space: nowrap;
+  /*border: 2px solid green;*/
+}
+.posttitle{
+  font-size: 70px;
+  padding: 3%;
+  margin-left: 3%;
+  font-family: 'raitons', sans-serif;
+  white-space: nowrap;
+  text-decoration: underline;
+  /*border: 2px solid green;*/
+
+}
+.spacer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: left;
+  justify-content: space-between;
+}
+.slogan{
+  font-size: 30px;
+  font-family: 'Calibri', sans-serif;
+  padding: 1% 0% 1.5% 20%;
+  font-weight: 400;
+    /*border-bottom: 2px solid rgba(60,60,255,1);*/
+    width: 100%;
+}
+
+.banner{
+  font-weight: 900;
+  font-size: 15px;
+  background-size: 100%;
+  font-family: 'Calibri', Fallback, sans-serif;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 40px;
+  background-color: rgba(255,255,255,.5);
+
+  position: fixed;
+   top: 0;
+   left: 0;
+   bottom: 0;
+}
+.buttons{
+  padding: 0px 10px 0px 10px;
+  margin: 1% 3%;
+  border: solid 2px black;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  border-radius: 20rem;
+  height: 80%;
+}
+.buttons:hover{
+  background-color: rgba(255,255,255,1);
+}
+.sidebar{
+display: flex;
+flex-direction: column;
+text-align: center;
+align-items: center;
+justify-content: center;
+padding: 2rem .5rem 10rem .5rem;
+font-weight: 600;
+/*border: solid red 5px;*/
+font-family: 'Calibri', sans-serif;
+}
+.sidebar:link{
+color: orange;
+}
+.link {
+  color: darkorange;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+}
+.link2{
+  color: darkorange;
+  font-weight: 600;
+}
+.link2:hover{
+  color:rgba(0,150,255,1);
+  font-size: 110%;
+}
+.images{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+img{
+  padding: 20px 0px;
+}
+d{
+  font-weight: 900;
+}
+b{
+  font-weight: 900;
+}
+i{
+  font-style: italic;
+}
+h{
+  margin: 50px 0px 0px 50px;
+}
+svg{
+  color:rgba(255,106,0,1);
+  height:30px;
+  width: 30px;
+}
+svg:hover{
+  color:rgba(255,255,255,1);
+  cursor: crosshair;
+  height:40px;
+  width: 40px;
+}
+.link:hover{
+  color:rgba(255,255,255,1);
+  cursor: crosshair;
+  font-size: 110%;
+}
+article{
+  padding: 2rem 2rem;
+  margin: 0rem 0rem 0rem 2rem;
+  background-color: rgba(255,255,255,.8);
+  width: 80%;
+  line-height: 20px;
+      text-align: center;
+  text-align: left;
+}
+h {
+  font-size: 20px;
+  font-weight: 900;
+  text-align: left;
+  margin-left: 0px;
+}
+
+#spec{
+  background-color: yellow;
+}
+.researchlinks{
+  font-weight: 600;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+.researchlink{
+  font-size: 18px;
+  padding:5px;
+  border: 2px solid black;
+  border-radius: 2rem;
+}
+.researchlink:hover{
+  background-color: rgba(50,50,50,1);
+  color:rgba(0,255,255,1);
+  font-weight: 900;
+}
+.sidebyside{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+}
+form{
+  padding: 100px;
+  background-color: rgba(255,255,255,.4);
+}
