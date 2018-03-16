@@ -101,7 +101,7 @@ th{
 }
 .buttons{
   padding: 0px 5px 0px 5px;
-  margin: 0% 0%;
+  margin: 5px;
   border: solid 2px black;
   display: flex;
   text-align: center;
