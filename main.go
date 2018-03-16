@@ -274,7 +274,7 @@ func dbpull2() []\Newspoint {
 
   sqlstatmt:="SELECT * FROM fmi.marketmentions WHERE report='analyst' AND date > current_timestamp - INTERVAL '2 days';"
   // fmt.Println(sqlstatmt)
-  err = db.Query(sqlstatmt)
+  rows, err := db.Query(sqlstatmt)
 
   if err != nil{
     log.Fatalf("failed to select marketmentions data")
