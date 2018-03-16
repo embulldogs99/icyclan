@@ -255,7 +255,7 @@ func profile(w http.ResponseWriter, r *http.Request){
 
 
 
-func dbpull2() Newspoint {
+func dbpull2() []\Newspoint {
 
   db, err := sql.Open("postgres", "postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable")
   if err != nil {
@@ -274,13 +274,23 @@ func dbpull2() Newspoint {
 
   sqlstatmt:="SELECT * FROM fmi.marketmentions WHERE report='analyst' AND date > current_timestamp - INTERVAL '2 days';"
   // fmt.Println(sqlstatmt)
-  err = db.QueryRow(sqlstatmt).Scan(&target,&price,&returns,&ticker,&note,&date,&q_eps,&a_eps,&report)
+  err = db.Query(sqlstatmt)
 
   if err != nil{
     log.Fatalf("failed to select marketmentions data")
   }
-  fmt.Println(target)
-  bks := Newspoint{target,price,returns,ticker,note,date,q_eps,a_eps,report}
+
+  bks := []Newspoint{}
+  for rows.Next() {
+    bk := Newspoint{}
+    err := rows.Scan(&bk.Target, &bk.Price, &bk.Returns, &bk.Ticker, &bk.Note, &bk.Date, &bk.Q_eps, &bk.A_eps, &bk.Report)
+
+    if err != nil {
+      log.Fatal(err)
+    }
+  	// appends the rows
+    bks = append(bks, bk)
+  }
 
 
   db.Close()
@@ -318,17 +328,7 @@ func dbpull365() Newspoint {
   return bks
 }
 
-// bks := []Newspoint{}
-// for rows.Next() {
-//   bk := Newspoint{}
-//   err := rows.Scan(&bk.Target, &bk.Price, &bk.Returns, &bk.Ticker, &bk.Note, &bk.Date, &bk.Q_eps, &bk.A_eps, &bk.Report)
-//
-//   if err != nil {
-//     log.Fatal(err)
-//   }
-// 	// appends the rows
-//   bks = append(bks, bk)
-// }
+
 
 
 func serve(w http.ResponseWriter, r *http.Request){
