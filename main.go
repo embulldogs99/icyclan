@@ -65,7 +65,7 @@ func main() {
 }
 
 
-type newspoint struct {
+type Newspoint struct {
 	Target int
 	Price  int
 	Returns sql.NullFloat64
@@ -255,7 +255,7 @@ func profile(w http.ResponseWriter, r *http.Request){
 
 
 
-func dbpull2() []newspoint {
+func dbpull2() Newspoint {
 
   db, err := sql.Open("postgres", "postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable")
   if err != nil {
@@ -280,13 +280,14 @@ func dbpull2() []newspoint {
     log.Fatalf("failed to select marketmentions data")
   }
 
-  bks := newspoint{target,price,returns,ticker,note,date,q_eps,a_eps,report}
+  bks := Newspoint{target,price,returns,ticker,note,date,q_eps,a_eps,report}
 
-  db.Close()
   return bks
+  db.Close()
+
 }
 
-func dbpull365() []newspoint {
+func dbpull365() Newspoint {
 
   db, err := sql.Open("postgres", "postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable")
   if err != nil {
@@ -311,15 +312,15 @@ func dbpull365() []newspoint {
     log.Fatalf("failed to select marketmentions data")
   }
 
-  bks := newspoint{target,price,returns,ticker,note,date,q_eps,a_eps,report}
-
-  db.Close()
+  bks := Newspoint{target,price,returns,ticker,note,date,q_eps,a_eps,report}
   return bks
+  db.Close()
+
 }
 
-// bks := []newspoint{}
+// bks := []Newspoint{}
 // for rows.Next() {
-//   bk := newspoint{}
+//   bk := Newspoint{}
 //   err := rows.Scan(&bk.Target, &bk.Price, &bk.Returns, &bk.Ticker, &bk.Note, &bk.Date, &bk.Q_eps, &bk.A_eps, &bk.Report)
 //
 //   if err != nil {
