@@ -255,7 +255,7 @@ func profile(w http.ResponseWriter, r *http.Request){
 
 
 
-func dbpull2() []\Newspoint {
+func dbpull2() []Newspoint {
 
   db, err := sql.Open("postgres", "postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable")
   if err != nil {
