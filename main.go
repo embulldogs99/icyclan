@@ -141,7 +141,10 @@ func alreadyLoggedIn(req *http.Request) bool {
 
 func login(w http.ResponseWriter, r *http.Request) {
 	//if already logged in send to home page
-	if alreadyLoggedIn(r)!=false{
+  if alreadyLoggedIn(r) {
+    http.Redirect(w, r, "/show", http.StatusSeeOther)
+    return
+  }
 
 	//grab posted form information
 	if r.Method == http.MethodPost {
@@ -168,14 +171,14 @@ func login(w http.ResponseWriter, r *http.Request) {
 		dbs[c.Value] = email
     http.Redirect(w, r, "/profile", http.StatusSeeOther)
 
-	}else{	//html template
+	}
+  //html template
     var tpl *template.Template
     tpl = template.Must(template.ParseFiles("login.gohtml","css/main.css","css/mcleod-reset.css",))
-    tpl.Execute(w, nil)}
-  }else{
-    http.Redirect(w, r, "/profile", http.StatusSeeOther)}
+    tpl.Execute(w, nil)
+  }
 
-}
+
 
 
 func logout(w http.ResponseWriter, r *http.Request) {
