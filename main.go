@@ -255,7 +255,7 @@ func profile(w http.ResponseWriter, r *http.Request){
 
 
 
-func dbpull2() newspoint {
+func dbpull2() []newspoint {
 
   db, err := sql.Open("postgres", "postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable")
   if err != nil {
@@ -286,7 +286,7 @@ func dbpull2() newspoint {
   return bks
 }
 
-func dbpull365() newspoint {
+func dbpull365() []newspoint {
 
   db, err := sql.Open("postgres", "postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable")
   if err != nil {
