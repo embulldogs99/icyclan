@@ -279,7 +279,7 @@ func dbpull2() Newspoint {
   if err != nil{
     log.Fatalf("failed to select marketmentions data")
   }
-
+  fmt.Println(target)
   bks := Newspoint{target,price,returns,ticker,note,date,q_eps,a_eps,report}
 
 
