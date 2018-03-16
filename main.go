@@ -78,6 +78,7 @@ type Newspoint struct {
 }
 
 
+
 type Member struct{
   Email sql.NullString
   Pass sql.NullString
