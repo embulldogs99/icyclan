@@ -282,9 +282,9 @@ func dbpull2() Newspoint {
 
   bks := Newspoint{target,price,returns,ticker,note,date,q_eps,a_eps,report}
 
-  return bks
-  db.Close()
 
+  db.Close()
+  return bks
 }
 
 func dbpull365() Newspoint {
@@ -313,9 +313,9 @@ func dbpull365() Newspoint {
   }
 
   bks := Newspoint{target,price,returns,ticker,note,date,q_eps,a_eps,report}
-  return bks
-  db.Close()
 
+  db.Close()
+  return bks
 }
 
 // bks := []Newspoint{}
