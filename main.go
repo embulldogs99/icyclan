@@ -272,7 +272,7 @@ func dbpull2() []newspoint {
   var a_eps sql.NullFloat64
   var report sql.NullString
 
-  sqlstatmt:="SELECT * FROM fmi.marketmentions WHERE report='analyst' AND date > current_timestamp - INTERVAL '2 days'"
+  sqlstatmt:="SELECT * FROM fmi.marketmentions WHERE report='analyst' AND date > current_timestamp - INTERVAL '2 days';"
   // fmt.Println(sqlstatmt)
   err = db.QueryRow(sqlstatmt).Scan(&target,&price,&returns,&ticker,&note,&date,&q_eps,&a_eps,&report)
 
@@ -303,7 +303,7 @@ func dbpull365() []newspoint {
   var a_eps sql.NullFloat64
   var report sql.NullString
 
-  sqlstatmt:="SELECT * FROM fmi.marketmentions WHERE report='analyst' AND date > current_timestamp - INTERVAL '365 days'"
+  sqlstatmt:="SELECT * FROM fmi.marketmentions WHERE report='analyst' AND date > current_timestamp - INTERVAL '365 days';"
   // fmt.Println(sqlstatmt)
   err = db.QueryRow(sqlstatmt).Scan(&target,&price,&returns,&ticker,&note,&date,&q_eps,&a_eps,&report)
 
