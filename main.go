@@ -151,7 +151,7 @@ func login(w http.ResponseWriter, r *http.Request) {
 	if r.Method == http.MethodPost {
 		email := r.FormValue("email")
 		pass := r.FormValue("pass")
-    fmt.Println(email.String + " logged on")
+    fmt.Println(email + " logged on")
 		//defines u as dbu user info (email,pass) then matches form email with stored email
 		u, ok := dbu[email]
 
