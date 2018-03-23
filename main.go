@@ -151,8 +151,10 @@ func login(w http.ResponseWriter, r *http.Request) {
 	if r.Method == http.MethodPost {
 		email := r.FormValue("email")
 		pass := r.FormValue("pass")
+    fmt.Println(email.String + " logged on")
 		//defines u as dbu user info (email,pass) then matches form email with stored email
 		u, ok := dbu[email]
+
 		if !ok {
 			http.Error(w, "Username and/or password not found", http.StatusForbidden)
 			return
@@ -242,7 +244,7 @@ func profile(w http.ResponseWriter, r *http.Request){
     dbusers, _ := sql.Open("postgres", "postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable")
     _ = dbusers.QueryRow("SELECT * FROM fmi.members WHERE email=$1 AND pass=$2",emailcheck,passcheck).Scan(&email, &pass, &balance, &memberflag)
     data:=Member{email, pass, balance, memberflag}
-    fmt.Println(email.String + " logged on")
+
     dbusers.Close()
     var tpl *template.Template
     tpl = template.Must(template.ParseFiles("profile.gohtml","css/main.css","css/mcleod-reset.css"))
