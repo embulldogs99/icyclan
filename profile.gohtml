@@ -42,10 +42,11 @@
 <body>
 
     <div>Investment Account Balance<br>
-      Email:    {{range .Email}}
-        {{.}}
-    {{end}}
-      ${{.Balance.Value}}
+      {{range .}}
+    Email:{{.Email}}
+    Balance:{{.Balnce}}
+{{end}}
+
     </div>
 
 
