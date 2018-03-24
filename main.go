@@ -233,9 +233,9 @@ func profile(w http.ResponseWriter, r *http.Request){
   if r.Method == http.MethodPost {
     emailcheck := r.FormValue("email")
     passcheck := r.FormValue("pass")
-    if membercheck(emailcheck,passcheck)==false{
-        http.Redirect(w, r, "/signup", http.StatusSeeOther)
-    }else{
+    if membercheck(emailcheck,passcheck)==false{http.Redirect(w, r, "/signup", http.StatusSeeOther)}
+  }
+    if !alreadyLoggedIn(r){http.Redirect(w, r, "/", http.StatusSeeOther)}
     var email sql.NullString
     var pass sql.NullString
     var balance sql.NullFloat64
