@@ -229,9 +229,11 @@ form{
   font-family: Calibri;
   font-size: 18px;
   padding: 50px;
-  width: 80%;
+
   display: flex;
   flex-direction: column;
-  height: 500px;
+  align-items: center;
+  justify-content: space-between;
+  height: 200px;
 
 }
