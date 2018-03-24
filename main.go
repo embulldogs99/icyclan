@@ -251,9 +251,9 @@ func profile(w http.ResponseWriter, r *http.Request){
     tpl = template.Must(template.ParseFiles("profile.gohtml","css/main.css","css/mcleod-reset.css"))
 
     tpl.Execute(w,data)
-      }
-      }
 }
+
+
 
 
 
