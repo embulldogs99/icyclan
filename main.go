@@ -366,3 +366,7 @@ func investors(w http.ResponseWriter, r *http.Request){
   tpl := template.Must(template.ParseFiles("investors.gohtml","css/main.css","css/mcleod-reset.css"))
   tpl.Execute(w, nil)
 }
+func researcheps(w http.ResponseWriter, r *http.Request){
+  tpl := template.Must(template.ParseFiles("research/eps.gohtml","css/main.css","css/mcleod-reset.css"))
+  tpl.Execute(w, nil)
+}
