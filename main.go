@@ -230,7 +230,7 @@ func getUser(w http.ResponseWriter, r *http.Request) user {
 
 
 func profile(w http.ResponseWriter, r *http.Request){
-    if alreadyLoggedIn(r){
+    if !alreadyLoggedIn(r){http.Redirect(w, r, "/login", http.StatusSeeOther)}
 
     var email sql.NullString
     var pass sql.NullString
@@ -247,8 +247,8 @@ func profile(w http.ResponseWriter, r *http.Request){
     tpl = template.Must(template.ParseFiles("profile.gohtml","css/main.css","css/mcleod-reset.css"))
 
     tpl.Execute(w,data)
-  }
 }
+
 
 
 
