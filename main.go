@@ -235,15 +235,16 @@ func profile(w http.ResponseWriter, r *http.Request){
     passcheck := r.FormValue("pass")
     if membercheck(emailcheck,passcheck)==false{http.Redirect(w, r, "/signup", http.StatusSeeOther)}
   }
-    if !alreadyLoggedIn(r){http.Redirect(w, r, "/", http.StatusSeeOther)}
+    if !alreadyLoggedIn(r){http.Redirect(w, r, "/login", http.StatusSeeOther)}
+
     var email sql.NullString
     var pass sql.NullString
     var balance sql.NullFloat64
     var memberflag sql.NullString
 
-
+    currentuser:=getUser(w,r)
     dbusers, _ := sql.Open("postgres", "postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable")
-    _ = dbusers.QueryRow("SELECT * FROM fmi.members WHERE email=$1 AND pass=$2",emailcheck,passcheck).Scan(&email, &pass, &balance, &memberflag)
+    _ = dbusers.QueryRow("SELECT * FROM fmi.members WHERE email=$1",currentuser.Email).Scan(&email, &pass, &balance, &memberflag)
     data:=Member{email, pass, balance, memberflag}
 
     dbusers.Close()
@@ -251,6 +252,7 @@ func profile(w http.ResponseWriter, r *http.Request){
     tpl = template.Must(template.ParseFiles("profile.gohtml","css/main.css","css/mcleod-reset.css"))
 
     tpl.Execute(w,data)
+
 }
 
 
