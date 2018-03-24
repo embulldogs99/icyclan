@@ -353,6 +353,7 @@ func servecontact(w http.ResponseWriter, r *http.Request){
   tpl.Execute(w, nil)
 }
 func researchlinks(w http.ResponseWriter, r *http.Request){
+  if !alreadyLoggedIn(r){http.Redirect(w, r, "/login", http.StatusSeeOther)}
   tpl := template.Must(template.ParseFiles("researchlinks.gohtml","css/main.css","css/mcleod-reset.css"))
   tpl.Execute(w, nil)
 }
