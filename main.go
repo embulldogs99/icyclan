@@ -267,14 +267,14 @@ func profile(w http.ResponseWriter, r *http.Request){
 
 
 
-func dbpull2() []Newspoint {
+func dbpull1() []Newspoint {
 
   db, err := sql.Open("postgres", "postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable")
   if err != nil {
     log.Fatalf("Unable to connect to the database")
   }
 
-  sqlstatmt:="SELECT * FROM fmi.marketmentions WHERE report='analyst' AND date > current_timestamp - INTERVAL '2 days';"
+  sqlstatmt:="SELECT * FROM fmi.marketmentions WHERE report='analyst' AND date > current_timestamp - INTERVAL '1 day';"
   // fmt.Println(sqlstatmt)
   rows, err := db.Query(sqlstatmt)
 
@@ -336,7 +336,7 @@ func dbpull365() []Newspoint {
 
 func serve(w http.ResponseWriter, r *http.Request){
   tpl := template.Must(template.ParseFiles("main.gohtml","css/main.css","css/mcleod-reset.css"))
-  tpl.Execute(w, dbpull2())
+  tpl.Execute(w, dbpull1())
 }
 func servemarketmentions(w http.ResponseWriter, r *http.Request){
   z:=getUser(w,r)
