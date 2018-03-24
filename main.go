@@ -334,6 +334,7 @@ func dbpull365() []Newspoint {
 
 
 func serve(w http.ResponseWriter, r *http.Request){
+  if alreadyLoggedIn(r){http.Redirect(w, r, "/profile", http.StatusSeeOther)}
   tpl := template.Must(template.ParseFiles("main.gohtml","css/main.css","css/mcleod-reset.css"))
   tpl.Execute(w, dbpull2())
 }
