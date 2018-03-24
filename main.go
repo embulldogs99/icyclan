@@ -68,6 +68,7 @@ func main() {
   http.HandleFunc("/login", login)
   http.HandleFunc("/logout", logout)
   http.HandleFunc("/profile", profile)
+  http.HandleFunc("/investors", investors)
   log.Fatal(s.ListenAndServe())
 }
 
