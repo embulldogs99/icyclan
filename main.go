@@ -141,9 +141,9 @@ func alreadyLoggedIn(req *http.Request) bool {
 }
 
 func login(w http.ResponseWriter, r *http.Request) {
-	//if already logged in send to home page
+	//if already logged in send to login
   if alreadyLoggedIn(r) {
-    http.Redirect(w, r, "/show", http.StatusSeeOther)
+    http.Redirect(w, r, "/profile", http.StatusSeeOther)
     return
   }
 
@@ -230,12 +230,7 @@ func getUser(w http.ResponseWriter, r *http.Request) user {
 
 
 func profile(w http.ResponseWriter, r *http.Request){
-  if r.Method == http.MethodPost {
-    emailcheck := r.FormValue("email")
-    passcheck := r.FormValue("pass")
-    if membercheck(emailcheck,passcheck)==false{http.Redirect(w, r, "/signup", http.StatusSeeOther)}
-  }
-    if !alreadyLoggedIn(r)==true{http.Redirect(w, r, "/login", http.StatusSeeOther)}
+    if alreadyLoggedIn(r){
 
     var email sql.NullString
     var pass sql.NullString
@@ -252,7 +247,7 @@ func profile(w http.ResponseWriter, r *http.Request){
     tpl = template.Must(template.ParseFiles("profile.gohtml","css/main.css","css/mcleod-reset.css"))
 
     tpl.Execute(w,data)
-
+  }
 }
 
 
