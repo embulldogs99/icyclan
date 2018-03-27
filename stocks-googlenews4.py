@@ -791,14 +791,13 @@ def contentfilter():
                 titles=x.find_all('title')
                 pubdate=x.find_all('lastbuilddate')+x.find_all('pubdate')
                 for p,t in zip(pubdate,titles):
-    				"""Assemble our Output Variable"""
-    				"""Data may be nil/missing or error prone. Going to TRY this step"""
+                    """Assemble our Output Variable"""
+                    """Data may be nil/missing or error prone. Going to TRY this step"""
                     pub=str(p.text)
                     info=str(t.text)
                     if info.find(';')>0:
                         info=info[:info.find(';')]
-                    except:
-                        pass
+
 
 
     				###Dynamically determining stock based on text. Assuming results may not match original search keyword
