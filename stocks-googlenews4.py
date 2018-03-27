@@ -870,6 +870,6 @@ for i in range(1,100):
         contentfilter()
         print('end')
         time.sleep(86400/2)
-    else:
+    except:
         print('failed to finish in entirety')
         time.sleep(86400/2)
