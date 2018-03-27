@@ -822,7 +822,7 @@ def contentfilter():
                             price=quandl_adj_close(stock)####### now you have the stock price from quandl
                             if price == None:
     							price=0
-                            except:
+                        except:
                             value=0
                             price=0
 
