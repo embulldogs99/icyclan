@@ -785,7 +785,7 @@ def contentfilter():
 		urls=snp500googleurls
 		for u in urls:
             try:
-    			time.sleep(1)
+                time.sleep(1)
     			x=c.get(u)
     			x=BeautifulSoup(x.content)
     			titles=x.find_all('title')
