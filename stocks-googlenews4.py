@@ -784,86 +784,86 @@ def contentfilter():
 		map=['']
 		urls=snp500googleurls
 		for u in urls:
-        try:
-			time.sleep(1)
-			x=c.get(u)
-			x=BeautifulSoup(x.content)
-			titles=x.find_all('title')
-			pubdate=x.find_all('lastbuilddate')+x.find_all('pubdate')
-			for p,t in zip(pubdate,titles):
-				"""Assemble our Output Variable"""
-				"""Data may be nil/missing or error prone. Going to TRY this step"""
-				try:
-					pub=str(p.text)
-					info=str(t.text)
-					if info.find(';')>0:
-						info=info[:info.find(';')]
-				except:
-					pass
+            try:
+    			time.sleep(1)
+    			x=c.get(u)
+    			x=BeautifulSoup(x.content)
+    			titles=x.find_all('title')
+    			pubdate=x.find_all('lastbuilddate')+x.find_all('pubdate')
+    			for p,t in zip(pubdate,titles):
+    				"""Assemble our Output Variable"""
+    				"""Data may be nil/missing or error prone. Going to TRY this step"""
+    				try:
+    					pub=str(p.text)
+    					info=str(t.text)
+    					if info.find(';')>0:
+    						info=info[:info.find(';')]
+    				except:
+    					pass
 
 
-				###Dynamically determining stock based on text. Assuming results may not match original search keyword
-				stock=info[info.find('(')+1:info.find(')')].replace('NYSE:','').replace('NASDAQ:','').replace('NYSE ','').replace(':','').replace(' ','')
-				grab=info
+    				###Dynamically determining stock based on text. Assuming results may not match original search keyword
+    				stock=info[info.find('(')+1:info.find(')')].replace('NYSE:','').replace('NASDAQ:','').replace('NYSE ','').replace(':','').replace(' ','')
+    				grab=info
 
-				# Save Initial Data to Raw File
+    				# Save Initial Data to Raw File
 
-				# f = open('rawmarketmentions.txt'+str(now.month)+'-'+str(now.day)+'-'+str(now.year)+'-UnSelected.txt', 'a')
-				# f.write(grab+' | ' + pub +'\n')
-				# f.close()
+    				# f = open('rawmarketmentions.txt'+str(now.month)+'-'+str(now.day)+'-'+str(now.year)+'-UnSelected.txt', 'a')
+    				# f.write(grab+' | ' + pub +'\n')
+    				# f.close()
 
-				## Begin filtering the data for model output
-				## First find $$$$
-				if grab.count('$') > 0:
-					targ=int(0)
-					targ=grab.find('$')
-					value=grab[targ+1:targ+5]######## now you have the targeted value
+    				## Begin filtering the data for model output
+    				## First find $$$$
+    				if grab.count('$') > 0:
+    					targ=int(0)
+    					targ=grab.find('$')
+    					value=grab[targ+1:targ+5]######## now you have the targeted value
 
-					try:
-						value=float(value)
-						price=quandl_adj_close(stock)####### now you have the stock price from quandl
-						if price == None:
-							price=0
-					except:
-						value=0
-						price=0
+    					try:
+    						value=float(value)
+    						price=quandl_adj_close(stock)####### now you have the stock price from quandl
+    						if price == None:
+    							price=0
+    					except:
+    						value=0
+    						price=0
 
-					if price>1 and value>0:
+    					if price>1 and value>0:
 
-						epsreference=yahooepspuller(stock)
+    						epsreference=yahooepspuller(stock)
 
-						if grab.find('EPS') >0 or grab.find('eps') > 0:
-							targetprice=round(value*4*25,0) #using marget P/E here insteead of individual stock's p/e to avoid -p/e erro
-							epsexpreturn=(targetprice-price)/price
+    						if grab.find('EPS') >0 or grab.find('eps') > 0:
+    							targetprice=round(value*4*25,0) #using marget P/E here insteead of individual stock's p/e to avoid -p/e erro
+    							epsexpreturn=(targetprice-price)/price
 
-							#########################################################
-							##############  Database Connection   ###################
-							conn = psycopg2.connect("dbname='postgres' user='postgres' password='postgres' host='localhost' port='5432'")
-							cur = conn.cursor()
-							# execute a statement
-							cur.execute("INSERT INTO fmi.marketmentions (target, price, returns, ticker, note, date, q_eps, a_eps, report) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)", (targetprice,price,epsexpreturn,stock,grab,pub,value,epsreference,'earnings'))
-							print("inserted value")
-							conn.commit()
-							# close the communication with the PostgreSQL
-							cur.close()
-							conn.close()
+    							#########################################################
+    							##############  Database Connection   ###################
+    							conn = psycopg2.connect("dbname='postgres' user='postgres' password='postgres' host='localhost' port='5432'")
+    							cur = conn.cursor()
+    							# execute a statement
+    							cur.execute("INSERT INTO fmi.marketmentions (target, price, returns, ticker, note, date, q_eps, a_eps, report) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)", (targetprice,price,epsexpreturn,stock,grab,pub,value,epsreference,'earnings'))
+    							print("inserted value")
+    							conn.commit()
+    							# close the communication with the PostgreSQL
+    							cur.close()
+    							conn.close()
 
 
-						if grab.find('arget') > 0:
-							predreturn=(value-price)/price
-							#########################################################
-							##############  Database Connection   ###################
-							conn = psycopg2.connect("dbname='postgres' user='postgres' password='postgres' host='localhost' port='5432'")
-							cur = conn.cursor()
-							# execute a statement
-							cur.execute("INSERT INTO fmi.marketmentions (target, price, returns, ticker, note, date, q_eps, a_eps, report) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)", (value,price,predreturn,stock,grab,pub,None,epsreference,'analyst'))
-							print("inserted value")
-							conn.commit()
-							# close the communication with the PostgreSQL
-							cur.close()
-							conn.close()
-        except:
-            pass
+    						if grab.find('arget') > 0:
+    							predreturn=(value-price)/price
+    							#########################################################
+    							##############  Database Connection   ###################
+    							conn = psycopg2.connect("dbname='postgres' user='postgres' password='postgres' host='localhost' port='5432'")
+    							cur = conn.cursor()
+    							# execute a statement
+    							cur.execute("INSERT INTO fmi.marketmentions (target, price, returns, ticker, note, date, q_eps, a_eps, report) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)", (value,price,predreturn,stock,grab,pub,None,epsreference,'analyst'))
+    							print("inserted value")
+    							conn.commit()
+    							# close the communication with the PostgreSQL
+    							cur.close()
+    							conn.close()
+            except:
+                pass
 
 
 #run for 100 cycles of 6 hours each
