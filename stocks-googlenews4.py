@@ -866,6 +866,10 @@ def contentfilter():
 
 #run for 100 cycles of 6 hours each
 for i in range(1,100):
-	contentfilter()
-	print('end')
-	time.sleep(86400/2)
+    try:
+	       contentfilter()
+           print('end')
+           time.sleep(86400/2)
+    else:
+        print('failed to finish in entirety')
+        time.sleep(86400/2)
