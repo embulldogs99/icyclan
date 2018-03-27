@@ -793,13 +793,12 @@ def contentfilter():
                 for p,t in zip(pubdate,titles):
     				"""Assemble our Output Variable"""
     				"""Data may be nil/missing or error prone. Going to TRY this step"""
-                    try:
-                        pub=str(p.text)
-                        info=str(t.text)
-                        if info.find(';')>0:
-                            info=info[:info.find(';')]
-                        except:
-                            pass
+                    pub=str(p.text)
+                    info=str(t.text)
+                    if info.find(';')>0:
+                        info=info[:info.find(';')]
+                    except:
+                        pass
 
 
     				###Dynamically determining stock based on text. Assuming results may not match original search keyword
