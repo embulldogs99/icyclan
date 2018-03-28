@@ -15,7 +15,7 @@ import io
 import re
 import psycopg2
 import quandl
-from mmduprem.py import mmduprem
+from mmduprem import mmduprem
 
 warnings.filterwarnings('ignore')
 
