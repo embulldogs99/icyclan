@@ -274,7 +274,7 @@ func dbpull1() []Newspoint {
     log.Fatalf("Unable to connect to the database")
   }
 
-  sqlstatmt:="SELECT * FROM fmi.marketmentions WHERE report='analyst' AND date > current_timestamp - INTERVAL '1 day';"
+  sqlstatmt:="SELECT * FROM fmi.marketmentions WHERE report='analyst' AND date > current_timestamp - INTERVAL '2 days';"
   // fmt.Println(sqlstatmt)
   rows, err := db.Query(sqlstatmt)
 
@@ -319,9 +319,7 @@ func dbpull365() []Newspoint {
     bk := Newspoint{}
     err := rows.Scan(&bk.Target, &bk.Price, &bk.Returns, &bk.Ticker, &bk.Note, &bk.Date, &bk.Q_eps, &bk.A_eps, &bk.Report)
 
-    if err != nil {
-      log.Fatal(err)
-    }
+    if err != nil {log.Fatal(err)}
   	// appends the rows
     bks = append(bks, bk)
   }
