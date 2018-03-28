@@ -15,7 +15,7 @@ import io
 import re
 import psycopg2
 import quandl
-import mmduprem
+from mmduprem.py import mmduprem
 
 warnings.filterwarnings('ignore')
 
@@ -866,7 +866,8 @@ def contentfilter():
 
 #run for 100 cycles of 6 hours each
 for i in range(1,100):
-    contentfilter()
     mmduprem()
+    contentfilter()
+
     print('end')
     time.sleep(86400/2)
