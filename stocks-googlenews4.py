@@ -868,6 +868,6 @@ def contentfilter():
 for i in range(1,100):
     mmduprem()
     contentfilter()
-
+    mmduprem()
     print('end')
     time.sleep(86400/2)
