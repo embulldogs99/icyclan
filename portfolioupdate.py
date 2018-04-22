@@ -1,4 +1,4 @@
-import stocks_googlenews4
+from stocks_googlenews4 import quandl_adj_close
 import psycopg2
 import quandl
 
