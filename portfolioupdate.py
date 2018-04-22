@@ -11,6 +11,7 @@ conn = psycopg2.connect("dbname='postgres' user='postgres' password='postgres' h
 cur = conn.cursor()
 cur.execute("""SELECT ticker,shares FROM fmi.portfolio;""")
 portfolio=cur.fetchall()
+print("gathered portfolio")
 cur.close()
 
 ####################################################
