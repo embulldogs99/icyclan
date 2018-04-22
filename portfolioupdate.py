@@ -1,4 +1,4 @@
-import stocks-googlenews4
+import stocks_googlenews4
 import psycopg2
 import quandl
 
