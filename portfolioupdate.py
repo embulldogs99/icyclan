@@ -58,7 +58,7 @@ cur = conn.cursor()
 cur.execute("""SELECT ticker,shares FROM fmi.portfolio;""")
 portfolio=cur.fetchall()
 print("gathered portfolio")
-cur.close()
+
 
 ####################################################
 ###################################################
@@ -68,7 +68,6 @@ for ticker,shares in portfolio:
     cur.execute("UPDATE fmi.portfolio set price=%s,value=%s where ticker=%s)", (price, value, ticker))
     conn.commit()
     # close the communication with the PostgreSQL
-    cur.close()
 
-
+cur.close()
 conn.close()
