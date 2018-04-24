@@ -1,8 +1,23 @@
-from stocks_googlenews4 import quandl_adj_close
 import psycopg2
 import quandl
+import pandas as pd
+import quandl
 
-
+def quandl_adj_close(ticker):
+	if len(ticker)<5:
+		data=pd.DataFrame(quandl_stocks(ticker))
+		#data=data[len(data)-1:]
+		data=data.tail(1)
+		data=str(data.max()).split(' ')[7:8]
+		data=re.split(r'[`\-=;\'\\/<>?]', str(data))
+		data=data[1]
+		try:
+			data=float(data)
+		except:
+			data=int(0)
+		price=int(round(data,0))
+		if price>1:
+			return price
 
 
 #############################################################################
