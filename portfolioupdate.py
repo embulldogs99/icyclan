@@ -72,7 +72,9 @@ for ticker,shares in portfolio:
 #####Log Portfolio Value data and SNP500 data to database############
 #####################################################
 cur.execute("""SELECT SUM(value) as total FROM fmi.portfolio;""")
-portfoliovalue=cur.fetchall()
+portfoliovalues=cur.fetchall()
+for row in portfoliovalues:
+    portfoliovalue=row
 snpvalue=quandl_adj_close("$SPXT")
 now=datetime.datetime.now()
 currentdate=now.strftime("%Y-%m-%d")
