@@ -75,7 +75,7 @@ cur.execute("""SELECT SUM(value) as total FROM fmi.portfolio;""")
 portfoliovalues=cur.fetchall()
 for row in portfoliovalues:
     portfoliovalue=row
-snpvalue=quandl_adj_close("SPY")
+snpvalue=quandl_adj_close("AAPL")
 now=datetime.datetime.now()
 currentdate=now.strftime("%Y-%m-%d")
 
