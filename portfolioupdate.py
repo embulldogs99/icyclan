@@ -65,7 +65,7 @@ print("gathered portfolio")
 for ticker,shares in portfolio:
     price=quandl_adj_close(ticker)
     value=shares*price
-    cur.execute("UPDATE fmi.portfolio set price=%s,value=%s where ticker=%s)", (price, value, ticker))
+    cur.execute("""UPDATE fmi.portfolio set price=%s,value=%s where ticker=%s;""", (price, value, ticker))
     conn.commit()
     # close the communication with the PostgreSQL
 
