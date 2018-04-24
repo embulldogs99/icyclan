@@ -1,9 +1,16 @@
+import requests
+import bs4
+from bs4 import BeautifulSoup
+import warnings
+import time
+import datetime
+import json
+import pandas as pd
+import io
+import re
 import psycopg2
 import quandl
-import pandas as pd
-import quandl
-import datetime
-
+from mmduprem import mmduprem
 
 
 ###########################################################
