@@ -35,7 +35,7 @@ def quandl_stocks(symbol, start_date=(2010, 1, 1), end_date=None):
             )
 
 def quandl_adj_close(ticker):
-	if len(ticker)<5:
+	if len(ticker)<10:
 		data=pd.DataFrame(quandl_stocks(ticker))
 		#data=data[len(data)-1:]
 		data=data.tail(1)
@@ -57,10 +57,9 @@ conn = psycopg2.connect("dbname='postgres' user='postgres' password='postgres' h
 cur = conn.cursor()
 cur.execute("""SELECT ticker,shares FROM fmi.portfolio;""")
 portfolio=cur.fetchall()
-print("gathered portfolio")
-
 
 ####################################################
+###Pull Quandl Price information for each ticker and send it to database#########
 ###################################################
 for ticker,shares in portfolio:
     price=quandl_adj_close(ticker)
@@ -68,6 +67,19 @@ for ticker,shares in portfolio:
     cur.execute("""UPDATE fmi.portfolio set price=%s,value=%s where ticker=%s;""", (price, value, ticker))
     conn.commit()
     # close the communication with the PostgreSQL
+
+#####################################################
+#####Log Portfolio Value data and SNP500 data to database############
+#####################################################
+cur.execute("""SELECT SUM(value) as total FROM fmi.portfolio;""")
+portfoliovalue=cur.fetchall()
+snpvalue=quandl_adj_close("$SPXT")
+now=datetime.datetime.now()
+currentdate=now.strftime("%Y-%m-%d")
+
+cur.execute("""INSERT INTO fmi.portfoliohistory (date,name,value) VALUES (%s,'Portfolio',%s);""", (currentdate,portfoliovalue))
+cur.execute("""INSERT INTO fmi.portfoliohistory (date,name,value) VALUES (%s,'snp500',%s);""", (currentdate,snpvalue))
+conn.commit()
 
 cur.close()
 conn.close()
