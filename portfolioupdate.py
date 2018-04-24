@@ -3,7 +3,7 @@ import quandl
 import pandas as pd
 import quandl
 
-warnings.filterwarnings('ignore')
+
 
 ###########################################################
 ##########################################################
