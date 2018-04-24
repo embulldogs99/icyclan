@@ -3,6 +3,29 @@ import quandl
 import pandas as pd
 import quandl
 
+warnings.filterwarnings('ignore')
+
+###########################################################
+##########################################################
+######## Used QUANDL Functions #########################
+
+quandl.ApiConfig.api_key = 'omQiMysF2NQ1B-xZEJBk'
+
+def quandl_stocks(symbol, start_date=(2010, 1, 1), end_date=None):
+    query_list = ['WIKI' + '/' + symbol + '.' + str(k) for k in range(11, 12)]
+    start_date = datetime.date(*start_date)
+    if end_date:
+        end_date = datetime.date(*end_date)
+    else:
+        end_date = datetime.date.today()
+    return quandl.get(query_list,
+            returns='pandas',
+            start_date=start_date,
+            end_date=end_date,
+            collapse='daily',
+            order='asc'
+            )
+
 def quandl_adj_close(ticker):
 	if len(ticker)<5:
 		data=pd.DataFrame(quandl_stocks(ticker))
