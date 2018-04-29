@@ -96,7 +96,29 @@
 <div class="title">
   Portfolio
 </div><br>
-Coming Soon ...
+
+<?php
+$portfolio = pg_connect("host=localhost dbname=postgres user=postgres");
+if (!$portfolio) {
+    die("Error in connection: " . pg_last_error());
+}
+// execute query
+$sql = "SELECT * FROM fmi.portfolio";
+$result = pg_query($portfolio, $sql);
+if (!$result) {
+    die("Error in SQL query: " . pg_last_error());
+}
+// iterate over result set
+// print each row
+while ($row = pg_fetch_array($result)) {
+    echo "Country code: " . $row[0] . "<br />";
+    echo "Country name: " . $row[1] . "<p />";
+}
+// free memory
+pg_free_result($result);
+// close connection
+pg_close($dbh);
+?>
 
 
 
@@ -121,7 +143,14 @@ Coming Soon ...
 <div class="sidebar">
   <d>Book List</d> <br><br>
     <a class="link" href="http://ws-na.amazon-adsystem.com/widgets/q?ServiceVersion=20070822&OneJS=1&Operation=GetAdHtml&MarketPlace=US&source=ac&ref=qf_sp_asin_til&ad_type=product_link&tracking_id=embulldogs99-20&marketplace=amazon&region=US&placement=0743200403&asins=0743200403&linkId=878e479b847b1fd021721a2f8ae61582&show_border=false&link_opens_in_new_window=false&price_color=333333&title_color=0066C0&bg_color=FFFFFF">One Up on Wall Street - Peter Lynch</a><br><br>
-      <d>Strengthen Your Mind and Your Pockets</d><br>
+    <a class="link" href="">The Paleo Solution - Robb Wolf</a><br><br>
+    <a class="link" href="">Godel Escher Bach - Douglas Hofstadter</a><br><br>
+    <a class="link" href="">The Electric Kool-Aid Acid Test - Tom Wolfe</a><br><br>
+    <a class="link" href="">Twilight of the Idols - Fredrick Nietzsche</a><br><br>
+
+
+
+    <d>Strengthen Your Mind and Your Pockets</d><br>
     <a class="link" href="http://ws-na.amazon-adsystem.com/widgets/q?ServiceVersion=20070822&OneJS=1&Operation=GetAdHtml&MarketPlace=US&source=ac&ref=qf_sp_asin_til&ad_type=product_link&tracking_id=embulldogs99-20&marketplace=amazon&region=US&placement=B00NB86OYE&asins=B00NB86OYE&linkId=428209263703e9c0969e2310d75fb6f2&show_border=false&link_opens_in_new_window=false&price_color=333333&title_color=0066c0&bg_color=ffffff"> Audio Books </a>
     <a class="link" href="https://www.swagbucks.com"> Swag Out!</a>
     <a class="link" href="https://www.robinhood.com"> Trade with RobinHood</a>

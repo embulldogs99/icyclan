@@ -55,18 +55,22 @@ def quandl_adj_close(ticker):
 ############## Pull Current Portfolio and Obtain Tickers  ###################
 conn = psycopg2.connect("dbname='postgres' user='postgres' password='postgres' host='localhost' port='5432'")
 cur = conn.cursor()
-cur.execute("""SELECT ticker,shares FROM fmi.portfolio;""")
+cur.execute("""SELECT ticker,shares,target_price FROM fmi.portfolio;""")
 portfolio=cur.fetchall()
 
 ####################################################
 ###Pull Quandl Price information for each ticker and send it to database#########
 ###################################################
-for ticker,shares in portfolio:
+for ticker,shares,target_price in portfolio:
     price=quandl_adj_close(ticker)
     value=shares*price
     cur.execute("""UPDATE fmi.portfolio set price=%s,value=%s where ticker=%s;""", (price, value, ticker))
     conn.commit()
-    # close the communication with the PostgreSQL
+    #Insert calculated expected return
+    exp_return=(target_price-price)/price
+    exp_value=(target_price*shares)
+    cur.execute("""UPDATE fmi.portfolio set exp_return=%s,exp_value=%s where ticker=%s;""", (exp_return,exp_value,Ticker))
+    conn.commit()
 
 #####################################################
 #####Log Portfolio Value data and SNP500 data to database############
@@ -83,6 +87,8 @@ cur.execute("""INSERT INTO fmi.portfoliohistory (date,name,value) VALUES (%s,'Po
 conn.commit()
 cur.execute("""INSERT INTO fmi.portfoliohistory (date,name,value) VALUES (%s,'snp500',%s);""", (currentdate,snpvalue))
 conn.commit()
+
+
 
 cur.close()
 conn.close()
