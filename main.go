@@ -349,7 +349,7 @@ func portfolioperformancepull() []PortfolioPerformance{
   sqlstatmt:="SELECT * FROM fmi.portfoliohistory;"
   rows, err := db.Query(sqlstatmt)
   if err != nil{log.Fatalf("failed to select portfolio")}
-  bks := []Portfolio{}
+  bks := []PortfolioPerformance{}
   for rows.Next() {
     bk := PortfolioPerformance{}
     err := rows.Scan(&bk.Date, &bk.P1, &bk.SnP, &bk.Nasdaq)
