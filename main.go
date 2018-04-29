@@ -333,7 +333,7 @@ func dbpull365() []Newspoint {
 
 
 func serve(w http.ResponseWriter, r *http.Request){
-  tpl := template.Must(template.ParseFiles("main.gohtml","css/main.css","css/mcleod-reset.css"))
+  tpl := template.Must(template.ParseFiles("main.html","css/main.css","css/mcleod-reset.css"))
   tpl.Execute(w, dbpull1())
 }
 func servemarketmentions(w http.ResponseWriter, r *http.Request){
