@@ -111,8 +111,13 @@ if (!$result) {
 // iterate over result set
 // print each row
 while ($row = pg_fetch_array($result)) {
-    echo "Country code: " . $row[0] . "<br />";
-    echo "Country name: " . $row[1] . "<p />";
+    echo "Ticker: " . $row[0] . "<br />";
+    echo "Shares: " . $row[1] . "<br />";
+    echo "Price: " . $row[2] . "<br />";
+    echo "Value: " . $row[3] . "<br />";
+    echo "Target: " . $row[4] . "<br />";
+    echo "Exp Return: " . $row[5] . "<br />";
+    echo "Exp Value: " . $row[6] . "<br />";
 }
 // free memory
 pg_free_result($result);
