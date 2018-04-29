@@ -43,7 +43,7 @@ def quandl_adj_close(ticker):
 		# data=str(data.max()).split(' ')[7:8]
 		# data=re.split(r'[`\-=;\'\\/<>?]', str(data))
 		# data=data[1]
-		try:
+        try:
 			data=float(data)
 		except:
 			data=int(0)
