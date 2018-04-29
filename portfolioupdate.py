@@ -59,7 +59,7 @@ def barchart(ticker):
         titles=str(titles)
         s=titles[titles.find("dailyLastPrice")+17:titles.find("dailyLastPrice")+17+20].replace('"','').split(",")
         s=[2]
-        return float(s)
+        return s
 
 print(barchart("AAPL"))
 
