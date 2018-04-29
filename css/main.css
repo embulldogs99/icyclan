@@ -55,6 +55,7 @@ header{
 th{
   font-weight: 900;
   font-size: 120%;
+  border: 2px solid black;
 }
 
 .title{
