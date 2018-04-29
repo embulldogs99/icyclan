@@ -45,11 +45,12 @@ def quandl_adj_close(ticker):
 		# data=data[1]
         try:
 			data=float(data)
+            price=int(round(data,2))
+            if price>1:
+            	return price
         except:
-			data=int(0)
-		price=int(round(data,2))
-		if price>1:
-			return price
+			return
+
 
 
 #############################################################################
