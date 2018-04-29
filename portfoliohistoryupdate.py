@@ -41,7 +41,7 @@ def quandl_snp500():
     with requests.Session() as c:
         u='https://www.barchart.com/stocks/quotes/$SPX/price-history'
         x=c.get(u)
-        x=BeautifulSoup(x.content)
+        x=BeautifulSoup(x.content, "html.parser")
         titles=x.find_all()
         titles=str(titles)
         s=titles.find("last-change")
