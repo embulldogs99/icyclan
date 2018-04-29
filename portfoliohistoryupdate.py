@@ -42,10 +42,9 @@ def quandl_snp500():
         u='https://www.barchart.com/stocks/quotes/$SPX'
         x=c.get(u)
         x=BeautifulSoup(x.content, "html.parser")
-        print(x)
         titles=x.find_all()
         titles=str(titles)
-        s=x[titles.find("dailyLastPrice"):titles.find("dailyLastPrice")+10]
+        s=titles[titles.find("dailyLastPrice"):titles.find("dailyLastPrice")+10]
         print(s)
 
 
