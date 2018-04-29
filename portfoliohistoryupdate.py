@@ -17,10 +17,35 @@ from mmduprem import mmduprem
 
 quandl.ApiConfig.api_key = 'omQiMysF2NQ1B-xZEJBk'
 
+
+def yahoopepuller(ticker):
+	with requests.Session() as c:
+		u="http://finance.yahoo.com/quote/"+ticker+"?p=" + ticker
+		x=c.get(u)
+		x=BeautifulSoup(x.content)
+		titles=x.find_all()
+		titles=str(titles)
+		s=titles.find("PE_RATIO-value")
+		pe=titles[s:s+1000]
+		sn=pe.find("react-text")
+		pe=pe[sn+17:sn+24]
+		pe=pe.replace(">","").replace("!","").replace("<","")
+		try:
+			pe=float(pe)
+		except:
+			pe=0
+		return pe
+
+
 def quandl_snp500():
-    apistring='https://www.barchart.com/stocks/quotes/$SPX/price-history'
-    s=requests.get(apistring).content
-    print(s)
+    with requests.Session() as c:
+        u='https://www.barchart.com/stocks/quotes/$SPX/price-history'
+        x=c.get(u)
+        x=BeautifulSoup(x.content)
+        titles=x.find_all()
+		titles=str(titles)
+		s=titles.find("last-change")
+        print(s)
 
 def quandl_nasdaq():
     now=datetime.datetime.now()
