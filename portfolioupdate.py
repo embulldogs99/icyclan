@@ -39,6 +39,7 @@ def quandl_adj_close(ticker):
 		data=pd.DataFrame(quandl_stocks(ticker))
 		#data=data[len(data)-1:]
 		data=data.tail(1)
+        print(data)
 		# data=str(data.max()).split(' ')[7:8]
 		# data=re.split(r'[`\-=;\'\\/<>?]', str(data))
 		# data=data[1]
