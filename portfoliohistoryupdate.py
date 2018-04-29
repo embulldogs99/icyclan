@@ -45,7 +45,7 @@ def quandl_snp500():
         titles=x.find_all()
         print(titles)
         titles=str(titles)
-        s=titles.find("last-change")
+        s=titles.find("dailyLastPrice")
         print(s)
 
 def quandl_nasdaq():
