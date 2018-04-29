@@ -322,7 +322,7 @@ func dbpull365() []Newspoint {
 
 
 type Portfolio struct{
-  Ticker sql.NullString
+  Ticker string
   Shares int
   Price int
   PortValue int
