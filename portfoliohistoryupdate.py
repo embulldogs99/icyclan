@@ -12,42 +12,16 @@ import psycopg2
 import quandl
 from mmduprem import mmduprem
 
-###########################################################
-##########################################################
-######## Used QUANDL Functions #########################
+##################################
+######## QUANDL Functions #########################
 
 quandl.ApiConfig.api_key = 'omQiMysF2NQ1B-xZEJBk'
 
-def quandl_stocks(symbol, start_date=(2010, 1, 1), end_date=None):
-    query_list = ['WIKI' + '/' + symbol + '.' + str(k) for k in range(11, 12)]
-    start_date = datetime.date(*start_date)
-    if end_date:
-        end_date = datetime.date(*end_date)
-    else:
-        end_date = datetime.date.today()
-    return quandl.get(query_list,
-            returns='pandas',
-            start_date=start_date,
-            end_date=end_date,
-            collapse='daily',
-            order='asc'
-            )
-
-def quandl_adj_close(ticker):
-	if len(ticker)<10:
-		data=pd.DataFrame(quandl_stocks(ticker))
-		#data=data[len(data)-1:]
-		data=data.tail(1)
-		data=str(data.max()).split(' ')[7:8]
-		data=re.split(r'[`\-=;\'\\/<>?]', str(data))
-		data=data[1]
-		try:
-			data=float(data)
-		except:
-			data=int(0)
-		price=int(round(data,0))
-		if price>1:
-			return price
+def quandl_price_pull(ticker):
+    apistring='https://www.quandl.com/api/v3/datasets/WIKI/'+ticker+'.csv'
+	data=pd.read_csv(apistring)
+	data=data.tail(1)
+	return data
 
 
 #############################################################################
@@ -58,8 +32,8 @@ cur.execute("""SELECT SUM(value) as total FROM fmi.portfolio;""")
 portfoliovalues=cur.fetchall()
 for row in portfoliovalues:
     portfoliovalue=row
-snpvalue=quandl_adj_close("AS500")
-nasdaqvalue=quandl_adj_close("XQC")
+snpvalue=quandl_price_pull("AS500")
+nasdaqvalue=quandl_price_pull("XQC")
 now=datetime.datetime.now()
 currentdate=now.strftime("%Y-%m-%d")
 
