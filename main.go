@@ -318,6 +318,13 @@ type Portfolio struct{
   Exp_value sql.NullFloat64
 }
 
+type PortfolioPerformance struct{
+  Date sql.NullString
+  P1 sql.NullFloat64
+  SnP sql.NullFloat64
+  Nasdaq sql.NullFloat64
+}
+
 func portfoliopull() []Portfolio{
   db, err := sql.Open("postgres", "postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable")
   if err != nil {log.Fatalf("Unable to connect to the database")}
@@ -336,13 +343,32 @@ func portfoliopull() []Portfolio{
   return bks
 }
 
+func portfolioperformancepull() []PortfolioPerformance{
+  db, err := sql.Open("postgres", "postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable")
+  if err != nil {log.Fatalf("Unable to connect to the database")}
+  sqlstatmt:="SELECT * FROM fmi.portfoliohistory;"
+  rows, err := db.Query(sqlstatmt)
+  if err != nil{log.Fatalf("failed to select portfolio")}
+  bks := []Portfolio{}
+  for rows.Next() {
+    bk := Portfolio{}
+    err := rows.Scan(&bk.Date, &bk.P1, &bk.SnP, &bk.Nasdaq)
+    if err != nil {log.Fatal(err)}
+  	// appends the rows
+    bks = append(bks, bk)
+  }
+  db.Close()
+  return bks
+}
+
 type Homepage struct {
   Marketmentions []Newspoint
   Portfoliolist []Portfolio
+  Pperformance []PortfolioPerformance
 }
 
 func serve(w http.ResponseWriter, r *http.Request){
-  homepagedata:=Homepage{dbpull1(),portfoliopull()}
+  homepagedata:=Homepage{dbpull1(),portfoliopull(),portfolioperformancepull()}
   tpl := template.Must(template.ParseFiles("main.gohtml","css/main.css","css/mcleod-reset.css"))
   tpl.Execute(w, homepagedata)
 }
