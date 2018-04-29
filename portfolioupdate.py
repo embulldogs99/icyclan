@@ -62,13 +62,12 @@ portfolio=cur.fetchall()
 ###Pull Quandl Price information for each ticker and send it to database#########
 ###################################################
 for ticker,shares,target_price in portfolio:
-    print(target_price)
     price=quandl_adj_close(ticker)
     value=shares*price
     cur.execute("""UPDATE fmi.portfolio set price=%s,value=%s where ticker=%s;""", (price, value, ticker))
     conn.commit()
     #Insert calculated expected return
-    exp_return=round((target_price-price)/price,2)
+    exp_return=round((target_price-price)/float(price),2)
     exp_value=(target_price*shares)
     print(exp_return)
     cur.execute("""UPDATE fmi.portfolio set exp_return=%s,exp_value=%s where ticker=%s;""", (exp_return,exp_value,ticker))
