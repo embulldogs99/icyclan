@@ -72,7 +72,7 @@
 
     <tbody>
 
-      {{range .}}
+      {{range .Marketmentions}}
       <tr>
         <td>{{.Target}}</td>
         <td>{{.Price}}</td>
@@ -91,15 +91,33 @@
 
   </table>
 
-
+  type Portfolio struct{
+    Ticker sql.NullString
+    Shares int
+    Price int
+    Value int
+    Target_price int
+    Exp_return sql.NullFloat64
+    Exp_value sql.NullFloat64
+  }
 
 <div class="title">
   Portfolio
 </div><br>
 
-<?php 
-include 'portfoliolist.php;
-?>
+{{range .Portfoliolist}}
+<tr>
+  <td>{{.Ticker}}</td>
+  <td>{{.Shares}}</td>
+  <!-- Must return .Value because we are ranging over a NullString which is a 2 variable type -->
+  <td>{{.Price}}</td>
+  <td>{{.PortValue}}</td>
+  <td>{{.Target_price}}</td>
+  <td>{{.Exp_return.Value}}</td>
+  <td>{{.Exp_value.Value}}</td>
+
+</tr>
+{{end}}
 
 
 
