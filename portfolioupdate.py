@@ -67,7 +67,7 @@ for ticker,shares,target_price in portfolio:
     cur.execute("""UPDATE fmi.portfolio set price=%s,value=%s where ticker=%s;""", (price, value, ticker))
     conn.commit()
     #Insert calculated expected return
-    exp_return=(target_price-price)/price
+    exp_return=round((target_price-price)/price,2)
     exp_value=(target_price*shares)
     cur.execute("""UPDATE fmi.portfolio set exp_return=%s,exp_value=%s where ticker=%s;""", (exp_return,exp_value,ticker))
     conn.commit()
