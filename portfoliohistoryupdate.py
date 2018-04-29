@@ -25,6 +25,7 @@ def quandl_snp500():
     print(data)
 
 def quandl_nasdaq():
+    now=datetime.datetime.now()
     currentdate=now.strftime("%Y-%m-%d")
     data=quandl.get('NASDAQOMX/XQC', start_date=currentdate, end_date=currentdate)
     print(data)
