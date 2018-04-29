@@ -19,7 +19,8 @@ quandl.ApiConfig.api_key = 'omQiMysF2NQ1B-xZEJBk'
 
 def quandl_price_pull(ticker):
     apistring='https://www.quandl.com/api/v3/datasets/WIKI/'+ticker+'.csv'
-    data=pd.read_csv(apistring)
+    s=requests.get(apistring).content
+    data=pd.read_csv(io.StringIO(s.decode('utf-8')))
     data=data.tail(1)
     return data
 
