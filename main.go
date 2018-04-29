@@ -301,9 +301,7 @@ func dbpull1() []Newspoint {
 
 func dbpull365() []Newspoint {
   db, err := sql.Open("postgres", "postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable")
-  if err != nil {
-    log.Fatalf("Unable to connect to the database")
-  }
+  if err != nil {log.Fatalf("Unable to connect to the database")}
   sqlstatmt:="SELECT * FROM fmi.marketmentions WHERE report='analyst' AND date > current_timestamp - INTERVAL '365 days';"
   // fmt.Println(sqlstatmt)
   rows, err := db.Query(sqlstatmt)
@@ -323,11 +321,43 @@ func dbpull365() []Newspoint {
 }
 
 
+type Portfolio struct{
+  Ticker string
+  Shares int
+  Price int
+  PortValue int
+  Target_price int
+  Exp_return sql.NullFloat64
+  Exp_value sql.NullFloat64
+}
 
+func portfoliopull() []Portfolio{
+  db, err := sql.Open("postgres", "postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable")
+  if err != nil {log.Fatalf("Unable to connect to the database")}
+  sqlstatmt:="SELECT * FROM fmi.portfolio;"
+  rows, err := db.Query(sqlstatmt)
+  if err != nil{log.Fatalf("failed to select portfolio")}
+  bks := []Portfolio{}
+  for rows.Next() {
+    bk := Portfolio{}
+    err := rows.Scan(&bk.Ticker, &bk.Shares, &bk.Price, &bk.PortValue, &bk.Target_price, &bk.Exp_return, &bk.Exp_value)
+    if err != nil {log.Fatal(err)}
+  	// appends the rows
+    bks = append(bks, bk)
+  }
+  db.Close()
+  return bks
+}
+
+type Homepage struct {
+  Marketmentions []Newspoint
+  Portfoliolist []Portfolio
+}
 
 func serve(w http.ResponseWriter, r *http.Request){
+  homepagedata:=Homepage{dbpull1(),portfoliopull()}
   tpl := template.Must(template.ParseFiles("main.gohtml","css/main.css","css/mcleod-reset.css"))
-  tpl.Execute(w, dbpull1())
+  tpl.Execute(w, homepagedata)
 }
 func servemarketmentions(w http.ResponseWriter, r *http.Request){
   z:=getUser(w,r)

@@ -42,6 +42,18 @@ header{
     border: .5px solid black;
     width: 90%;
 }
+
+.portfolio{
+    background-color:#eee;
+    color:#666666;
+    font-weight: 600;
+    cursor: crosshair;
+    padding: 2px;
+    border: .5px solid black;
+    width: 90%;
+    text-align: center;
+}
+
 th{
   font-weight: 900;
   font-size: 120%;
