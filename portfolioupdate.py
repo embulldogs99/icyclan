@@ -50,6 +50,19 @@ def quandl_adj_close(ticker):
 		if price>1:
 			return price
 
+def barchart(ticker):
+    with requests.Session() as c:
+        u='https://www.barchart.com/stocks/quotes/'+ticker
+        x=c.get(u)
+        x=BeautifulSoup(x.content, "html.parser")
+        titles=x.find_all()
+        titles=str(titles)
+        s=titles[titles.find("dailyLastPrice")+17:titles.find("dailyLastPrice")+17+20].replace('"','').split(",")
+        s=[2]
+        return float(s)
+
+barchart("AAPL")
+
 
 #############################################################################
 ############## Pull Current Portfolio and Obtain Tickers  ###################
