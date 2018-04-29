@@ -45,7 +45,7 @@ def quandl_snp500():
         print(x)
         titles=x.find_all()
         titles=str(titles)
-        s=x[titles.find("dailyLastPrice"),titles.find("dailyLastPrice")+10]
+        s=x[titles.find("dailyLastPrice"):titles.find("dailyLastPrice")+10]
         print(s)
 
 
