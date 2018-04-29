@@ -311,7 +311,7 @@ func dbpull365() []Newspoint {
 type Portfolio struct{
   Ticker string
   Shares int
-  Price int
+  Price sql.NullFloat64
   PortValue int
   Target_price int
   Exp_return sql.NullFloat64
@@ -321,7 +321,7 @@ type Portfolio struct{
 func portfoliopull() []Portfolio{
   db, err := sql.Open("postgres", "postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable")
   if err != nil {log.Fatalf("Unable to connect to the database")}
-  sqlstatmt:="SELECT * FROM fmi.portfolio;"
+  sqlstatmt:="SELECT * FROM fmi.portfolio where ticker<>'CASH';"
   rows, err := db.Query(sqlstatmt)
   if err != nil{log.Fatalf("failed to select portfolio")}
   bks := []Portfolio{}

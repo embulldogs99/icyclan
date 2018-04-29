@@ -46,7 +46,7 @@ def quandl_adj_close(ticker):
 			data=float(data)
 		except:
 			data=int(0)
-		price=int(round(data,0))
+		price=int(round(data,2))
 		if price>1:
 			return price
 
@@ -63,7 +63,7 @@ portfolio=cur.fetchall()
 ###################################################
 for ticker,shares,target_price in portfolio:
     price=quandl_adj_close(ticker)
-    value=shares*price
+    value=round(shares*float(price),2)
     cur.execute("""UPDATE fmi.portfolio set price=%s,value=%s where ticker=%s;""", (price, value, ticker))
     conn.commit()
     #Insert calculated expected return
