@@ -47,14 +47,9 @@ header{
     background-color:#eee;
     color:#666666;
     font-weight: 600;
-    cursor: crosshair;
-    padding: 2px;
     border: 10px solid black;
     width: 200px;
     text-align: center;
-}
-.portfolio.thead{
-      border: 2px solid black;
 }
 
 th{
