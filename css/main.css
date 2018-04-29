@@ -41,6 +41,7 @@ header{
     padding: 3px;
     border: .5px solid black;
     width: 90%;
+    text-align: center;
 }
 
 .portfolio{

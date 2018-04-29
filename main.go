@@ -318,12 +318,7 @@ type Portfolio struct{
   Exp_value sql.NullFloat64
 }
 
-type PortfolioPerformance struct{
-  Date sql.NullString
-  P1 sql.NullFloat64
-  SnP sql.NullFloat64
-  Nasdaq sql.NullFloat64
-}
+
 
 func portfoliopull() []Portfolio{
   db, err := sql.Open("postgres", "postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable")
@@ -341,6 +336,14 @@ func portfoliopull() []Portfolio{
   }
   db.Close()
   return bks
+}
+
+
+type PortfolioPerformance struct{
+  Date sql.NullString
+  P1 sql.NullFloat64
+  SnP sql.NullFloat64
+  Nasdaq sql.NullFloat64
 }
 
 func portfolioperformancepull() []PortfolioPerformance{
