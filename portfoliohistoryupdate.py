@@ -17,13 +17,17 @@ from mmduprem import mmduprem
 
 quandl.ApiConfig.api_key = 'omQiMysF2NQ1B-xZEJBk'
 
-def quandl_price_pull(ticker):
-    apistring='https://www.quandl.com/api/v3/datasets/WIKI/'+ticker+'.csv'
+def quandl_snp500():
+    apistring='https://www.quandl.com/api/v3/datasets/AS500/AS-SP500.csv'
     s=requests.get(apistring).content
     data=pd.read_csv(io.StringIO(s.decode('utf-8')))
     data=data.tail(1)
     return data
 
+def quandl_nasdaq():
+    currentdate=now.strftime("%Y-%m-%d")
+    data=quandl.get('NASDAQOMX/XQC', start_date=currentdate, end_date=currentdate)
+    return(data)
 
 #############################################################################
 ############## Pull Current Portfolio and Obtain Tickers  ###################
@@ -33,8 +37,8 @@ cur.execute("""SELECT SUM(value) as total FROM fmi.portfolio;""")
 portfoliovalues=cur.fetchall()
 for row in portfoliovalues:
     portfoliovalue=row
-snpvalue=quandl_price_pull("AS500")
-nasdaqvalue=quandl_price_pull("XQC")
+snpvalue=quandl_snp500()
+nasdaqvalue=quandl_nasdaq()
 print(snpvalue)
 print(nasdaqvalue)
 now=datetime.datetime.now()
