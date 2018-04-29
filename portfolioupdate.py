@@ -23,7 +23,10 @@ def barchart(ticker):
         titles=x.find_all()
         titles=str(titles)
         s=titles[titles.find("dailyLastPrice")+17:titles.find("dailyLastPrice")+17+20].replace('"','').split(",")
-        s=float(s[0])
+        if ticker="GOOG":
+            s=float(s[0]+s[1])
+        else:
+            s=float(s[0])
         return s
 
 #############################################################################
