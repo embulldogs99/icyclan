@@ -45,7 +45,8 @@ def quandl_snp500():
         titles=x.find_all()
         titles=str(titles)
         s=titles[titles.find("dailyLastPrice")+17:titles.find("dailyLastPrice")+17+10].replace('"','').replace(",","")
-        print(s)
+
+        print(float(s))
 
 
 quandl_snp500()
