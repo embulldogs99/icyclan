@@ -104,9 +104,9 @@
       {{range .Portfoliolist}}
       <tr>
         <td>{{.Ticker}}</td>
-        <td>{{.Price.Value}}</td>
-        <td>{{.Target_price}}</td>
-        <td>{{.Exp_return.Value}}</td>
+        <td>${{.Price.Value}}</td>
+        <td>${{.Target_price}}</td>
+        <td>{{.Exp_return.Value}}%</td>
       </tr>
       {{end}}
     </tbody>
