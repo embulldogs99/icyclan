@@ -57,6 +57,24 @@ def quandl_adj_close(ticker):
 			return price
 
 
+###########################################################################
+#########Main Barchart Function (ticker puller###############################
+
+def barchart(ticker):
+    with requests.Session() as c:
+        u='https://www.barchart.com/stocks/quotes/'+ticker
+        x=c.get(u)
+        x=BeautifulSoup(x.content, "html.parser")
+        titles=x.find_all()
+        titles=str(titles)
+        s=titles[titles.find("dailyLastPrice")+17:titles.find("dailyLastPrice")+17+20].replace('"','').split(",")
+        if quandl_adj_close(ticker)>1000:
+            s=float(s[0]+s[1])
+        else:
+            s=float(s[0])
+        return s
+
+
 ########################################################################################
 ##########################################################################################
 ###############            YAHOO PE and EPS pullers    ##################################
@@ -819,7 +837,7 @@ def contentfilter():
 
                         try:
                             value=float(value)
-                            price=quandl_adj_close(stock)####### now you have the stock price from quandl
+                            price=barchart(stock)####### now you have the stock price from quandl
                             if price == None:
     							price=0
                         except:
