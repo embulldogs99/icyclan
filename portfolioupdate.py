@@ -19,7 +19,7 @@ from mmduprem import mmduprem
 
 quandl.ApiConfig.api_key = 'omQiMysF2NQ1B-xZEJBk'
 
-def quandl_stocks(symbol, start_date=(2010, 1, 1), end_date=None):
+def quandl_stocks(symbol, start_date=(2017, 1, 1), end_date=None):
     query_list = ['WIKI' + '/' + symbol + '.' + str(k) for k in range(11, 12)]
     start_date = datetime.date(*start_date)
     if end_date:
