@@ -323,7 +323,7 @@ type Portfolio struct{
 func portfoliopull() []Portfolio{
   db, err := sql.Open("postgres", "postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable")
   if err != nil {log.Fatalf("Unable to connect to the database")}
-  sqlstatmt:="SELECT * FROM fmi.portfolio where ticker<>'CASH';"
+  sqlstatmt:="SELECT * FROM fmi.portfolio where ticker<>'CASH' ORDER BY ticker asc;"
   rows, err := db.Query(sqlstatmt)
   if err != nil{log.Fatalf("failed to select portfolio")}
   bks := []Portfolio{}
