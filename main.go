@@ -75,7 +75,7 @@ func main() {
 
 type Newspoint struct {
 	Target int
-	Price  int
+	Price  sql.NullFloat64
 	Returns sql.NullFloat64
 	Ticker sql.NullString
   Note sql.NullString

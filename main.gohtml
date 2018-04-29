@@ -75,7 +75,7 @@
       {{range .Marketmentions}}
       <tr>
         <td>{{.Target}}</td>
-        <td>{{.Price}}</td>
+        <td>{{.Price.Value}}</td>
         <!-- Must return .Value because we are ranging over a NullString which is a 2 variable type -->
         <td>{{.Returns.Value}}</td>
         <td>{{.A_eps.Value}}</td>
