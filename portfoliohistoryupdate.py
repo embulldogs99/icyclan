@@ -46,7 +46,12 @@ def quandl_snp500():
         titles=str(titles)
         s=titles.find("dailyLastPrice")
         p=titles.find("lastPrice")
+        l=titles.find("currentSymbol")
         print(s)
+        print(p)
+        print(l)
+
+quandl_snp500()
 
 def quandl_nasdaq():
     now=datetime.datetime.now()
@@ -56,24 +61,22 @@ def quandl_nasdaq():
 
 #############################################################################
 ############## Pull Current Portfolio and Obtain Tickers  ###################
-conn = psycopg2.connect("dbname='postgres' user='postgres' password='postgres' host='localhost' port='5432'")
-cur = conn.cursor()
-cur.execute("""SELECT SUM(value) as total FROM fmi.portfolio;""")
-portfoliovalues=cur.fetchall()
-for row in portfoliovalues:
-    portfoliovalue=row
-snpvalue=quandl_snp500()
-nasdaqvalue=quandl_nasdaq()
-print(snpvalue)
-print(nasdaqvalue)
-now=datetime.datetime.now()
-currentdate=now.strftime("%Y-%m-%d")
-
-cur.execute("""INSERT INTO fmi.portfoliohistory (date,portfolio,snp,nasdaq) VALUES (%s,%s,%s,%s);""", (currentdate,portfoliovalue,snpvalue,nasdaqvalue))
-conn.commit()
-
-
-
-
-cur.close()
-conn.close()
+# conn = psycopg2.connect("dbname='postgres' user='postgres' password='postgres' host='localhost' port='5432'")
+# cur = conn.cursor()
+# cur.execute("""SELECT SUM(value) as total FROM fmi.portfolio;""")
+# portfoliovalues=cur.fetchall()
+# for row in portfoliovalues:
+#     portfoliovalue=row
+# snpvalue=quandl_snp500()
+# nasdaqvalue=quandl_nasdaq()
+# now=datetime.datetime.now()
+# currentdate=now.strftime("%Y-%m-%d")
+#
+# cur.execute("""INSERT INTO fmi.portfoliohistory (date,portfolio,snp,nasdaq) VALUES (%s,%s,%s,%s);""", (currentdate,portfoliovalue,snpvalue,nasdaqvalue))
+# conn.commit()
+#
+#
+#
+#
+# cur.close()
+# conn.close()
