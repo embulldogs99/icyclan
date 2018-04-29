@@ -43,9 +43,9 @@ def quandl_snp500():
         x=c.get(u)
         x=BeautifulSoup(x.content, "html.parser")
         titles=x.find_all()
-        print(titles)
         titles=str(titles)
         s=titles.find("dailyLastPrice")
+        p=titles.find("lastPrice")
         print(s)
 
 def quandl_nasdaq():
