@@ -22,12 +22,12 @@ def quandl_snp500():
     s=requests.get(apistring).content
     data=pd.read_csv(io.StringIO(s.decode('utf-8')))
     data=data.tail(1)
-    return data
+    print(data)
 
 def quandl_nasdaq():
     currentdate=now.strftime("%Y-%m-%d")
     data=quandl.get('NASDAQOMX/XQC', start_date=currentdate, end_date=currentdate)
-    return(data)
+    print(data)
 
 #############################################################################
 ############## Pull Current Portfolio and Obtain Tickers  ###################
