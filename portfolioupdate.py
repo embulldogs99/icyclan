@@ -58,7 +58,7 @@ def barchart(ticker):
         titles=x.find_all()
         titles=str(titles)
         s=titles[titles.find("dailyLastPrice")+17:titles.find("dailyLastPrice")+17+20].replace('"','').split(",")
-        s=[2]
+        s=s[2]
         return s
 
 print(barchart("AAPL"))
@@ -76,7 +76,6 @@ portfolio=cur.fetchall()
 ###################################################
 for ticker,shares,target_price in portfolio:
     price=quandl_adj_close(ticker)
-    print(price)
     value=round(shares*float(price),2)
     cur.execute("""UPDATE fmi.portfolio set price=%s,value=%s where ticker=%s;""", (price, value, ticker))
     conn.commit()
