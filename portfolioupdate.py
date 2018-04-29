@@ -55,7 +55,7 @@ def quandl_adj_close(ticker):
 ############## Pull Current Portfolio and Obtain Tickers  ###################
 conn = psycopg2.connect("dbname='postgres' user='postgres' password='postgres' host='localhost' port='5432'")
 cur = conn.cursor()
-cur.execute("""SELECT ticker,shares,target_price FROM fmi.portfolio;""")
+cur.execute("""SELECT ticker,shares,target_price FROM fmi.portfolio where ticker<>'CASH';""")
 portfolio=cur.fetchall()
 
 ####################################################
@@ -63,13 +63,13 @@ portfolio=cur.fetchall()
 ###################################################
 for ticker,shares,target_price in portfolio:
     price=quandl_adj_close(ticker)
+    print(price)
     value=round(shares*float(price),2)
     cur.execute("""UPDATE fmi.portfolio set price=%s,value=%s where ticker=%s;""", (price, value, ticker))
     conn.commit()
     #Insert calculated expected return
     exp_return=round((target_price-price)/float(price),2)
     exp_value=(target_price*shares)
-    print(exp_return)
     cur.execute("""UPDATE fmi.portfolio set exp_return=%s,exp_value=%s where ticker=%s;""", (exp_return,exp_value,ticker))
     conn.commit()
 
