@@ -43,8 +43,8 @@ def quandl_snp500():
         x=c.get(u)
         x=BeautifulSoup(x.content)
         titles=x.find_all()
-		titles=str(titles)
-		s=titles.find("last-change")
+        titles=str(titles)
+        s=titles.find("last-change")
         print(s)
 
 def quandl_nasdaq():
