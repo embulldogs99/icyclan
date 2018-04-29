@@ -351,7 +351,7 @@ func portfolioperformancepull() []PortfolioPerformance{
   if err != nil{log.Fatalf("failed to select portfolio")}
   bks := []Portfolio{}
   for rows.Next() {
-    bk := Portfolio{}
+    bk := PortfolioPerformance{}
     err := rows.Scan(&bk.Date, &bk.P1, &bk.SnP, &bk.Nasdaq)
     if err != nil {log.Fatal(err)}
   	// appends the rows
