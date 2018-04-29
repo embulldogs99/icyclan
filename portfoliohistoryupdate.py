@@ -18,7 +18,7 @@ from mmduprem import mmduprem
 quandl.ApiConfig.api_key = 'omQiMysF2NQ1B-xZEJBk'
 
 def quandl_snp500():
-    apistring='https://www.quandl.com/api/v3/datasets/AS500/AS-SP500.csv'
+    apistring='https://www.quandl.com/data/BCIP/_INX-S-P-500-Index-INX'
     s=requests.get(apistring).content
     print(s)
 
