@@ -18,7 +18,7 @@ from mmduprem import mmduprem
 quandl.ApiConfig.api_key = 'omQiMysF2NQ1B-xZEJBk'
 
 def quandl_snp500():
-    apistring='https://www.quandl.com/api/v3/datasets/EOV/IVV.csv?api_key=omQiMysF2NQ1B-xZEJBk'
+    apistring='https://www.quandl.com/api/v3/databases/AS500/download?api_key=omQiMysF2NQ1B-xZEJBk&download_type=20180429'
     s=requests.get(apistring).content
     print(s)
 
