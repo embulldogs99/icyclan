@@ -312,7 +312,7 @@ type Portfolio struct{
   Ticker string
   Shares int
   Price sql.NullFloat64
-  PortValue int
+  PortValue sql.NullFloat64
   Target_price int
   Exp_return sql.NullFloat64
   Exp_value sql.NullFloat64
