@@ -39,7 +39,7 @@ def yahoopepuller(ticker):
 
 def quandl_snp500():
     with requests.Session() as c:
-        u='https://www.barchart.com/stocks/quotes/$SPX/price-history'
+        u='https://www.barchart.com/stocks/quotes/$SPX'
         x=c.get(u)
         x=BeautifulSoup(x.content, "html.parser")
         print(x)
