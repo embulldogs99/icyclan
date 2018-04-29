@@ -44,7 +44,7 @@ def quandl_snp500():
         x=BeautifulSoup(x.content, "html.parser")
         titles=x.find_all()
         titles=str(titles)
-        s=titles[titles.find("dailyLastPrice")+17:titles.find("dailyLastPrice")+17+9]
+        s=titles[titles.find("dailyLastPrice")+17:titles.find("dailyLastPrice")+17+10].replace('"','').replace(",","")
         print(s)
 
 
