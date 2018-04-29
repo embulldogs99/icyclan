@@ -268,33 +268,20 @@ func profile(w http.ResponseWriter, r *http.Request){
 
 
 func dbpull1() []Newspoint {
-
   db, err := sql.Open("postgres", "postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable")
-  if err != nil {
-    log.Fatalf("Unable to connect to the database")
-  }
-
+  if err != nil {log.Fatalf("Unable to connect to the database")}
   sqlstatmt:="SELECT * FROM fmi.marketmentions WHERE report='analyst' AND date > current_timestamp - INTERVAL '2 days';"
   // fmt.Println(sqlstatmt)
   rows, err := db.Query(sqlstatmt)
-
-  if err != nil{
-    log.Fatalf("failed to select marketmentions data")
-  }
-
+  if err != nil{log.Fatalf("failed to select marketmentions data")}
   bks := []Newspoint{}
   for rows.Next() {
     bk := Newspoint{}
     err := rows.Scan(&bk.Target, &bk.Price, &bk.Returns, &bk.Ticker, &bk.Note, &bk.Date, &bk.Q_eps, &bk.A_eps, &bk.Report)
-
-    if err != nil {
-      log.Fatal(err)
-    }
+    if err != nil {log.Fatal(err)}
   	// appends the rows
     bks = append(bks, bk)
   }
-
-
   db.Close()
   return bks
 }

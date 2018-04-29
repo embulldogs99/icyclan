@@ -12,7 +12,6 @@ import psycopg2
 import quandl
 from mmduprem import mmduprem
 
-
 ###########################################################
 ##########################################################
 ######## Used QUANDL Functions #########################
@@ -55,23 +54,20 @@ def quandl_adj_close(ticker):
 ############## Pull Current Portfolio and Obtain Tickers  ###################
 conn = psycopg2.connect("dbname='postgres' user='postgres' password='postgres' host='localhost' port='5432'")
 cur = conn.cursor()
-cur.execute("""SELECT ticker,shares,target_price FROM fmi.portfolio;""")
-portfolio=cur.fetchall()
+cur.execute("""SELECT SUM(value) as total FROM fmi.portfolio;""")
+portfoliovalues=cur.fetchall()
+for row in portfoliovalues:
+    portfoliovalue=row
+snpvalue=quandl_adj_close("AS500")
+nasdaqvalue=quandl_adj_close("XQC")
+now=datetime.datetime.now()
+currentdate=now.strftime("%Y-%m-%d")
 
-####################################################
-###Pull Quandl Price information for each ticker and send it to database#########
-###################################################
-for ticker,shares,target_price in portfolio:
-    price=quandl_adj_close(ticker)
-    value=shares*price
-    cur.execute("""UPDATE fmi.portfolio set price=%s,value=%s where ticker=%s;""", (price, value, ticker))
-    conn.commit()
-    #Insert calculated expected return
-    exp_return=round((target_price-price)/float(price),2)
-    exp_value=(target_price*shares)
-    print(exp_return)
-    cur.execute("""UPDATE fmi.portfolio set exp_return=%s,exp_value=%s where ticker=%s;""", (exp_return,exp_value,ticker))
-    conn.commit()
+cur.execute("""INSERT INTO fmi.portfoliohistory (date,portfolio,snp,nasdaq) VALUES (%s,%s,%s,%s);""", (currentdate,portfoliovalue,snpvalue,nasdaqvalue))
+conn.commit()
+
+
+
 
 cur.close()
 conn.close()
