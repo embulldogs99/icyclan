@@ -47,7 +47,9 @@ header{
     background-color:#eee;
     color:#666666;
     font-weight: 600;
-    border: 50px 20px 50px 20px solid #666666;
+    border-color: #666666;
+    border-width: 50px 20px 50px 20px ;
+    border-style: solid;
     width: 400px;
     text-align: center;
 }
