@@ -61,7 +61,7 @@ def barchart(ticker):
         s=[2]
         return float(s)
 
-barchart("AAPL")
+print(barchart("AAPL"))
 
 
 #############################################################################
