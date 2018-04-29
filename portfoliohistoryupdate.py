@@ -35,6 +35,8 @@ for row in portfoliovalues:
     portfoliovalue=row
 snpvalue=quandl_price_pull("AS500")
 nasdaqvalue=quandl_price_pull("XQC")
+print(snpvalue)
+print(nasdaqvalue)
 now=datetime.datetime.now()
 currentdate=now.strftime("%Y-%m-%d")
 
