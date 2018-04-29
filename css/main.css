@@ -48,10 +48,10 @@ header{
     color:#666666;
     font-weight: 600;
     border: 10px solid black;
-    width: 300px;
+    width: 400px;
     text-align: center;
 }
-.portfolio.thead{
+.portfolio thead{
   border: 2px solid black;
 }
 
