@@ -10,4 +10,7 @@
 }
 .profilehelplinks:hover{
   background-color: rgb(0, 204, 255);
+  color: white;
+  font-weight: 900;
+  border: solid 3px white;
 }
