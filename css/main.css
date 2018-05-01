@@ -59,6 +59,13 @@ header{
   border: 2px solid black;
 }
 
+.porthistory {
+  padding: 4px;
+}
+.porthistory td{
+  padding: 4px;
+}
+
 th{
   font-weight: 900;
   font-size: 120%;
