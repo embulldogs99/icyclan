@@ -252,7 +252,7 @@ func profile(w http.ResponseWriter, r *http.Request){
 
     dbusers.Close()
     var tpl *template.Template
-    tpl = template.Must(template.ParseFiles("profile.gohtml","css/main.css","css/mcleod-reset.css"))
+    tpl = template.Must(template.ParseFiles("profile.gohtml","css/main.css","css/mcleod-reset.css","css/profile.css"))
 
     tpl.Execute(w,data)
 }
