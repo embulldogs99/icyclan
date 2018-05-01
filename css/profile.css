@@ -1,9 +1,13 @@
 .profilehelplinks{
-  padding: 20px;
+  padding: 7px;
   border: solid 2px black;
   border-radius: 2rem;
   border-style: solid;
   border-color: black;
   text-align: center;
   align-items: center;
+  font-size: 25px;
+}
+.profilehelplinks:hover{
+  background-color: cyan;
 }
