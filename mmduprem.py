@@ -29,9 +29,7 @@ def portfoliohistoryduplicatedelete():
     cur.execute("CREATE TABLE fmi.portfoliohistory_temp (LIKE fmi.portfoliohistory);")
     conn.commit()
     cur.execute("INSERT into fmi.portfoliohistory_temp(date,portfolio,snp,nasdaq)"
-    "SELECT DISTINCT ON (date) "
-    "date,portfolio,snp,nasdaq "
-    "FROM fmi.portfoliohistory;")
+    "SELECT DISTINCT ON (date) date,portfolio,snp,nasdaq FROM fmi.portfoliohistory;")
     conn.commit()
     cur.execute("DROP TABLE fmi.portfoliohistory;")
     conn.commit()
