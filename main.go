@@ -344,6 +344,9 @@ type PortfolioPerformance struct{
   P1 sql.NullFloat64
   SnP sql.NullFloat64
   Nasdaq sql.NullFloat64
+  Portfolioreturn sql.NullFloat64
+  Snpreturn sql.NullFloat64
+  Nasdaqreturn sql.NullFloat64
 }
 
 func portfolioperformancepull() []PortfolioPerformance{
@@ -355,7 +358,7 @@ func portfolioperformancepull() []PortfolioPerformance{
   bks := []PortfolioPerformance{}
   for rows.Next() {
     bk := PortfolioPerformance{}
-    err := rows.Scan(&bk.Date, &bk.P1, &bk.SnP, &bk.Nasdaq)
+    err := rows.Scan(&bk.Date, &bk.P1, &bk.SnP, &bk.Nasdaq,&bk.Portfolioreturn,&bk.Snpreturn,&bk.Nasdaqreturn)
     if err != nil {log.Fatal(err)}
   	// appends the rows
     bks = append(bks, bk)
