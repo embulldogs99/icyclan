@@ -17,9 +17,9 @@ start=1
 ####################################################
 ###Pull Quandl Price information for each ticker and send it to database#########
 ###################################################
-port=[1,1]
-snp=[1,1]
-nasdaq=[1,1]
+port=["1","1"]
+snp=["1","1"]
+nasdaq=["1","1"]
 for pr,sr,nr in portfolio:
     try:
         if start==1:
