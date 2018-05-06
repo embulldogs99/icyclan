@@ -21,7 +21,7 @@ port=[]
 snp=[]
 nasdaq=[]
 for pr,sr,nr in portfolio:
-    if start=1:
+    if start==1:
         relport=start+(start*pr)
         relsnp=start+(start*sr)
         relnasdaq=start+(start*sr)
