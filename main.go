@@ -375,7 +375,7 @@ type Homepage struct {
 
 func serve(w http.ResponseWriter, r *http.Request){
   homepagedata:=Homepage{dbpull1(),portfoliopull(),portfolioperformancepull()}
-  tpl := template.Must(template.ParseFiles("main.gohtml","css/main.css","css/mcleod-reset.css"))
+  tpl := template.Must(template.ParseFiles("main.gohtml","css/main.css","css/mcleod-reset.css","getData.php"))
   tpl.Execute(w, homepagedata)
 }
 func servemarketmentions(w http.ResponseWriter, r *http.Request){
