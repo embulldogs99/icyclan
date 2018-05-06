@@ -82,14 +82,14 @@ def portfoliohistoryreturnscalc():
         else:
             print(p)
             print(pastport)
-            portfolioreturn=round((p-pastport)/pastport,2)
-            snpreturn=round((s-pastsnp)/pastsnp,2)
-            nasdaqreturn=round((n-pastnasdaq)/pastnasdaq,2)
+            portfolioreturn=round((p-pastport)/float64(pastport),2)
+            snpreturn=round((s-pastsnp)/float64(pastsnp),2)
+            nasdaqreturn=round((n-pastnasdaq)/float64(pastnasdaq),2)
             pastport=p
             pastsnp=s
             pastnasdaq=n
             row+=1
-            cur.execute("""UPDATE fmi.portfoliohistory set portfolioreturn=%s, snpreturn=%s, nasdaqreturn=%s, WHERE date=%s;""", (portfolioreturn,snpreturn,nasdaqreturn,d))
+            cur.execute("""UPDATE fmi.portfoliohistory set portfolioreturn=%s, snpreturn=%s, nasdaqreturn=%s WHERE date=%s;""", (portfolioreturn,snpreturn,nasdaqreturn,d))
             conn.commit()
     cur.close()
     conn.close()
