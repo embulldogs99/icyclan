@@ -36,4 +36,4 @@ plt.title("Simple Plot")
 plt.legend()
 
 plt.show()
-savefig('test.png')
+plt.savefig('test.png')
