@@ -78,7 +78,7 @@ def portfoliohistoryreturnscalc():
             pastsnp=s
             pastnasdaq=n
             row+=1
-            return
+            print(row)
         else:
             print(p)
             print(pastport)
