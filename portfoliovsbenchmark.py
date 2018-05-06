@@ -21,11 +21,7 @@ cur.close()
 conn.close()
 
 
-
-
-
-
-fig, ax = plt.subplots()
+ax = plt.subplots()
 ax.plot(portfolioreturns)
 ax.set(xlabel='Days', ylabel='Return',
        title='Relative Portfolio Return')
