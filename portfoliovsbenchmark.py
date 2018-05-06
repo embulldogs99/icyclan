@@ -21,22 +21,24 @@ port=[1,1]
 snp=[1,1]
 nasdaq=[1,1]
 for pr,sr,nr in portfolio:
-    if start==1:
-        relport=start+(start*pr)
-        relsnp=start+(start*sr)
-        relnasdaq=start+(start*sr)
-        port=port.append(relport)
-        snp=snp.append(relsnp)
-        nasdaq=nasdaq.append(relnasdaq)
-        start+=1
-    else:
-        relport=relport+(relport*pr)
-        relsnp=relsnp+(relsnp*sr)
-        relnasdaq=relnasdaq+(relnasdaq*sr)
-        port=port.append(relport)
-        snp=snp.append(relsnp)
-        nasdaq=nasdaq.append(relnasdaq)
-
+    try:
+        if start==1:
+            relport=start+(start*pr)
+            relsnp=start+(start*sr)
+            relnasdaq=start+(start*sr)
+            port=port.append(relport)
+            snp=snp.append(relsnp)
+            nasdaq=nasdaq.append(relnasdaq)
+            start+=1
+        else:
+            relport=relport+(relport*pr)
+            relsnp=relsnp+(relsnp*sr)
+            relnasdaq=relnasdaq+(relnasdaq*sr)
+            port=port.append(relport)
+            snp=snp.append(relsnp)
+            nasdaq=nasdaq.append(relnasdaq)
+    except:
+        return
 
 print(port)
 print(snp)
