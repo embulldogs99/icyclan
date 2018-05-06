@@ -152,17 +152,19 @@
 {{range .Pperformance}}
 <script>
 var ctx = document.getElementById('myChart').getContext('2d');
-var myChart = new Chart(ctx, {
-  type: 'line',
-  data: {
-    labels: {{.Date.Value}},
-    datasets: [{
-      label: 'hours slept',
-      data: {{.Portfolioreturn.Value}},
+var myChart = new Chart(ctx).Line({
+  labels:[],
+  datasets: [
+    { label: 'check1',
+      data: [1,2,4],
       backgroundColor: "rgba(153,255,51,0.4)",
-    }]
+    },
+  {
+    label:'test2'
+    data[5,3,7]
   }
-});
+  ]
+},null);
 </script>
 {{end}}
 
