@@ -20,6 +20,9 @@ start=1
 port=["1","1"]
 snp=["1","1"]
 nasdaq=["1","1"]
+relport=1
+relsnp=1
+relnasdaq=1
 for pr,sr,nr in portfolio:
     if start==1:
         relport=start+(start*pr)
@@ -30,9 +33,6 @@ for pr,sr,nr in portfolio:
         nasdaq=nasdaq.append(relnasdaq)
         start+=1
     else:
-        relport=1
-        relsnp=1
-        renasdaq=1
         relport=relport+(relport*pr)
         relsnp=relsnp+(relsnp*sr)
         relnasdaq=relnasdaq+(relnasdaq*sr)
