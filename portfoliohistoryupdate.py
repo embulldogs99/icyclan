@@ -79,13 +79,10 @@ def portfoliohistoryreturnscalc():
             pastsnp=s
             pastnasdaq=n
             row+=1
-            print(row)
         else:
-            print(p)
-            print(pastport)
-            portfolioreturn=round((p-pastport)/Decimal(pastport),2)
-            snpreturn=round((s-pastsnp)/Decimal(pastsnp),2)
-            nasdaqreturn=round((n-pastnasdaq)/Decimal(pastnasdaq),2)
+            portfolioreturn=round((p-pastport)/Decimal(pastport),4)
+            snpreturn=round((s-pastsnp)/Decimal(pastsnp),4)
+            nasdaqreturn=round((n-pastnasdaq)/Decimal(pastnasdaq),4)
             pastport=p
             pastsnp=s
             pastnasdaq=n
