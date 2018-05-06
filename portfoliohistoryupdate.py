@@ -68,7 +68,7 @@ def portfoliohistoryreturnscalc():
     cur.execute("""SELECT * FROM fmi.portfoliohistory;""")
     portfolio=cur.fetchall()
     row=0
-    for d,p,s,n in portfolio:
+    for d,p,s,n,pr,sr,nr in portfolio:
         if row==0:
             pastport=p
             pastsnp=s
