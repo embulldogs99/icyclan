@@ -4,7 +4,7 @@
 # plt.plot(range(10))
 # plt.savefig('testplot.png')
 # Image.open('testplot.png').save('testplot.jpg','JPEG')
-
+import psycopg2
 
 
 ############## Pull Current Portfolio and Obtain Tickers  ###################
