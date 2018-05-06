@@ -20,3 +20,23 @@ def mmduprem():
     # close the communication with the PostgreSQL
     cur.close()
     conn.close()
+
+
+def portfoliohistoryduplicatedelete():
+    conn = psycopg2.connect("dbname='postgres' user='postgres' password='postgres' host='localhost' port='5432'")
+    cur = conn.cursor()
+
+    cur.execute("CREATE TABLE fmi.portfoliohistory_temp (LIKE fmi.portfoliohistory);")
+    conn.commit()
+    cur.execute("INSERT into fmi.portfoliohistory_temp(date,portfolio,snp,nasdaq)"
+    "SELECT DISTINCT ON (date) "
+    "date,portfolio,snp,nasdaq"
+    "FROM fmi.portfoliohistory;")
+    conn.commit()
+    cur.execute("DROP TABLE fmi.portfoliohistory;")
+    conn.commit()
+    cur.execute("ALTER TABLE fmi.portfoliohistory_temp RENAME TO portfoliohistory;")
+    conn.commit()
+    # close the communication with the PostgreSQL
+    cur.close()
+    conn.close()

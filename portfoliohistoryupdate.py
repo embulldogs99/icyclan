@@ -11,6 +11,7 @@ import re
 import psycopg2
 import quandl
 from mmduprem import mmduprem
+from mmduprem import portfoliohistoryduplicatedelete
 
 ##################################
 ######## QUANDL Functions #########################
@@ -58,3 +59,5 @@ conn.commit()
 
 cur.close()
 conn.close()
+
+portfoliohistoryduplicatedelete()
