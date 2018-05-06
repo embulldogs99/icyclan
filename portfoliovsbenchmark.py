@@ -38,7 +38,7 @@ for pr,sr,nr in portfolio:
             snp=snp.append(relsnp)
             nasdaq=nasdaq.append(relnasdaq)
     except:
-        return
+        pass
 
 print(port)
 print(snp)
