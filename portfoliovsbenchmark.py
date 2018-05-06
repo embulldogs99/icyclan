@@ -1,5 +1,5 @@
-import Image
-import matplotlib.pyplot as plt
+# import Image
+# import matplotlib.pyplot as plt
 
 # plt.plot(range(10))
 # plt.savefig('testplot.png')
