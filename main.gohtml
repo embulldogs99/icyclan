@@ -151,7 +151,7 @@
   </tbody>
 </table>
 
-<canvas id="myChart" width="400" height="400"></canvas>
+<canvas id="myChart" width="400" height="400" border="2px solid black"></canvas>
 
 {{range .Pperformance}}
 <script>
@@ -161,7 +161,7 @@ var myChart = new Chart(ctx).Line({
   datasets: [
     { label: 'check1',
       data: [1,2,4],
-      backgroundColor: "rgba(153,255,51,0.4)",
+      backgroundColor: "rgba(153,255,51,1)",
     },
   {
     label:'test2'
