@@ -61,3 +61,31 @@ cur.close()
 conn.close()
 
 portfoliohistoryduplicatedelete()
+
+def portfoliohistoryreturnscalc():
+    conn = psycopg2.connect("dbname='postgres' user='postgres' password='postgres' host='localhost' port='5432'")
+    cur = conn.cursor()
+    cur.execute("""SELECT * FROM fmi.portfoliohistory;""")
+    portfolio=cur.fetchall()
+        row=0
+        for d,p,s,n in portfolio:
+            if row=0:
+                pastport=p
+                pastsnp=s
+                pastnasdaq=n
+                row+=1
+                return
+            else:
+                portfolioreturn=round((p-pastport)/float(pastport),2)
+                snpreturn=round((s-pastsnp)/float(pastsnp),2)
+                nasdaqreturn=round((n-pastnasdaq)/float(pastnasdaq),2)
+                pastport=p
+                pastsnp=s
+                pastnasdaq=n
+                row+=1
+                cur.execute("""INSERT INTO fmi.portfoliohistory (portfolioreturn,snpreturn,nasdaqreturn) where date=%s VALUES (%s,%s,%s);""", (d,portfolioreturn,snpreturn,nasdaqreturn))
+                conn.commit()
+    cur.close()
+    conn.close()
+
+portfoliohistoryreturnscalc()
