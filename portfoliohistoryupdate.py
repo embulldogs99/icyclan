@@ -89,7 +89,7 @@ def portfoliohistoryreturnscalc():
             pastsnp=s
             pastnasdaq=n
             row+=1
-            cur.execute("""INSERT INTO fmi.portfoliohistory (portfolioreturn,snpreturn,nasdaqreturn) VALUES (%s,%s,%s) WHERE date=%s;""", (portfolioreturn,snpreturn,nasdaqreturn,d))
+            cur.execute("""UPDATE fmi.portfoliohistory set portfolioreturn=%s, snpreturn=%s, nasdaqreturn=%s) WHERE date=%s;""", (portfolioreturn,snpreturn,nasdaqreturn,d))
             conn.commit()
     cur.close()
     conn.close()
