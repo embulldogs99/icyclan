@@ -16,7 +16,7 @@ portfolio=cur.fetchall()
 data=pd.DataFrame(portfolio)
 
 
-print(data["portfolioreturn"])
+print(data[[0]])
 
 
 cur.close()
