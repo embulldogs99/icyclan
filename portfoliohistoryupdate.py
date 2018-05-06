@@ -26,7 +26,11 @@ def barchart_snp500():
         titles=x.find_all()
         titles=str(titles)
         s=titles[titles.find("dailyLastPrice")+17:titles.find("dailyLastPrice")+17+10].replace('"','').replace(",","")
-        return float(s)
+        try:
+            s=float(s)
+            return s
+        else:
+            return 0
 
 def barchart_nasdaq():
     with requests.Session() as c:
