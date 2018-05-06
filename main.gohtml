@@ -143,18 +143,19 @@
       <td>{{.Snpreturn.Value}}</td>
       <td>{{.Nasdaqreturn.Value}}</td>
     </tr>
-
+      {{end}}
   </tbody>
 </table>
 
 <canvas id="myChart" width="400" height="400"></canvas>
 
+{{range .Pperformance}}
 <script>
 var ctx = document.getElementById('myChart').getContext('2d');
 var myChart = new Chart(ctx, {
   type: 'line',
   data: {
-    labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
+    labels: {{.Date.Value}},
     datasets: [{
       label: 'hours slept',
       data: {{.Portfolioreturn.Value}},
@@ -163,7 +164,9 @@ var myChart = new Chart(ctx, {
   }
 });
 </script>
-    {{end}}
+{{end}}
+
+
 <br>
 <br>
 <br>
