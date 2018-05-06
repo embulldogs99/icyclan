@@ -69,7 +69,7 @@ def portfoliohistoryreturnscalc():
     portfolio=cur.fetchall()
     row=0
     for d,p,s,n in portfolio:
-        if row=0:
+        if row==0:
             pastport=p
             pastsnp=s
             pastnasdaq=n
