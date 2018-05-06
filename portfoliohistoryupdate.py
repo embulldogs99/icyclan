@@ -29,7 +29,7 @@ def barchart_snp500():
         try:
             s=float(s)
             return s
-        else:
+        except:
             return 0
 
 def barchart_nasdaq():
