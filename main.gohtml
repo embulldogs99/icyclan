@@ -24,7 +24,7 @@
         'iDisplayLength': 100
     })})
 </script>
-
+<script src="js/Chart.js"></script>
 
 </head>
 
@@ -143,10 +143,27 @@
       <td>{{.Snpreturn.Value}}</td>
       <td>{{.Nasdaqreturn.Value}}</td>
     </tr>
-    {{end}}
+
   </tbody>
 </table>
 
+<canvas id="myChart" width="400" height="400"></canvas>
+
+<script>
+var ctx = document.getElementById('myChart').getContext('2d');
+var myChart = new Chart(ctx, {
+  type: 'line',
+  data: {
+    labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
+    datasets: [{
+      label: 'hours slept',
+      data: [{{.Portfolioreturn.Value}}],
+      backgroundColor: "rgba(153,255,51,0.4)",
+    }]
+  }
+});
+</script>
+    {{end}}
 <br>
 <br>
 <br>
