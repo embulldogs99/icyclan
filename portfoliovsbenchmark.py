@@ -17,9 +17,9 @@ start=1
 ####################################################
 ###Pull Quandl Price information for each ticker and send it to database#########
 ###################################################
-port=[]
-snp=[]
-nasdaq=[]
+port=[1]
+snp=[1]
+nasdaq=[1]
 for pr,sr,nr in portfolio:
     if start==1:
         relport=start+(start*pr)
