@@ -28,17 +28,17 @@ for pr,sr,nr in portfolio:
         relport=start+(start*pr)
         relsnp=start+(start*sr)
         relnasdaq=start+(start*sr)
-        port=port.append(relport)
-        snp=snp.append(relsnp)
-        nasdaq=nasdaq.append(relnasdaq)
+        port=port.insert(relport)
+        snp=snp.insert(relsnp)
+        nasdaq=nasdaq.insert(relnasdaq)
         start+=1
     else:
         relport=relport+(relport*pr)
         relsnp=relsnp+(relsnp*sr)
         relnasdaq=relnasdaq+(relnasdaq*sr)
-        port=port.append(relport)
-        snp=snp.append(relsnp)
-        nasdaq=nasdaq.append(relnasdaq)
+        port=port.insert(relport)
+        snp=snp.insert(relsnp)
+        nasdaq=nasdaq.insert(relnasdaq)
 
 
 print(port)
