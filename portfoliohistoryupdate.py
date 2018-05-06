@@ -80,6 +80,8 @@ def portfoliohistoryreturnscalc():
             row+=1
             return
         else:
+            print(p)
+            print(pastport)
             portfolioreturn=round((p-pastport)/float(pastport),2)
             snpreturn=round((s-pastsnp)/float(pastsnp),2)
             nasdaqreturn=round((n-pastnasdaq)/float(pastnasdaq),2)
