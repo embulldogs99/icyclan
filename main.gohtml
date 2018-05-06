@@ -45,7 +45,7 @@
       // Create our data table out of JSON data loaded from server.
       var data = new google.visualization.DataTable(jsonData);
       // Instantiate and draw our chart, passing in some options.
-      var chart = new google.visualization.LineChart(document.getElementById('portfolio'));
+      var chart = new google.visualization.PieChart(document.getElementById('portfolio'));
       chart.draw(data, {width: 400, height: 240});
     }
     </script>
@@ -74,6 +74,10 @@
 </header>
 
 <body>
+
+  <div id='portfolio' style='height: 400px; width: 400px;'></div>
+
+
 <div class="page">
 <div class="posts">
 
@@ -174,7 +178,6 @@
 </table>
 
 
- <div id='portfolio' style='height: 400px; width: 400px;'></div>
 
 
 
