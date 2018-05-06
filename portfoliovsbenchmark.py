@@ -21,7 +21,7 @@ cur.close()
 conn.close()
 
 
-
+fig = plt.figure()
 plt.plot(portfolioreturns, snpreturns, label='vs SnP500')
 plt.plot(portfolioreturns, nasdaqreturns, label='vs Nasdaq')
 
