@@ -78,6 +78,8 @@ def portfoliohistoryreturnscalc():
             pastport=p
             pastsnp=s
             pastnasdaq=n
+            cur.execute("""UPDATE fmi.portfoliohistory set portfolioreturn=%s, snpreturn=%s, nasdaqreturn=%s WHERE date=%s;""", (0,0,0,d))
+            conn.commit()
             row+=1
         else:
             portfolioreturn=round((p-pastport)/Decimal(pastport),4)
