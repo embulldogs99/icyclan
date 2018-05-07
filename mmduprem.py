@@ -21,6 +21,8 @@ def mmduprem():
     cur.close()
     conn.close()
 
+mmduprem()
+
 
 def portfoliohistoryduplicatedelete():
     conn = psycopg2.connect("dbname='postgres' user='postgres' password='postgres' host='localhost' port='5432'")
@@ -38,3 +40,5 @@ def portfoliohistoryduplicatedelete():
     # close the communication with the PostgreSQL
     cur.close()
     conn.close()
+
+portfoliohistoryduplicatedelete()
