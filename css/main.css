@@ -63,7 +63,9 @@ header{
 .portfolio thead{
   border: 2px solid black;
 }
-
+.portfolio td{
+  padding:5px;
+}
 .porthistory {
   padding: 10px;
 }
