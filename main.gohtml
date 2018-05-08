@@ -106,7 +106,7 @@
     <tbody>
       {{range .Portfoliolist}}
       <tr>
-        <td>{{.Ticker}}</td>
+        <a href="https://www.google.com/search?q={{.Ticker}}+stock+price"><td>{{.Ticker}}</td></a>
         <td>${{.Price.Value}}</td>
         <td>${{.Target_price}}</td>
         <td>{{.Exp_return.Value}}</td>
