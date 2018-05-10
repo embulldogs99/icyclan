@@ -57,6 +57,7 @@ now=datetime.datetime.now()
 currentdate=now.strftime("%Y-%m-%d")
 
 cur.execute("""INSERT INTO fmi.portfoliohistory (date,portfolio,snp,nasdaq) VALUES (%s,%s,%s,%s);""", (currentdate,portfoliovalue,snpvalue,nasdaqvalue))
+cur.execute("""UPDATE fmi.portfoliohistory set portfolio=%s, snp=%s, nasdaq=%s where date=%s;""", (portfoliovalue,snpvalue,nasdaqvalue,currentdate))
 conn.commit()
 
 
