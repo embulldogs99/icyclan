@@ -352,7 +352,7 @@ type PortfolioPerformance struct{
 func portfolioperformancepull() []PortfolioPerformance{
   db, err := sql.Open("postgres", "postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable")
   if err != nil {log.Fatalf("Unable to connect to the database")}
-  sqlstatmt:="SELECT * FROM fmi.portfoliohistory;"
+  sqlstatmt:="SELECT to_char(date, 'DD/MM/YYYY'),portfolio,snp,nasdaq,portfolioreturn,snpreturn,nasdaqreturn FROM fmi.portfoliohistory;"
   rows, err := db.Query(sqlstatmt)
   if err != nil{log.Fatalf("failed to select portfolio")}
   bks := []PortfolioPerformance{}
