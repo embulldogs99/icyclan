@@ -2,6 +2,7 @@ package main
 import(
   "net/http"
   	"html/template"
+    "log"
 )
 
 func main(){
