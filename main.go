@@ -12,7 +12,7 @@ func main(){
 
 	http.Handle("/css/", http.StripPrefix("/css/", http.FileServer(http.Dir("./css"))))
   http.HandleFunc("/", serve)
-
+	log.Fatal(s.ListenAndServe())
 }
 
 func serve(w http.ResponseWriter, r *http.Request){
