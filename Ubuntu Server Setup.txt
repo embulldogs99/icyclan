@@ -10,3 +10,11 @@ go get github.com/lib/pq
 sudo su - postgres
 psql
 ALTER USER postgres WITH PASSWORD 'postgres';
+
+
+
+other notes:
+git init
+git add .
+git commit -m "First commit"
+git push -f [githubc.com/embulldogs99/projects]      ## force pushes to the correct repository using your initilized github acc login
