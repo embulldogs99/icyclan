@@ -1,33 +1,12 @@
-#### Debeian Stretch 9 Server Deployment
-sudo -i
-
-#############################################
-############ Backend Requirements #############
-apt-get update
-apt-get install git
-apt-get update
-apt-get install golang
-apt-get install postgresql-9.6
-apt-get install libpq-dev
+#### Quick UBUTNTU SERVER STARTUP
+sudo apt-get update
+sudo apt-get install git
+sudo apt-get update
+sudo apt-get install golang
+sudo apt-get update
+sudo apt-get install postgresql-9.6
+sudo apt-get update
 go get github.com/lib/pq
 sudo su - postgres
 psql
-ALTER USER postgres WITH PASSWORD 'rk';
-ALTER USER postgres PASSWORD 'rk';
-CREATE schema rfgg;
-CREATE table fmi.marketmentions(target int, price int, returns NUMERIC(7,2), note VARCHAR(500), date date, q_eps NUMERIC(7,2), a_eps NUMERIC(7,2),report VARCHAR(10));
-
-
-#############################################
-############ Frontend Requirements #############
-apt-get install python3-bs4
-apt-get install python3-pandas
-apt-get install python-setuptools python-dev build-essential
-apt-get upgrade python
-easy_install pip
-pip install --upgrade virtualenv
-pip install BeautifulSoup4
-pip install pandas
-apt-get install python-psycopg2
-pip install quandl
-apt-get install npm
+ALTER USER postgres WITH PASSWORD 'postgres';
