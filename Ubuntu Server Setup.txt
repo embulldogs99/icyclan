@@ -1,12 +1,47 @@
-#### Quick UBUTNTU SERVER STARTUP
+#### Quick UBUTNTU SERVER STARTUP (also works on Debian 9 Stretch)
+
+###login as root
+sudo -i
+
 sudo apt-get update
+sudo apt-get -y upgrade
+
 sudo apt-get install git
 sudo apt-get update
-sudo apt-get install golang
-sudo apt-get update
+sudo git clone https://github.com/embulldogs99/projectname
+
+##installing GOlang 1.8
+sudo curl -O https://storage.googleapis.com/golang/go1.8.linux-amd64.tar.gz
+sudo tar -xvf go1.8.linux-amd64.tar.gz
+sudo mv go /usr/local
+
+###setting GO env variables
+sudo vi ~/.profile
+export GOPATH=~/projectname/go
+export GOBIN=$GOPATH/bin
+export PATH=$PATH:/usr/local/go/bin
+source ~/.profile
+
+##making compatable Go directory
+sudo -i
+cd projectname
+mkdir go
+cd go
+mkdir src
+mkdir bin
+mkdir pkg
+
+
+### now that everythins is setup, navigate to project folder and pull dependancy requirements
+sudo -i
+cd projectname
+go get .
+
+
 sudo apt-get install postgresql-9.6
 sudo apt-get update
-go get github.com/lib/pq
+
+
 sudo su - postgres
 psql
 ALTER USER postgres WITH PASSWORD 'postgres';
