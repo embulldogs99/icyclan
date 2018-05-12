@@ -6,15 +6,19 @@
 
 <body>
 
-<br><br><br><br>
+<br><br>
 <div class="column">
-<a href="/signup"><button class="signupbutton">SIGN UP Here</button></a>
+<a href="/signup"><button class="signupbutton">SIGN UP HERE</button></a>
 
 <form action="/login" method="POST" class="loginform">
-  <font style="padding:20px;">Login Here</font><br><br>
-  email:<input type="email" name="email" value="" required><br>
-  password:<input type="password" name="pass" value="" required><br>
-  <br><br>
+  <div class="column">
+  <div class="smallfont">Already Signed Up?</div>
+  <div>Login Below</div>
+  </div>
+  <br>
+  Email:<input type="email" name="email" value="" required><br>
+  Password:<input type="password" name="pass" value="" required><br>
+
   <input type="submit" value="Login" class="loginformsubmit">
 
 </form>
