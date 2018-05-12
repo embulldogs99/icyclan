@@ -1,0 +1,37 @@
+<html>
+<head>
+  <link href="css/mcleod-reset.css" rel="stylesheet">
+  <link href="css/main.css" rel="stylesheet">
+</head>
+
+<body>
+<h>Icy Leaderboards</h>
+<br><br>
+
+<div style="display:flex;flex-direction:row;justify-content:center;">
+
+<div class="column">
+
+  <table class="leaderboard">
+    {{range .Leaderboard}}
+    <thead>
+      <tr>
+        <th>Username</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{.Epicusername}}</td>
+      </tr>
+    </tbody>
+    {{end}}
+</div>
+
+<a href="/joinleaderboard"><div class="leaderboardbutton">Join Leaderboards</div></a>
+</div>
+
+
+<br><br><br><br>
+</body>
+
+</html>

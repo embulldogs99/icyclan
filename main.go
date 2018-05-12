@@ -55,6 +55,8 @@ func main() {
   http.HandleFunc("/login", login)
   http.HandleFunc("/home", home)
   http.HandleFunc("/signup", signup)
+  http.HandleFunc("/joinleaderboard", joinleaderboard)
+  http.HandleFunc("/leaderboard", leaderboard)
 	log.Fatal(s.ListenAndServe())
 }
 
@@ -77,6 +79,27 @@ func signup(w http.ResponseWriter, r *http.Request){
     http.Redirect(w, r, "/home", http.StatusSeeOther)
     }
 }
+
+
+func joinleaderboard(w http.ResponseWriter, r *http.Request){
+  var tpl *template.Template
+  tpl = template.Must(template.ParseFiles("joinleaderboard.gohtml","css/main.css","css/mcleod-reset.css",))
+  tpl.Execute(w, nil)
+
+
+  if r.Method == http.MethodPost {
+    email := r.FormValue("email")
+    password := r.FormValue("epicusername")
+    date:=time.Now().Format("2006-01-02 15:04:05")
+    dbusers, _ := sql.Open("postgres", "postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable")
+    _, err := dbusers.Exec(`INSERT INTO icy.leaderboard (date, email, epicusername) VALUES ($1, $2, $3);`, date, email, epicusername)
+    dbusers.Close()
+    if err != nil {http.Redirect(w, r, "/login", http.StatusSeeOther)}
+    fmt.Printf("Added User: "+email+" To Leaderboards At Time : "+date)
+    http.Redirect(w, r, "/leaderboard", http.StatusSeeOther)
+    }
+}
+
 
 
 
@@ -181,3 +204,45 @@ func home(w http.ResponseWriter, r *http.Request){
   tpl:=template.Must(template.ParseFiles("home.gohtml","css/main.css","css/mcleod-reset.css"))
   tpl.Execute(w, nil)
 }
+
+
+func leaderboard(w http.ResponseWriter, r *http.Request){
+  if !alreadyLoggedIn(r) {http.Redirect(w, r, "/login", http.StatusSeeOther)}
+
+  type Leaderboard struct{
+    Epicusername
+  }
+
+  //pull leaderboard table
+  db, err := sql.Open("postgres", "postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable")
+  if err != nil {log.Fatalf("Unable to connect to leaderboard database")}
+  rows, err := db.Query("SELECT epicusername FROM icy.leaderboard;")
+  if err != nil{log.Fatalf("failed to select leaderboard data")}
+  leaderboard := []Leaderboard{}
+  for rows.Next() {
+    bk := Leaderboard{}
+    err := rows.Scan(&bk.Epicusername)
+    if err != nil {log.Fatal(err)}
+    leaderboard = append(leaderboard, bk)
+  }
+  db.Close()
+
+  tpl:=template.Must(template.ParseFiles("leaderboard.gohtml","css/main.css","css/mcleod-reset.css"))
+  tpl.Execute(w, leaderboard)
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+///
