@@ -3,6 +3,13 @@ import(
   "net/http"
   	"html/template"
     "log"
+    "database/sql"
+_ "github.com/lib/pq"
+  "time"
+  "fmt"
+    	"github.com/satori/go.uuid"
+    _ "strconv"
+
 )
 
 //create User struct for cookie tracking
