@@ -69,9 +69,6 @@ func signup(w http.ResponseWriter, r *http.Request){
   if r.Method == http.MethodPost {
     email := r.FormValue("email")
     pass := r.FormValue("password")
-    if membercheck(email,password) == true{
-      http.Redirect(w, r, "/login", http.StatusSeeOther)
-    }else{
     dbusers, _ := sql.Open("postgres", "postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable")
     _, err := dbusers.Exec(`INSERT INTO icy.users (email, password) VALUES ($1, $2);`, email, password)
     dbusers.Close()
@@ -79,8 +76,8 @@ func signup(w http.ResponseWriter, r *http.Request){
     fmt.Printf("Added User: "+email+" At Time : "+time.Now().Format("2006-01-02 15:04:05"))
     http.Redirect(w, r, "/home", http.StatusSeeOther)
     }
-  }
 }
+
 
 
 func alreadyLoggedIn(req *http.Request) bool {
