@@ -12,11 +12,21 @@ body{
   font-size: 80px;
   width: 800px;
   height: 100px;
+  margin: 10px;
 
 }
 .column{
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: center; 
+  align-items: center;
+}
+.loginform{
+  border:5px solid black;
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+  align-items: center;
+  justify-content: center;
+  font-family: 'cambria';
 }
