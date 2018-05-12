@@ -53,7 +53,7 @@ func main() {
 	http.Handle("/css/", http.StripPrefix("/css/", http.FileServer(http.Dir("./css"))))
   http.HandleFunc("/", serve)
   http.HandleFunc("/login", login)
-  http.HandleFunc("/logout", login)
+  http.HandleFunc("/logout", logout)
   http.HandleFunc("/home", home)
   http.HandleFunc("/signup", signup)
   http.HandleFunc("/joinleaderboard", joinleaderboard)
