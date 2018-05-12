@@ -89,7 +89,7 @@ func joinleaderboard(w http.ResponseWriter, r *http.Request){
 
   if r.Method == http.MethodPost {
     email := r.FormValue("email")
-    password := r.FormValue("epicusername")
+    epicusername := r.FormValue("epicusername")
     date:=time.Now().Format("2006-01-02 15:04:05")
     dbusers, _ := sql.Open("postgres", "postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable")
     _, err := dbusers.Exec(`INSERT INTO icy.leaderboard (date, email, epicusername) VALUES ($1, $2, $3);`, date, email, epicusername)
@@ -210,7 +210,7 @@ func leaderboard(w http.ResponseWriter, r *http.Request){
   if !alreadyLoggedIn(r) {http.Redirect(w, r, "/login", http.StatusSeeOther)}
 
   type Leaderboard struct{
-    Epicusername
+    Epicusername sql.NullString
   }
 
   //pull leaderboard table
