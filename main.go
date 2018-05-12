@@ -68,7 +68,7 @@ func signup(w http.ResponseWriter, r *http.Request){
 
   if r.Method == http.MethodPost {
     email := r.FormValue("email")
-    pass := r.FormValue("password")
+    password := r.FormValue("password")
     dbusers, _ := sql.Open("postgres", "postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable")
     _, err := dbusers.Exec(`INSERT INTO icy.users (email, password) VALUES ($1, $2);`, email, password)
     dbusers.Close()
