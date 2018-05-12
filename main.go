@@ -36,9 +36,9 @@ func main() {
   //userslists:=user{}
   for rowz.Next(){
     //userslist:=user{}
-    err:=rowz.Scan(&email, &pass)
+    err:=rowz.Scan(&email, &password)
     if err != nil {log.Fatal(err)}
-    dbu[email]=user{email,pass}
+    dbu[email]=user{email,password}
   }
 
   dbusers.Close()
@@ -69,7 +69,7 @@ func signup(w http.ResponseWriter, r *http.Request){
   if r.Method == http.MethodPost {
     email := r.FormValue("email")
     pass := r.FormValue("password")
-    if membercheck(email,pass) == true{
+    if membercheck(email,password) == true{
       http.Redirect(w, r, "/login", http.StatusSeeOther)
     }else{
     dbusers, _ := sql.Open("postgres", "postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable")
@@ -108,7 +108,7 @@ func login(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		//pulls password from u and checks it with stored password
-		if pass != u.Pass {
+		if pass != u.Password {
 			http.Error(w, "Username and/or password not found", http.StatusForbidden)
 			return
 		}
