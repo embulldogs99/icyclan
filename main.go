@@ -6,7 +6,7 @@ import(
 )
 
 //create User struct for cookie tracking
-type User struct {
+type user struct {
   Email string
   Password string
 }
