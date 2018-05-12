@@ -8,11 +8,10 @@
 <h>Icy Leaderboards</h>
 <br><br>
 
-<div style="display:flex;flex-direction:row;justify-content:center;">
-
+<div class="row">
 <div class="column">
 
-  <table class="leaderboard">
+  <table class="leaderboardtable">
     {{range .}}
     <thead>
       <tr>
@@ -21,10 +20,11 @@
     </thead>
     <tbody>
       <tr>
-        <td>{{.Epicusername}}</td>
+        <td>{{.Epicusername.Value}}</td>
       </tr>
     </tbody>
     {{end}}
+  </table>
 </div>
 
 <a href="/joinleaderboard"><div class="leaderboardbutton">Join Leaderboards</div></a>

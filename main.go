@@ -216,7 +216,7 @@ func leaderboard(w http.ResponseWriter, r *http.Request){
   //pull leaderboard table
   db, err := sql.Open("postgres", "postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable")
   if err != nil {log.Fatalf("Unable to connect to leaderboard database")}
-  rows, err := db.Query("SELECT epicusername FROM icy.leaderboard;")
+  rows, err := db.Query("SELECT DISTINCT epicusername FROM icy.leaderboard;")
   if err != nil{log.Fatalf("failed to select leaderboard data")}
   leaderboard := []Leaderboard{}
   for rows.Next() {
