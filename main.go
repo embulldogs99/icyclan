@@ -155,7 +155,6 @@ func login(w http.ResponseWriter, r *http.Request) {
 
 
 func logout(w http.ResponseWriter, r *http.Request) {
-
 	c, _ := r.Cookie("session")
 	//delete the session
 	delete(dbs, c.Value)
@@ -166,7 +165,6 @@ func logout(w http.ResponseWriter, r *http.Request) {
 		//max avge value of less than 0 means delete the cookie now
 		MaxAge: -1,
 	}
-	http.SetCookie(w, c)
 	http.Redirect(w, r, "/login", http.StatusSeeOther)
 }
 
