@@ -4,3 +4,12 @@ body{
   background-color: rgba(0,0,0,.2);
   color:black;
 }
+.signupbutton{
+  border:5px solid green;
+  color:white;
+  background-color: green;
+  border-radius: 1.5rem;
+  font-size: 80px;
+  width: 300px;
+  height: 300px;
+}
