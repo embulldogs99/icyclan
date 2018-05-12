@@ -155,7 +155,7 @@ func login(w http.ResponseWriter, r *http.Request) {
 
 
 func logout(w http.ResponseWriter, r *http.Request) {
-	if !alreadyLoggedIn(r) {http.Redirect(w, r, "/login", http.StatusSeeOther)}
+
 	c, _ := r.Cookie("session")
 	//delete the session
 	delete(dbs, c.Value)
