@@ -223,22 +223,36 @@ func leaderboard(w http.ResponseWriter, r *http.Request){
     Killspermatch sql.NullFloat64
   }
 
+  type Rank struct{
+    Rankvalue int
+  }
+
+  type Datapost struct{
+    Leaderboard
+    Rank
+  }
+
   //pull leaderboard table
   db, err := sql.Open("postgres", "postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable")
   if err != nil {log.Fatalf("Unable to connect to leaderboard database")}
-  rows, err := db.Query("SELECT DISTINCT epicusername,squadkills,duokills,solokills,squadmatch,duomatch,solomatch,totalkills,totalmatch,killspermatch FROM icy.leaderboard;")
+  rows, err := db.Query("SELECT DISTINCT epicusername,squadkills,duokills,solokills,squadmatch,duomatch,solomatch,totalkills,totalmatch,killspermatch FROM icy.leaderboard ORDER BY killspermatch DESC;")
   if err != nil{log.Fatalf("failed to select leaderboard data")}
   leaderboard := []Leaderboard{}
+  rank:=[]Rank{}
+  i:=0
   for rows.Next() {
+    i=i+1
     bk := Leaderboard{}
     err := rows.Scan(&bk.Epicusername,&bk.Squadkills,&bk.Duokills,&bk.Solokills,&bk.Squadmatch,&bk.Duomatch,&bk.Solomatch,&bk.Totalkills,&bk.Totalmatch,&bk.Killspermatch)
     if err != nil {log.Fatal(err)}
     leaderboard = append(leaderboard, bk)
+    rank=append(rank,i)
   }
   db.Close()
 
+  data:=Datapost{leaderboard,rank}
   tpl:=template.Must(template.ParseFiles("leaderboard.gohtml","css/main.css","css/mcleod-reset.css"))
-  tpl.Execute(w, leaderboard)
+  tpl.Execute(w, data)
 }
 
 

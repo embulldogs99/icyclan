@@ -18,6 +18,7 @@
     {{range .}}
     <thead>
       <tr>
+        <th>Rank</th>
         <th>User</th>
         <th>Squad Kills</th>
         <th>Duo Kills</th>
@@ -32,16 +33,17 @@
     </thead>
     <tbody>
       <tr>
-        <td>{{.Epicusername.Value}}</td>
-        <td>{{.Squadkills}}</td>
-        <td>{{.Duokills}}</td>
-        <td>{{.Solokills}}</td>
-        <td>{{.Squadmatch}}</td>
-        <td>{{.Duomatch}}</td>
-        <td>{{.Solomatch}}</td>
-        <td>{{.Totalkills}}</td>
-        <td>{{.Totalmatch}}</td>
-        <td>{{.Killspermatch.Value}}</td>
+        <td>{{.Rank.Rankvalue}}
+        <td>{{.Leaderboard.Epicusername.Value}}</td>
+        <td>{{.Leaderboard.Squadkills}}</td>
+        <td>{{.Leaderboard.Duokills}}</td>
+        <td>{{.Leaderboard.Solokills}}</td>
+        <td>{{.Leaderboard.Squadmatch}}</td>
+        <td>{{.Leaderboard.Duomatch}}</td>
+        <td>{{.Leaderboard.Solomatch}}</td>
+        <td>{{.Leaderboard.Totalkills}}</td>
+        <td>{{.Leaderboard.Totalmatch}}</td>
+        <td>{{.Leaderboard.Killspermatch.Value}}</td>
       </tr>
     </tbody>
     {{end}}
