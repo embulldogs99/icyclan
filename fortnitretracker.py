@@ -67,6 +67,4 @@ def leaderboardpopulate():
 def sqlduplicatedelete(tablename):
 
 
-mmduprem()
-
 leaderboardpopulate()
