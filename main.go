@@ -212,17 +212,26 @@ func leaderboard(w http.ResponseWriter, r *http.Request){
 
   type Leaderboard struct{
     Epicusername sql.NullString
+    Squadkills int
+    Duokills int
+    Solokills int
+    Squadmatch int
+    Duomatch int
+    Solomatch int
+    Totalkills int
+    Totalmatch int
+    Killspermatch sql.NullFloat64
   }
 
   //pull leaderboard table
   db, err := sql.Open("postgres", "postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable")
   if err != nil {log.Fatalf("Unable to connect to leaderboard database")}
-  rows, err := db.Query("SELECT DISTINCT epicusername FROM icy.leaderboard;")
+  rows, err := db.Query("SELECT DISTINCT epicusername,squadkills,duokills,solokills,squadmatch,duomatch,solomatch,totalkills,totalmatch,killspermatch FROM icy.leaderboard;")
   if err != nil{log.Fatalf("failed to select leaderboard data")}
   leaderboard := []Leaderboard{}
   for rows.Next() {
     bk := Leaderboard{}
-    err := rows.Scan(&bk.Epicusername)
+    err := rows.Scan(&bk.Epicusername,&bk.Squadkills,&bk.Duokills,&bk.Solokills,&bk.Squadmatch,&bk.Duomatch,&bk.Solomatch,&bk.Totalkills,&bk.Totalmatch,&bk.Killspermatch)
     if err != nil {log.Fatal(err)}
     leaderboard = append(leaderboard, bk)
   }

@@ -18,12 +18,30 @@
     {{range .}}
     <thead>
       <tr>
-        <th>Username</th>
+        <th>User</th>
+        <th>Squad Kills</th>
+        <th>Duo Kills</th>
+        <th>Solo Kills</th>
+        <th>Squad Matches</th>
+        <th>Duo Matches</th>
+        <th>Solo Matches</th>
+        <th>Total Kills</th>
+        <th>Total Matches</th>
+        <th>Kills/Match</th>
       </tr>
     </thead>
     <tbody>
       <tr>
         <td>{{.Epicusername.Value}}</td>
+        <td>{{.Squadkills}}</td>
+        <td>{{.Duokills}}</td>
+        <td>{{.Solokills}}</td>
+        <td>{{.Squadmatch}}</td>
+        <td>{{.Duomatch}}</td>
+        <td>{{.Solomatch}}</td>
+        <td>{{.Totalkills}}</td>
+        <td>{{.Totalmatch}}</td>
+        <td>{{.Killspermatch.Value}}</td>
       </tr>
     </tbody>
     {{end}}
