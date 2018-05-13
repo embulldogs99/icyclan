@@ -29,7 +29,7 @@ def fortniteuserstats(u):
     conn = psycopg2.connect("dbname='postgres' user='postgres' password='postgres' host='localhost' port='5432'")
     cur = conn.cursor()
     # execute a statement
-    cur.execute("INSERT INTO icy.leaderboard (date,epicusername,squadkills,squadmatch,duokills,duomatch,solokills,solomatch,totalkills,totalmatch,killspermatch) VALUES (%s, %s, %s, %s, %s,%s,%s,%s,%s,%s,%s)", (str(curtime),u,squadkills,squadmatch,duokills,duomatch,solokills,solomatch,totalkills,totalmatch,killspermatch))
+    cur.execute("UPDATE icy.leaderboard set date=%s,squadkills=%s,squadmatch=%s,duokills=%s,duomatch=%s,solokills=%s,solomatch=%s,totalkills=%s,totalmatch=%s,killspermatch=%s VALUES (%s, %s, %s, %s, %s,%s,%s,%s,%s,%s,%s)", (str(curtime),u,squadkills,squadmatch,duokills,duomatch,solokills,solomatch,totalkills,totalmatch,killspermatch))
     conn.commit()
     # close the communication with the PostgreSQL
     cur.close()
