@@ -116,17 +116,15 @@ h{
   color:white;
   font-family: 'cambria';
   width:70%;
-  padding: 20px;
+
 
 }
 .leaderboardtable th{
   font-size: 18px;
-  margin:20px;
-  padding: 20px;
+  padding: 5px;
 }
 .leaderboardtable td{
   font-size: 14px;
-  margin:20px;
-  padding: 20px;
+  padding: 10px 5px 10px 5px;
 
 }
