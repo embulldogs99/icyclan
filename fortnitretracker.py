@@ -13,7 +13,7 @@ def fortniteuserstats(u):
     # pass api key as header
     r=t.get('http://api.fortnitetracker.com/v1/profile/xbl/'+str(u), headers = api)
     store=json.loads(r.text)
-    for x in store:
+    for x in store['stats']:
         print(x)
     # squadkills=store['stats']['u']['kills']['valueInt']
     # squadmatch=store['stats']['u']['matches']['valueInt']
