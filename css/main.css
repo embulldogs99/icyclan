@@ -114,7 +114,9 @@ h{
   border: 2px dotted rgb(130, 232, 255);
   background-color: rgba(0,0,0,.8);
   color:white;
-  font-family: 'cambria'
+  font-family: 'cambria';
+  width:70%;
+
 }
 .leaderboardtable th{
   font-size: 18px;
