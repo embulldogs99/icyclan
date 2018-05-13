@@ -64,7 +64,4 @@ def leaderboardpopulate():
     conn.close()
 
 
-def sqlduplicatedelete(tablename):
-
-
 leaderboardpopulate()
