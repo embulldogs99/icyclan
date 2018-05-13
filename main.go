@@ -234,7 +234,7 @@ func leaderboard(w http.ResponseWriter, r *http.Request){
   for rows.Next() {
     rank=rank+1
     bk := Leaderboard{}
-    err := rows.Scan(rank,&bk.Epicusername,&bk.Squadkills,&bk.Duokills,&bk.Solokills,&bk.Squadmatch,&bk.Duomatch,&bk.Solomatch,&bk.Totalkills,&bk.Totalmatch,&bk.Killspermatch)
+    err := rows.Scan(&bk.rank,&bk.Epicusername,&bk.Squadkills,&bk.Duokills,&bk.Solokills,&bk.Squadmatch,&bk.Duomatch,&bk.Solomatch,&bk.Totalkills,&bk.Totalmatch,&bk.Killspermatch)
     if err != nil {log.Fatal(err)}
     leaderboard = append(leaderboard, bk)
   }
