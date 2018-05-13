@@ -31,10 +31,18 @@ def fortniteuserstats(u):
     # execute a statement
     cur.execute("UPDATE icy.leaderboard set date=%s,squadkills=%s,squadmatch=%s,duokills=%s,duomatch=%s,solokills=%s,solomatch=%s,totalkills=%s,totalmatch=%s,killspermatch=%s WHERE epicusername=%s", (str(curtime),squadkills,squadmatch,duokills,duomatch,solokills,solomatch,totalkills,totalmatch,killspermatch,u))
     conn.commit()
+    # delete duplicates to clean table
+    cur.execute("CREATE TABLE icy.leaderboard_temp (LIKE icy.leaderboard);")
+    conn.commit()
+    cur.execute("INSERT into icy.leaderboard_temp(date,epicusername,squadkills,squadmatch,duokills,duomatch,solokills,solomatch,totalkills,totalmatch,killspermatch) SELECT DISTINCT ON (epicusername) date,epicusername,squadkills,squadmatch,duokills,duomatch,solokills,solomatch,totalkills,totalmatch,killspermatch FROM icy.leaderboard;")
+    conn.commit()
+    cur.execute("DROP TABLE icy.leaderboard;")
+    conn.commit()
+    cur.execute("ALTER TABLE icy.leaderboard_temp RENAME TO icy.leaderboard;")
+    conn.commit()
     # close the communication with the PostgreSQL
     cur.close()
     conn.close()
-
 
 
 def leaderboardpopulate():
@@ -54,5 +62,11 @@ def leaderboardpopulate():
     # close the communication with the PostgreSQL
     cur.close()
     conn.close()
+
+
+def sqlduplicatedelete(tablename):
+
+
+mmduprem()
 
 leaderboardpopulate()
