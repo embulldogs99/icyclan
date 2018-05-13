@@ -7,12 +7,12 @@ import time
 import psycopg2
 
 def fortniteuserstats(u):
+    print(u)
     t=requests.Session()
-    player=u#input("player name: ")
     #api key given to rapidfire.gg
     api = {'TRN-Api-Key':'703cb7b0-4c42-444b-a485-379ed15319b8'}
     # pass api key as header
-    r=t.get('http://api.fortnitetracker.com/v1/profile/xbl/'+player, headers = api)
+    r=t.get('http://api.fortnitetracker.com/v1/profile/xbl/'+str(u), headers = api)
     store=json.loads(r.text)
     print(store)
 
@@ -51,7 +51,7 @@ def leaderboardpopulate():
     ##get leaderboardlist
     rows = cur.fetchall()
     for x in rows:
-        fortniteuserstats(x)
+        fortniteuserstats(str(x))
     # close the communication with the PostgreSQL
     # close the communication with the PostgreSQL
     cur.close()
