@@ -228,8 +228,8 @@ func leaderboard(w http.ResponseWriter, r *http.Request){
   }
 
   type Datapost struct{
-    Leaderboard
-    Rank
+    Leaderboard []Leaderboard
+    Rank []Rank
   }
 
   //pull leaderboard table
@@ -251,7 +251,7 @@ func leaderboard(w http.ResponseWriter, r *http.Request){
   }
   db.Close()
 
-  data:=Datapost{[]leaderboard,[]rank}
+  data:=Datapost{leaderboard,rank}
   tpl:=template.Must(template.ParseFiles("leaderboard.gohtml","css/main.css","css/mcleod-reset.css"))
   tpl.Execute(w, data)
 }
