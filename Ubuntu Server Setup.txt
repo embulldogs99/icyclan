@@ -1,28 +1,63 @@
-#### Quick UBUTNTU SERVER STARTUP (also works on Debian 9 Stretch)
+######################################################################
+####  Build your own Webserver Startup Guide  ########################
+####      By  embulldogs99                     #######################
+####  Tested on Ubuntu and Debian 9 Stretch   ########################
+#####################################################################
+############################################################
+############################################################
+### Let's Begin
+### After starting up your webserver/cloud compute engine / file serving device
+### Connect via SSH
+### Login as root
 
-###login as root
 sudo -i
 
 sudo apt-get update
 sudo apt-get -y upgrade
 
+
+
+###########################################################
+###########################################################
+### Github Setup
+### At this point, you want github to host your code
+### go to github, create a repository, and clone it into ALL devices that may need read and/OR write access.
+### you want github to host the first copy to imrpove  file setup on your systems later on
+
 sudo apt-get install git
 sudo apt-get update
 sudo git clone https://github.com/embulldogs99/projectname
 
-##installing GOlang 1.8
+
+###########################################################
+###########################################################
+## Installing Golang 1.8
+## The Go programming language is really wonderful to write in
+## however, it generally requires a standard setup of:
+##    1) Go Installation location ($GOROOT)
+##    2) Setting up the $GOPATH, $GOBIN, $GOROOT correctly
+##    3) Creating a $GOPATH directory that Golang is used to working with (src,pkg,bin)
+## With these critical steps in mind, lets begin by downloading Golang from googleapi
+
+##########################################################
+## 1) Downloading golang1.8 and moving it to /root/usr/local
+sudo -i
 sudo curl -O https://storage.googleapis.com/golang/go1.8.linux-amd64.tar.gz
 sudo tar -xvf go1.8.linux-amd64.tar.gz
 sudo mv go /usr/local
 
-###setting GO env variables
+
+#########################################################
+### 2) Setting GO ennvironemtal (env) variables
+
 sudo vi ~/.profile
 export GOPATH=~/projectname/go
 export GOBIN=$GOPATH/bin
 export PATH=$PATH:/usr/local/go/bin
 source ~/.profile
 
-##making compatable Go directory
+###########################################################
+## 3) Making Compatible GoRoot directory
 sudo -i
 cd projectname
 mkdir go
@@ -31,24 +66,38 @@ mkdir src
 mkdir bin
 mkdir pkg
 
-
+###########################################################
 ### now that everythins is setup, navigate to project folder and pull dependancy requirements
 sudo -i
+go version
 cd projectname
 go get .
 
-
+############################################################
+#####      Installing PostgresSQL
+################################################################
 sudo apt-get install postgresql-9.6
 sudo apt-get update
-
 
 sudo su - postgres
 psql
 ALTER USER postgres WITH PASSWORD 'postgres';
 
 
+################################################################
+####    Installing Pip and Common Python Packages
+##################################################################
 
-other notes:
+apt-get install python-pip
+pip install pandas
+pip install psycopg2
+pip install bs4
+pip install BeautifulSoup
+
+
+################################################################
+####    Git Commit Notes
+##################################################################
 git init
 git add .
 git commit -m "First commit"
