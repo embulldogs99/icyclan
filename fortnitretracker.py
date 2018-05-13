@@ -15,8 +15,8 @@ def fortniteuserstats(u):
     store=json.loads(r.text)
     print(store)
 
-    squadkills=store['stats']['curr_p9']['kills']['valueInt']
-    squadmatch=store['stats']['curr_p9']['matches']['valueInt']
+    squadkills=store['stats']['u']['kills']['valueInt']
+    squadmatch=store['stats']['u']['matches']['valueInt']
     duokills=store['stats']['curr_p10']['kills']['valueInt']
     duomatch=store['stats']['curr_p10']['matches']['valueInt']
     solokills=store['stats']['p2']['kills']['valueInt']
