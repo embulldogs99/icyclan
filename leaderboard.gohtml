@@ -32,11 +32,10 @@
       </tr>
     </thead>
     <tbody>
-      {{range .Rank}}
+      {{range .Rank .Leaderboard}}
       <tr>
         <td>{{.Rankvalue}}
 
-        {{range .Leaderboard}}
         <td>{{.Epicusername.Value}}</td>
         <td>{{.Squadkills}}</td>
         <td>{{.Duokills}}</td>
@@ -49,7 +48,7 @@
         <td>{{.Killspermatch.Value}}</td>
 
       </tr>
-          {{end}}
+
         {{end}}
     </tbody>
 
