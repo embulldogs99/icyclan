@@ -7,7 +7,6 @@ import time
 import psycopg2
 
 def fortniteuserstats(u):
-    print(str(u))
     t=requests.Session()
     #api key given to rapidfire.gg
     api = {'TRN-Api-Key':'703cb7b0-4c42-444b-a485-379ed15319b8'}
@@ -51,6 +50,7 @@ def leaderboardpopulate():
     ##get leaderboardlist
     rows = cur.fetchall()
     for x in rows:
+        print(x)
         fortniteuserstats(str(x))
     # close the communication with the PostgreSQL
     # close the communication with the PostgreSQL
