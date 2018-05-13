@@ -50,8 +50,8 @@ def leaderboardpopulate():
     ##get leaderboardlist
     rows = cur.fetchall()
     for x in rows:
-        print(x)
-        fortniteuserstats(str(x))
+        for t in x:
+            fortniteuserstats(str(t))
     # close the communication with the PostgreSQL
     # close the communication with the PostgreSQL
     cur.close()
