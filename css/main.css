@@ -122,9 +122,11 @@ h{
 .leaderboardtable th{
   font-size: 18px;
   margin:20px;
+  padding: 20px;
 }
 .leaderboardtable td{
   font-size: 14px;
   margin:20px;
+  padding: 20px;
 
 }
