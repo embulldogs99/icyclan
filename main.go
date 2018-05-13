@@ -211,7 +211,7 @@ func leaderboard(w http.ResponseWriter, r *http.Request){
   if !alreadyLoggedIn(r) {http.Redirect(w, r, "/login", http.StatusSeeOther)}
 
   type Leaderboard struct{
-    Rank int
+
     Epicusername sql.NullString
     Squadkills int
     Duokills int
@@ -222,19 +222,20 @@ func leaderboard(w http.ResponseWriter, r *http.Request){
     Totalkills int
     Totalmatch int
     Killspermatch sql.NullFloat64
+    Rank int
   }
 
   //pull leaderboard table
   db, err := sql.Open("postgres", "postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable")
   if err != nil {log.Fatalf("Unable to connect to leaderboard database")}
-  rows, err := db.Query("SELECT DISTINCT epicusername,squadkills,duokills,solokills,squadmatch,duomatch,solomatch,totalkills,totalmatch,killspermatch FROM icy.leaderboard ORDER BY killspermatch DESC;")
+  rows, err := db.Query("SELECT DISTINCT epicusername,squadkills,duokills,solokills,squadmatch,duomatch,solomatch,totalkills,totalmatch,killspermatch,rank() over (order by killspermatch desc) as rank FROM icy.leaderboard ORDER BY killspermatch DESC;")
   if err != nil{log.Fatalf("failed to select leaderboard data")}
   leaderboard := []Leaderboard{}
   rank:=0
   for rows.Next() {
     rank=rank+1
     bk := Leaderboard{}
-    err := rows.Scan(&bk.rank,&bk.Epicusername,&bk.Squadkills,&bk.Duokills,&bk.Solokills,&bk.Squadmatch,&bk.Duomatch,&bk.Solomatch,&bk.Totalkills,&bk.Totalmatch,&bk.Killspermatch)
+    err := rows.Scan(&bk.Epicusername,&bk.Squadkills,&bk.Duokills,&bk.Solokills,&bk.Squadmatch,&bk.Duomatch,&bk.Solomatch,&bk.Totalkills,&bk.Totalmatch,&bk.Killspermatch,&bk.Rank)
     if err != nil {log.Fatal(err)}
     leaderboard = append(leaderboard, bk)
   }
