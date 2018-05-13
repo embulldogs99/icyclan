@@ -19,7 +19,7 @@ def fortniteuserstats(u):
     duomatch=store['stats']['p10']['matches']['valueInt']
     solokills=store['stats']['p2']['kills']['valueInt']
     solomatch=store['stats']['p2']['matches']['valueInt']
-    curtime=time.strftime('%Y-%m-%d', time.time())
+    curtime=time.strftime("%Y-%m-%d", time.gmtime(time.time()))
     totalkills=squadkills+duokills+solokills
     totalmatch=squadmatch+duomatch+solomatch
     killspermatch=round(totalkills/float(totalmatch),2)
