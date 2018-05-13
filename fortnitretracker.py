@@ -13,29 +13,29 @@ def fortniteuserstats(u):
     # pass api key as header
     r=t.get('http://api.fortnitetracker.com/v1/profile/xbl/'+str(u), headers = api)
     store=json.loads(r.text)
-    print(store)
-
-    squadkills=store['stats']['u']['kills']['valueInt']
-    squadmatch=store['stats']['u']['matches']['valueInt']
-    duokills=store['stats']['curr_p10']['kills']['valueInt']
-    duomatch=store['stats']['curr_p10']['matches']['valueInt']
-    solokills=store['stats']['p2']['kills']['valueInt']
-    solomatch=store['stats']['p2']['matches']['valueInt']
-    time=time.time()
-    totalkills=squadkills+duokills+solokills
-    totalmatch=squadmatch+duomatch+solomatch
-    killspermatch=round(totalkills/float(totalmatch),2)
-
-    #########################################################
-    ##############  Database Connection   ###################
-    conn = psycopg2.connect("dbname='postgres' user='postgres' password='postgres' host='localhost' port='5432'")
-    cur = conn.cursor()
-    # execute a statement
-    cur.execute("INSERT INTO icy.leaderboard WHERE epicusername=%s (date,squadkills,squadmatch,duokills,duomatch,solokills,solomatch,totalkills,totalmatch,killspermatch) VALUES (%s, %s, %s, %s, %s,%s,%s,%s,%s,%s)", (u,time,squadkills,squadmatch,duokills,duomatch,solokills,solomatch,totalkills,totalmatch,killspermatch))
-    conn.commit()
-    # close the communication with the PostgreSQL
-    cur.close()
-    conn.close()
+    x=store['u']
+    print(x)
+    # squadkills=store['stats']['u']['kills']['valueInt']
+    # squadmatch=store['stats']['u']['matches']['valueInt']
+    # duokills=store['stats']['curr_p10']['kills']['valueInt']
+    # duomatch=store['stats']['curr_p10']['matches']['valueInt']
+    # solokills=store['stats']['p2']['kills']['valueInt']
+    # solomatch=store['stats']['p2']['matches']['valueInt']
+    # time=time.time()
+    # totalkills=squadkills+duokills+solokills
+    # totalmatch=squadmatch+duomatch+solomatch
+    # killspermatch=round(totalkills/float(totalmatch),2)
+    #
+    # #########################################################
+    # ##############  Database Connection   ###################
+    # conn = psycopg2.connect("dbname='postgres' user='postgres' password='postgres' host='localhost' port='5432'")
+    # cur = conn.cursor()
+    # # execute a statement
+    # cur.execute("INSERT INTO icy.leaderboard WHERE epicusername=%s (date,squadkills,squadmatch,duokills,duomatch,solokills,solomatch,totalkills,totalmatch,killspermatch) VALUES (%s, %s, %s, %s, %s,%s,%s,%s,%s,%s)", (u,time,squadkills,squadmatch,duokills,duomatch,solokills,solomatch,totalkills,totalmatch,killspermatch))
+    # conn.commit()
+    # # close the communication with the PostgreSQL
+    # cur.close()
+    # conn.close()
 
 
 
