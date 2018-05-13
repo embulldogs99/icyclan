@@ -46,7 +46,7 @@ def leaderboardpopulate():
     conn = psycopg2.connect("dbname='postgres' user='postgres' password='postgres' host='localhost' port='5432'")
     cur = conn.cursor()
     # execute a statement
-    cur.execute("SELECT DISTINCT epicusername from icy.leaderboard"))
+    cur.execute("SELECT DISTINCT epicusername from icy.leaderboard;"))
     conn.commit()
     ##get leaderboardlist
     rows = cur.fetchall()
