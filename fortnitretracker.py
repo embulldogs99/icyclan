@@ -20,6 +20,7 @@ def fortniteuserstats(u):
     solokills=store['stats']['p2']['kills']['valueInt']
     solomatch=store['stats']['p2']['matches']['valueInt']
     curtime=time.time()
+    d = datetime.strptime(curtime, "%d-%b-%Y")
     totalkills=squadkills+duokills+solokills
     totalmatch=squadmatch+duomatch+solomatch
     killspermatch=round(totalkills/float(totalmatch),2)
@@ -29,7 +30,7 @@ def fortniteuserstats(u):
     conn = psycopg2.connect("dbname='postgres' user='postgres' password='postgres' host='localhost' port='5432'")
     cur = conn.cursor()
     # execute a statement
-    cur.execute("INSERT INTO icy.leaderboard (date,epicusername,squadkills,squadmatch,duokills,duomatch,solokills,solomatch,totalkills,totalmatch,killspermatch) VALUES (%s, %s, %s, %s, %s,%s,%s,%s,%s,%s)", (curtime,u,squadkills,squadmatch,duokills,duomatch,solokills,solomatch,totalkills,totalmatch,killspermatch,u))
+    cur.execute("INSERT INTO icy.leaderboard (date,epicusername,squadkills,squadmatch,duokills,duomatch,solokills,solomatch,totalkills,totalmatch,killspermatch) VALUES (%s, %s, %s, %s, %s,%s,%s,%s,%s,%s)", (str(d),u,squadkills,squadmatch,duokills,duomatch,solokills,solomatch,totalkills,totalmatch,killspermatch,u))
     conn.commit()
     # close the communication with the PostgreSQL
     cur.close()
