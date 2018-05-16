@@ -213,16 +213,16 @@ func leaderboard(w http.ResponseWriter, r *http.Request){
   type Leaderboard struct{
 
     Epicusername sql.NullString
-    Squadkills int
-    Duokills int
-    Solokills int
-    Squadmatch int
-    Duomatch int
-    Solomatch int
-    Totalkills int
-    Totalmatch int
+    Squadkills sql.NullFloat64
+    Duokills sql.NullFloat64
+    Solokills sql.NullFloat64
+    Squadmatch sql.NullFloat64
+    Duomatch sql.NullFloat64
+    Solomatch sql.NullFloat64
+    Totalkills sql.NullFloat64
+    Totalmatch sql.NullFloat64
     Killspermatch sql.NullFloat64
-    Rank int
+    Rank sql.NullFloat64
   }
 
   //pull leaderboard table
