@@ -31,7 +31,7 @@ func main() {
   //pulls users from database
   dbusers, err := sql.Open("postgres", "postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable")
   if err != nil {log.Fatalf("Unable to connect to the database")}
-  rowz, err := dbusers.Query("SELECT email,password FROM icy.users")
+  rowz, err := dbusers.Query("SELECT DISTINCT email,password FROM icy.users")
   if err != nil {log.Fatalf("Could not Scan User Data")}
   //userslists:=user{}
   for rowz.Next(){
