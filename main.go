@@ -71,6 +71,9 @@ func signup(w http.ResponseWriter, r *http.Request){
     dbusers, _ := sql.Open("postgres", "postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable")
     _, err := dbusers.Exec(`INSERT INTO icy.users (email, password,date) VALUES ($1, $2, $3);`, email, password, curdate)
     dbusers.Close()
+
+    dbu[email]=user{email,password}
+
     if err != nil {http.Redirect(w, r, "/login", http.StatusSeeOther)}
     fmt.Printf("Added User: "+email+" At Time : "+time.Now().Format("2006-01-02 15:04:05"))
     http.Redirect(w, r, "/login", http.StatusSeeOther)
