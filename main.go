@@ -64,11 +64,6 @@ func main() {
 
 
 func signup(w http.ResponseWriter, r *http.Request){
-  var tpl *template.Template
-  tpl = template.Must(template.ParseFiles("signup.gohtml","css/main.css","css/mcleod-reset.css",))
-  tpl.Execute(w, nil)
-
-
   if r.Method == http.MethodPost {
     email := r.FormValue("email")
     password := r.FormValue("password")
@@ -78,8 +73,13 @@ func signup(w http.ResponseWriter, r *http.Request){
     dbusers.Close()
     if err != nil {http.Redirect(w, r, "/login", http.StatusSeeOther)}
     fmt.Printf("Added User: "+email+" At Time : "+time.Now().Format("2006-01-02 15:04:05"))
-    http.Redirect(w, r, "/home", http.StatusSeeOther)
+    http.Redirect(w, r, "/login", http.StatusSeeOther)
     }
+
+  var tpl *template.Template
+  tpl = template.Must(template.ParseFiles("signup.gohtml","css/main.css","css/mcleod-reset.css",))
+  tpl.Execute(w, nil)
+
 }
 
 
