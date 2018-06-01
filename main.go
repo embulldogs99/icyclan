@@ -305,7 +305,9 @@ func forums(w http.ResponseWriter, r *http.Request){
     if err != nil {log.Fatalf("Unable to connect to leaderboard database")}
 
     rowcount, _ := db.Query("SELECT Count(DISTINCT title) FROM icy.forums;")
-    for rowcount.Next(){postcount:=rowcount.Scan()+1}
+    for rowcount.Next(){
+      postcount,err:=rowcount.Scan()
+      postcount=postcount+1}
 
 
     _, err = db.Query("INSERT INTO icy.forums (postdate,postcount,poster,title,contents,imagefilelocation) values(%s,%s,%s,%s,%s,%s);",current_time,postcount,u,posttitle,contents,imagefilelocation)
@@ -336,11 +338,11 @@ func forums(w http.ResponseWriter, r *http.Request){
 func forumscontent(w http.ResponseWriter, r *http.Request){
   url:=r.URL.Path
   s:="/forums/images/"
-  title:=SplitAfter(url,s)
+  title:=strings.SplitAfter(url,s)
 
   type Holder struct{
     Forumstitle string
-    Forumscontent []Forums
+    Forumscontent Forums
   }
 
 
@@ -351,7 +353,7 @@ func forumscontent(w http.ResponseWriter, r *http.Request){
   rows, _ := db.Query("SELECT postdate,postcount,poster,title,contents,imagefilelocation icy.forums where title=%s;",title)
   if err != nil{log.Fatalf("failed to select leaderboard data")}
 
-  content:= []Forums{}
+  content:= Forums{}
 
   for rows.Next() {
     bk := Forums{}
@@ -361,7 +363,7 @@ func forumscontent(w http.ResponseWriter, r *http.Request){
   }
   db.Close()
 
-  dataholder:=[]Holder{title,content}
+  dataholder:=Holder{title,content}
 
 
 
