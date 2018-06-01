@@ -293,7 +293,6 @@ func forums(w http.ResponseWriter, r *http.Request){
 
   if r.Method == http.MethodPost {
     //defines u as dbu user info (email,pass) then matches form email with stored email
-    var forumspost Forums
 
     current_time := time.Now().Local()
     u:=getUser(w,r)
