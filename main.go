@@ -304,7 +304,10 @@ func forums(w http.ResponseWriter, r *http.Request){
     db, err := sql.Open("postgres", "postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable")
     if err != nil {log.Fatalf("Unable to connect to leaderboard database")}
 
-    rowcount, _ := db.Exec("SELECT Count(DISTINCT title) FROM icy.forums;")
+
+    var rowcount int
+    err = db.QueryRow("SELECT Count(DISTINCT title) FROM icy.forums;").Scan(&rowcount)
+    if err != nil {log.Fatal(err)}
     postcount:=rowcount+1
 
 
