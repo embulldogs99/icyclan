@@ -1,0 +1,35 @@
+<html>
+<head>
+  <link href="css/mcleod-reset.css" rel="stylesheet">
+  <link href="css/main.css" rel="stylesheet">
+</head>
+
+<body>
+
+  <div class="column">
+    <h>IcyClan Forums</h><br>
+    {{range .}}
+    <a href="/forumscontent/{{.Forumstitle}}" style="padding:5px;" >{{.Forumstitle}}</a>
+    {{end}}
+
+
+
+
+    <br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <h>Post Your Own</h><br>
+
+    <form action="/forums" method="POST" class="loginform">
+    Title <input type="text" name="Title" value="" size="100" maxlength="200"required><br>
+    Contents  <input type="text" name="Contents" value="" size="1000" maxlength="20000" required><br>
+    File Name  <input type="text" name="Imagefilename" value="test" required><br>
+    <input type="submit" name="email" value="Post New Thread" required><br>
+    </form>
+
+
+  </div>
+
+
+
+</body>
+
+</html>

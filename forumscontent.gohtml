@@ -1,0 +1,26 @@
+<html>
+<head>
+  <link href="css/mcleod-reset.css" rel="stylesheet">
+  <link href="css/main.css" rel="stylesheet">
+</head>
+
+<body>
+
+  <div class="column">
+    {{range .Holder}}
+    <h>{{.Forumstitle}}</h><br>
+    {{.Forumscontent.Postdate}}
+    {{.Forumscontent.Postcount}}
+    {{.Forumscontent.Poster}}
+    {{.Forumscontent.Title}}
+    {{.Forumscontent.Contents}}
+    {{.Forumscontent.Imagefilelocation}}
+    {{end}}
+
+  </div>
+
+
+
+</body>
+
+</html>

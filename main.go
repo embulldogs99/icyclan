@@ -8,7 +8,7 @@ _ "github.com/lib/pq"
   "time"
   "fmt"
     	"github.com/satori/go.uuid"
-    _ "strconv"
+    "strconv"
 
 )
 
@@ -55,6 +55,8 @@ func main() {
   http.HandleFunc("/login", login)
   http.HandleFunc("/logout", logout)
   http.HandleFunc("/home", home)
+  http.HandleFunc("/forums", forums)
+  http.HandleFunc("/forumscontent", forumscontent)
   http.HandleFunc("/signup", signup)
   http.HandleFunc("/joinleaderboard", joinleaderboard)
   http.HandleFunc("/leaderboard", leaderboard)
@@ -250,8 +252,122 @@ func leaderboard(w http.ResponseWriter, r *http.Request){
 
 
 
+type Forums struct{
+  Postdate sql.NullFloat64
+  Postcount sql.NullFloat64
+  Poster sql.NullString
+  Title sql.NullString
+  Contents sql.NullString
+  Imagefilelocation sql.NullString
+}
 
 
+
+func forums(w http.ResponseWriter, r *http.Request){
+  if !alreadyLoggedIn(r) {http.Redirect(w,r,"/login", http.StatusSeeOther)}
+
+
+  db, err := sql.Open("postgres", "postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable")
+  if err != nil {log.Fatalf("Unable to connect to leaderboard database")}
+  rows, err := db.Query("SELECT DISTINCT title FROM icy.forums;")
+  if err != nil{log.Fatalf("failed to select leaderboard data")}
+
+  type Forumstitlelist struct{
+    Forumstitle string
+  }
+
+  titlelist := []Forumstitlelist{}
+  for rows.Next() {
+    bk := []Forumstitlelist{}
+    err := rows.Scan(&bk.Title)
+    if err != nil {log.Fatal(err)}
+    titlelist = append(titlelist, bk)
+  }
+  db.Close()
+
+  tpl:=template.Must(template.ParseFiles("forums.gohtml","css/main.css","css/mcleod-reset.css"))
+  tpl.Execute(w, titlelist)
+
+
+
+  if r.Method == http.MethodPost {
+    //defines u as dbu user info (email,pass) then matches form email with stored email
+    var forumspost Forums
+
+    current_time := time.Now().Local()
+    u:=GetUser()
+    posttitle := r.FormValue("Title")
+    contents := r.FormValue("Contents")
+    imagefilename := r.FormValue("Imagefilelocation")
+    imagefilelocation:="./fourms/images/"+imagefilename+".jpg"
+
+    db, err := sql.Open("postgres", "postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable")
+    if err != nil {log.Fatalf("Unable to connect to leaderboard database")}
+
+    rowcount, _ := db.Query("SELECT Count(DISTINCT title) FROM icy.forums;")
+    postcount=rowcount+1
+
+    _, err := db.Query("INSERT INTO icy.forums (postdate,postcount,poster,title,contents,imagefilelocation) values(%s,%s,%s,%s,%s,%s);",current_time,postcount,u,posttitle,contents,imagefilelocation)
+    if err != nil{log.Fatalf("failed to select leaderboard data")}
+    db.Close()
+    http.Redirect(w,r,http.Get("/forums"),http.StatusSeeOther)
+
+  }
+
+  //
+  //For Uploading files
+  //
+  // file, header, err:=r.FormFile()
+  // if err !=nil{http.Error(w,err.Error(),http.StatusInternalServerError)
+  // return}
+  // defer file.Close()
+  // fmt.Printf("file uploaded")
+  // f, er :=os.CreateFile("./forums/images/"+header.Filename)
+  // if er != nil{fmt.Println(er)
+  // return}
+  // defer f.Close()
+  // io.Copy(f,file)
+
+}
+
+
+
+func forumscontent(w http.ResponseWriter, r *http.Request){
+  url:=strconv.Atoi(r.URL.Path)
+  s:="/forums/images/"
+  title=url.SplitAfter(s,url)
+
+  type Holder struct{
+    Forumstitle string
+    Forumscontent Forums
+  }
+
+
+
+  db, err := sql.Open("postgres", "postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable")
+  if err != nil {log.Fatalf("Unable to connect to leaderboard database")}
+
+  rows, _ := db.Query("SELECT postdate,postcount,poster,title,contents,imagefilelocation icy.forums where title=%s;",title)
+  if err != nil{log.Fatalf("failed to select leaderboard data")}
+
+  content:= []Forums{}
+
+  for rows.Next() {
+    bk := Forums{}
+    err := rows.Scan(&bk.Postdate,&bk.Postciunt,&bk.Poster,&bk.Title,&bk.Contents,&bk.Imagefilelocation)
+    if err != nil {log.Fatal(err)}
+    content = append(content, bk)
+  }
+  db.Close()
+
+  dataholder:=[]Holder{title,content}
+
+
+
+  if !alreadyLoggedIn(r) {http.Redirect(w,r,"/login", http.StatusSeeOther)}
+  tpl:=template.Must(template.ParseFiles("forumscontent.gohtml","css/main.css","css/mcleod-reset.css"))
+  tpl.Execute(w, dataholder)
+}
 
 
 
