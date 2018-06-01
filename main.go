@@ -9,6 +9,7 @@ _ "github.com/lib/pq"
   "fmt"
     	"github.com/satori/go.uuid"
     _ "strconv"
+    "strings"
 
 )
 
@@ -339,7 +340,7 @@ func forums(w http.ResponseWriter, r *http.Request){
 func forumscontent(w http.ResponseWriter, r *http.Request){
   url:=r.URL.Path
   s:="/forums/images/"
-  title:=strings.Split(url,s)
+  title:=strings.SplitAfter(url,s)
 
   type Holder struct{
     Forumstitle []string
