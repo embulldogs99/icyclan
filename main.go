@@ -310,10 +310,9 @@ func forums(w http.ResponseWriter, r *http.Request){
     if err != nil {log.Fatal(err)}
     postcount:=rowcount+1
 
-    fmt.Printf(current_time)
-    fmt.Printf(u)
+    fmt.Println(u)
     fmt.Printf(posttitle)
-    fmt.Printf(content)
+    fmt.Printf(contents)
     _, err = db.Query("INSERT INTO icy.forums (postdate,postcount,poster,title,contents,imagefilelocation) values(%s,%s,%s,%s,%s,%s);",current_time,postcount,u,posttitle,contents,imagefilelocation)
     if err != nil{log.Fatalf("failed to insert new forums post")}
     db.Close()
