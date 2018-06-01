@@ -314,9 +314,9 @@ func forums(w http.ResponseWriter, r *http.Request){
     fmt.Println(posttitle)
     fmt.Println(contents)
     fmt.Println(postcount)
-    fmt.Println(current_time.Format("2006-01-02"))
+    fmt.Println(current_time.Format("2006-01-02").String())
 
-    _, err = db.Exec(`INSERT INTO icy.forums (postdate,postcount,poster,title,contents,imagefilelocation) VALUES ($1,$2,$3,$4,$5,$6);`,current_time.Format("2006-01-02"),postcount,u,posttitle,contents,imagefilelocation)
+    _, err = db.Exec(`INSERT INTO icy.forums (postdate,postcount,poster,title,contents,imagefilelocation) VALUES ($1,$2,$3,$4,$5,$6);`,current_time.Format("2006-01-02").String(),postcount,u,posttitle,contents,imagefilelocation)
     if err != nil{log.Fatalf("failed to insert new forums post")}
     db.Close()
     http.Redirect(w,r,"/forumscontent"+posttitle,http.StatusSeeOther)
