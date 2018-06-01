@@ -8,7 +8,7 @@ _ "github.com/lib/pq"
   "time"
   "fmt"
     	"github.com/satori/go.uuid"
-    "strconv"
+    _ "strconv"
 
 )
 
@@ -278,7 +278,7 @@ func forums(w http.ResponseWriter, r *http.Request){
 
   titlelist := []Forumstitlelist{}
   for rows.Next() {
-    bk := []Forumstitlelist{}
+    bk := Forumstitlelist{}
     err := rows.Scan(&bk.Forumstitle)
     if err != nil {log.Fatal(err)}
     titlelist = append(titlelist, bk)
@@ -295,7 +295,7 @@ func forums(w http.ResponseWriter, r *http.Request){
     var forumspost Forums
 
     current_time := time.Now().Local()
-    u:=GetUser()
+    u:=getUser(w,r)
     posttitle := r.FormValue("Title")
     contents := r.FormValue("Contents")
     imagefilename := r.FormValue("Imagefilelocation")
@@ -305,12 +305,12 @@ func forums(w http.ResponseWriter, r *http.Request){
     if err != nil {log.Fatalf("Unable to connect to leaderboard database")}
 
     rowcount, _ := db.Query("SELECT Count(DISTINCT title) FROM icy.forums;")
-    postcount=rowcount+1
+    postcount:=rowcount+1
 
     _, err := db.Query("INSERT INTO icy.forums (postdate,postcount,poster,title,contents,imagefilelocation) values(%s,%s,%s,%s,%s,%s);",current_time,postcount,u,posttitle,contents,imagefilelocation)
     if err != nil{log.Fatalf("failed to select leaderboard data")}
     db.Close()
-    http.Redirect(w,r,http.Get("/forums"),http.StatusSeeOther)
+    http.Redirect(w,r,"/forums",http.Get)
 
   }
 
@@ -333,9 +333,9 @@ func forums(w http.ResponseWriter, r *http.Request){
 
 
 func forumscontent(w http.ResponseWriter, r *http.Request){
-  url:=strconv.Atoi(r.URL.Path)
+  url:=r.URL.Path
   s:="/forums/images/"
-  title=url.SplitAfter(s,url)
+  title:=url.SplitAfter(s,url)
 
   type Holder struct{
     Forumstitle string
