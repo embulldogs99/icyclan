@@ -279,7 +279,7 @@ func forums(w http.ResponseWriter, r *http.Request){
   titlelist := []Forumstitlelist{}
   for rows.Next() {
     bk := []Forumstitlelist{}
-    err := rows.Scan(&bk.Title)
+    err := rows.Scan(&bk.Forumstitle)
     if err != nil {log.Fatal(err)}
     titlelist = append(titlelist, bk)
   }
