@@ -300,7 +300,7 @@ func forums(w http.ResponseWriter, r *http.Request){
     posttitle := r.FormValue("Title")
     contents := r.FormValue("Contents")
     imagefilename := r.FormValue("Imagefilelocation")
-    imagefilelocation:="./fourms/images/"+imagefilename+".jpg"
+    imagefilelocation:=imagefilename+".jpg"
 
     db, err := sql.Open("postgres", "postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable")
     if err != nil {log.Fatalf("Unable to connect to forums database")}
