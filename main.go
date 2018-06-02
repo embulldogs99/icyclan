@@ -341,7 +341,7 @@ func forumscontent(w http.ResponseWriter, r *http.Request){
   url:=r.URL.Path
   s:="/forumscontent/"
   title:=strings.Split(url,s)
-  title=strings.Replace(title,"%20"," ")
+  title=strings.Replace("%20"," ")
 
   type Holder struct{
     Forumstitle string
