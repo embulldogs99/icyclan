@@ -58,7 +58,7 @@ func main() {
   http.HandleFunc("/logout", logout)
   http.HandleFunc("/home", home)
   http.HandleFunc("/forums", forums)
-  http.HandleFunc("/forumscontent", forumscontent)
+  http.HandleFunc("/forumscontent/", forumscontent)
   http.HandleFunc("/signup", signup)
   http.HandleFunc("/joinleaderboard", joinleaderboard)
   http.HandleFunc("/leaderboard", leaderboard)
