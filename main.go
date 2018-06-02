@@ -303,18 +303,21 @@ func forums(w http.ResponseWriter, r *http.Request){
     posttitle := r.FormValue("Title")
     contents := r.FormValue("Contents")
     imagefilename := r.FormValue("Imagefilelocation")
-
     imagefilelocation:=imagefilename+".jpg"
-    imagefile := r.Body("pic")
 
-    //open a file for writing
-    file, err := os.Create("/forums/images/"+imagefilelocation)
-    if err != nil {log.Fatal(err)}
-    // Use io.Copy to just dump the response body to the file. This supports huge files
-    _, err = io.Copy(file, imagefile)
-    if err != nil {log.Fatal(err)}
-    file.Close()
-    fmt.Println("Saved file")
+
+
+    file, header, err:=r.FormFile()
+    if err !=nil{http.Error(w,err.Error(),http.StatusInternalServerError)
+    return}
+    defer file.Close()
+    fmt.Printf("file uploaded")
+    f, er :=os.CreateFile("./forums/images/"+header.Filename)
+    if er != nil{fmt.Println(er)
+    return}
+    defer f.Close()
+    io.Copy(f,file)
+
 
 
     db, err := sql.Open("postgres", "postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable")
@@ -335,18 +338,7 @@ func forums(w http.ResponseWriter, r *http.Request){
   }
 
   //
-  //For Uploading files
-  //
-  // file, header, err:=r.FormFile()
-  // if err !=nil{http.Error(w,err.Error(),http.StatusInternalServerError)
-  // return}
-  // defer file.Close()
-  // fmt.Printf("file uploaded")
-  // f, er :=os.CreateFile("./forums/images/"+header.Filename)
-  // if er != nil{fmt.Println(er)
-  // return}
-  // defer f.Close()
-  // io.Copy(f,file)
+
 
 }
 
