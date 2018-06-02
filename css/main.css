@@ -59,7 +59,8 @@ body{
   justify-content: center;
   font-family: 'cambria';
   height: 800px;
-  width: 40%;
+  width: 30px;
+  size:20;
   padding: 20px;
   margin: 20px;
 }
