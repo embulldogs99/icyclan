@@ -312,7 +312,7 @@ func forums(w http.ResponseWriter, r *http.Request){
     if err != nil {log.Fatal(err)}
     postcount:=rowcount+1
 
-    _, err = db.Exec(`INSERT INTO icy.forums (postdate,postcount,poster,title,contents,imagefilelocation) VALUES ($1,$2,$3,$4,$5,$6);`,current_time.Format("2006-01-02"),postcount,u.Email,posttitle,contents,imagefilelocation)
+    _, err = db.Exec(`INSERT INTO icy.forums (postdate,postcount,poster,title,contents,imagefilelocation) VALUES ($1,$2,$3,$4,$5,$6);`,current_time.Format("2006-01-02"),postcount,u.Email,posttitle,contents,strings.ToLower(imagefilelocation))
     db.Close()
     if err != nil{log.Fatalf("failed to insert new forums post")}
 
