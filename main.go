@@ -61,6 +61,7 @@ func main() {
   http.HandleFunc("/logout", logout)
   http.HandleFunc("/home", home)
   http.HandleFunc("/forums", forums)
+  http.HandleFunc("/donate", donate)
   http.HandleFunc("/forumscontent/", forumscontent)
   http.HandleFunc("/signup", signup)
   http.HandleFunc("/joinleaderboard", joinleaderboard)
@@ -215,7 +216,11 @@ func home(w http.ResponseWriter, r *http.Request){
   tpl:=template.Must(template.ParseFiles("home.gohtml","css/main.css","css/mcleod-reset.css"))
   tpl.Execute(w, nil)
 }
-
+func donate(w http.ResponseWriter, r *http.Request){
+  if !alreadyLoggedIn(r) {http.Redirect(w, r, "/login", http.StatusSeeOther)}
+  tpl:=template.Must(template.ParseFiles("donate.gohtml","css/main.css","css/mcleod-reset.css"))
+  tpl.Execute(w, nil)
+}
 
 func leaderboard(w http.ResponseWriter, r *http.Request){
   if !alreadyLoggedIn(r) {http.Redirect(w, r, "/login", http.StatusSeeOther)}
