@@ -10,8 +10,8 @@ _ "github.com/lib/pq"
     	"github.com/satori/go.uuid"
     _ "strconv"
     "strings"
-    // "os"
-    // "io"
+    "os"
+    "io"
 
 )
 
