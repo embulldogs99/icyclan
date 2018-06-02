@@ -341,6 +341,7 @@ func forumscontent(w http.ResponseWriter, r *http.Request){
   url:=r.URL.Path
   s:="/forumscontent/"
   title:=strings.Split(url,s)
+  title=strings.Replace(title,"%20"," ")
 
   type Holder struct{
     Forumstitle string
@@ -348,9 +349,9 @@ func forumscontent(w http.ResponseWriter, r *http.Request){
   }
 
   db, err := sql.Open("postgres", "postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable")
-  if err != nil {log.Fatalf("Unable to connect to leaderboard database")}
+  if err != nil {log.Fatalf("Unable to connect to postgres")}
 
-  rows,err := db.Query("SELECT postdate,postcount,poster,title,contents,imagefilelocation FROM icy.forums WHERE title='%s';",title[1])
+  rows,err := db.Query(`SELECT postdate,postcount,poster,title,contents,imagefilelocation FROM icy.forums WHERE title='%s';`,title[1])
   if err != nil{log.Fatalf("failed to select leaderboard data")}
 
   content:= []Forums{}
