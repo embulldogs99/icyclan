@@ -305,7 +305,7 @@ func forums(w http.ResponseWriter, r *http.Request){
     imagefilename := r.FormValue("Imagefilelocation")
 
     imagefilelocation:=imagefilename+".jpg"
-    imagefile := r.FormValue("pic")
+    imagefile := r.Body("pic")
 
     //open a file for writing
     file, err := os.Create("/forums/images/"+imagefilelocation)
