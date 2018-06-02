@@ -4,12 +4,19 @@
   <link href="css/main.css" rel="stylesheet">
 </head>
 
+<div class="row">
+    <h>IcyClan Forums</h><br>
+  <a href="/leaderboard"><div class="button">Leaderboards</div></a>
+  <a href="/donate"><div class="button">Donate</div></a>
+  <a href="/logout"><div class="button">Logout</div></a>
+</div>
+
 <body>
 
   <div class="column">
-    <h>IcyClan Forums</h><br>
+    <h>Threads</h><br>
     {{range .}}
-    <a href="/forumscontent/{{.Forumstitle}}" style="padding:5px;" >{{.Forumstitle}}</a>
+    <a href="/forumscontent/{{.Forumstitle}}" style="padding:5px;border:2px solid cyan;background-color:white;" >{{.Forumstitle}}</a>
     {{end}}
 
 
@@ -24,7 +31,7 @@
     File Name  <input type="text" name="Imagefilename" value="test" required><br>
       Accepts .jpgs<input type="file" name="pic" accept=".jpg"><br><br>
 
-        <input type="submit" style="border:2px solid black;size=20px;" value="Submit" class="submit"/><br>
+        <input type="submit" value="Submit" class="loginformsubmit"/><br>
 
   </form>
 
