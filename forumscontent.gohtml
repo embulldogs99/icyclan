@@ -29,7 +29,18 @@
     {{.Postdate.Value}}
     {{.Postcount.Value}}
     {{end}} -->
-  </div>
+  </div><br>
+
+    <h>Post a Reply to this Thread</h><br><br>
+  <form action="/forums" method="POST" class="loginform">
+    Title <input type="hidden" name="Title" value="{{.Forumstitle}}" size="50" maxlength="200" required><br>
+    Contents  <input type="text" name="Contents" size="50"><br>
+    File Name  <input type="text" name="Imagefilename" value="test" required><br>
+      Accepts .jpgs<input type="file" name="pic" accept=".jpg"><br><br>
+
+        <input type="submit" style="border:2px solid black;size=20px;" value="Submit" class="submit"/><br>
+
+  </form>
 
 
 
