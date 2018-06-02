@@ -4,8 +4,10 @@
   <link href="css/main.css" rel="stylesheet">
 </head>
 
+  <div class="column">
+    <h>IcyClan Forums</h>
 <div class="row">
-    <h>IcyClan Forums</h><br>
+<br>
   <a href="/leaderboard"><div class="button">Leaderboards</div></a>
   <a href="/donate"><div class="button">Donate</div></a>
   <a href="/logout"><div class="button">Logout</div></a>
@@ -13,16 +15,16 @@
 
 <body>
 
-  <div class="column">
+
     <h>Threads</h><br>
     {{range .}}
-    <a href="/forumscontent/{{.Forumstitle}}" style="padding:5px;border:2px solid cyan;background-color:white;" >{{.Forumstitle}}</a><br>
+    <a href="/forumscontent/{{.Forumstitle}}" style="padding:2px;border:2px solid cyan;background-color:white;" >{{.Forumstitle}}</a><br>
     {{end}}
 
 
 
 
-    <br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br>
     <h>Post Your Own</h><br>
 
   <form action="/forums" method="POST" class="loginform">
