@@ -52,7 +52,7 @@ func main() {
   }
 
 	http.Handle("/css/", http.StripPrefix("/css/", http.FileServer(http.Dir("./css"))))
-	http.Handle("/forums/images", http.StripPrefix("/forums/images", http.FileServer(http.Dir("./forums/images"))))
+	http.Handle("/forumscontent/forums/images", http.StripPrefix("/forumscontent/forums/images", http.FileServer(http.Dir("./forums/images"))))
   http.HandleFunc("/", serve)
   http.HandleFunc("/login", login)
   http.HandleFunc("/logout", logout)
