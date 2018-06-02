@@ -331,7 +331,7 @@ func forums(w http.ResponseWriter, r *http.Request){
     db.Close()
     if err != nil{fmt.Println("failed to insert new forums post")}
 
-    getUser()
+    getUser(w,r)
     http.Redirect(w,r,"/forumscontent/"+posttitle,http.StatusSeeOther)
 
   }
