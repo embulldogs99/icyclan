@@ -57,7 +57,7 @@ func main() {
   http.HandleFunc("/logout", logout)
   http.HandleFunc("/home", home)
   http.HandleFunc("/forums", forums)
-  http.HandleFunc("/forumscontent", forumscontent)
+  http.HandleFunc("/forumscontent/", forumscontent)
   http.HandleFunc("/signup", signup)
   http.HandleFunc("/joinleaderboard", joinleaderboard)
   http.HandleFunc("/leaderboard", leaderboard)
@@ -351,8 +351,6 @@ func forumscontent(w http.ResponseWriter, r *http.Request){
     Forumstitle []string
     Forumscontent []Forums
   }
-
-
 
   db, err := sql.Open("postgres", "postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable")
   if err != nil {log.Fatalf("Unable to connect to leaderboard database")}
