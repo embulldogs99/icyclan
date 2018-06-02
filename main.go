@@ -303,7 +303,7 @@ func forums(w http.ResponseWriter, r *http.Request){
     posttitle := r.FormValue("Title")
     contents := r.FormValue("Contents")
     imagefilename := r.FormValue("Imagefilelocation")
-    imagefilelocation:=imagefilename+".jpg"
+    imagefilelocation:=strings.ToLower(imagefilename+".jpg")
 
 
 
@@ -311,7 +311,7 @@ func forums(w http.ResponseWriter, r *http.Request){
     if err !=nil{http.Error(w,err.Error(),http.StatusInternalServerError)}
     defer file.Close()
     fmt.Printf("file uploaded")
-    f, er :=os.Create("forums/images/"+imagefilelocation)
+    f, er :=os.Create("./forums/images/"+imagefilelocation)
     if er != nil{fmt.Println(er)}
     defer f.Close()
     io.Copy(f,file)
