@@ -315,6 +315,7 @@ func forums(w http.ResponseWriter, r *http.Request){
     fmt.Println(contents)
     fmt.Println(postcount)
     fmt.Println(current_time.Format("2006-01-02"))
+    fmt.Println(imagefilelocation)
 
     _, err = db.Exec(`INSERT INTO icy.forums (postdate,postcount,poster,title,contents) VALUES ($1,$2,$3,$4,$5);`,current_time.Format("2006-01-02"),postcount,u,posttitle,contents)
     db.Close()
