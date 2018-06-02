@@ -9,7 +9,8 @@ Test data
   <div class="column">
     {{.Forumstitle}}
     {{range .Forumscontent}}
-    {{.}}
+    {{.Postdate.Value}}
+    {{.Postcount.Value}}
     {{end}}
 
 
