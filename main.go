@@ -271,30 +271,6 @@ type Forums struct{
 func forums(w http.ResponseWriter, r *http.Request){
   if !alreadyLoggedIn(r) {http.Redirect(w,r,"/login", http.StatusSeeOther)}
 
-
-  db, err := sql.Open("postgres", "postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable")
-  if err != nil {log.Fatalf("Unable to connect to leaderboard database")}
-  rows, err := db.Query("SELECT DISTINCT title FROM icy.forums;")
-  if err != nil{log.Fatalf("failed to select distinct icy forums titles")}
-
-  type Forumstitlelist struct{
-    Forumstitle string
-  }
-
-  titlelist := []Forumstitlelist{}
-  for rows.Next() {
-    bk := Forumstitlelist{}
-    err := rows.Scan(&bk.Forumstitle)
-    if err != nil {log.Fatal(err)}
-    titlelist = append(titlelist, bk)
-  }
-  db.Close()
-
-  tpl:=template.Must(template.ParseFiles("forums.gohtml","css/main.css","css/mcleod-reset.css"))
-  tpl.Execute(w, titlelist)
-
-
-
   if r.Method == http.MethodPost {
     //defines u as dbu user info (email,pass) then matches form email with stored email
 
@@ -334,6 +310,28 @@ func forums(w http.ResponseWriter, r *http.Request){
     http.Redirect(w, r, "/login", http.StatusSeeOther)
 
   }
+
+
+  db, err := sql.Open("postgres", "postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable")
+  if err != nil {log.Fatalf("Unable to connect to leaderboard database")}
+  rows, err := db.Query("SELECT DISTINCT title FROM icy.forums;")
+  if err != nil{log.Fatalf("failed to select distinct icy forums titles")}
+
+  type Forumstitlelist struct{
+    Forumstitle string
+  }
+
+  titlelist := []Forumstitlelist{}
+  for rows.Next() {
+    bk := Forumstitlelist{}
+    err := rows.Scan(&bk.Forumstitle)
+    if err != nil {log.Fatal(err)}
+    titlelist = append(titlelist, bk)
+  }
+  db.Close()
+
+  tpl:=template.Must(template.ParseFiles("forums.gohtml","css/main.css","css/mcleod-reset.css"))
+  tpl.Execute(w, titlelist)
 
   //
 
