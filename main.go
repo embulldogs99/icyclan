@@ -10,8 +10,8 @@ _ "github.com/lib/pq"
     	"github.com/satori/go.uuid"
     _ "strconv"
     "strings"
-    "os"
-    "io"
+    // "os"
+    // "io"
 
 )
 
@@ -304,7 +304,7 @@ func forums(w http.ResponseWriter, r *http.Request){
     contents := r.FormValue("Contents")
     imagefilename := r.FormValue("Imagefilelocation")
     imagefilelocation:=strings.ToLower(imagefilename+".jpg")
-    
+
 
 
     // file, _, err:=r.FormFile("pic")
