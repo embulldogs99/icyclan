@@ -284,15 +284,12 @@ func forums(w http.ResponseWriter, r *http.Request){
     if err != nil {fmt.Println(err)
         return}
     defer file.Close()
-    fmt.Fprintf(w, "%v", handler.Header)
     imagefilename := handler.Filename
     f, err := os.OpenFile("forums/images/"+handler.Filename, os.O_WRONLY|os.O_CREATE, 0666)
     if err != nil {fmt.Println(err)
         return}
     defer f.Close()
     io.Copy(f, file)
-
-
 
     db, err := sql.Open("postgres", "postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable")
     if err != nil {log.Fatalf("Unable to connect to forums database")}
@@ -307,7 +304,7 @@ func forums(w http.ResponseWriter, r *http.Request){
     db.Close()
     if err != nil{fmt.Println("failed to insert new forums post")}
 
-    http.Redirect(w, r, "/login", http.StatusSeeOther)
+    login(w,r)
 
   }
 
