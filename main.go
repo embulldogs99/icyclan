@@ -366,6 +366,6 @@ func forumscontent(w http.ResponseWriter, r *http.Request){
   db.Close()
 
   dataholder:=Holder{title2,content}
-  tpl:=template.Must(template.ParseFiles("forumscontent.gohtml","css/main.css","css/mcleod-reset.css","forums/images/*"))
+  tpl:=template.Must(template.ParseFiles("forumscontent.gohtml","css/main.css","css/mcleod-reset.css","forums/images"))
   tpl.Execute(w, dataholder)
 }
