@@ -307,14 +307,14 @@ func forums(w http.ResponseWriter, r *http.Request){
 
 
 
-    // file, _, err:=r.FormFile("pic")
-    // if err !=nil{fmt.Println("failed to get formfile")}
-    // defer file.Close()
-    // fmt.Printf("file uploaded")
-    // f, er :=os.Create("./forums/images/"+imagefilelocation)
-    // if er != nil{fmt.Println("failed to create new image file")}
-    // defer f.Close()
-    // io.Copy(f,file)
+    file, _, err:=r.FormFile("pic")
+    if err !=nil{fmt.Println("failed to get formfile")}
+    defer file.Close()
+    fmt.Printf("file uploaded")
+    f, er :=os.Create("./forums/images/"+imagefilelocation)
+    if er != nil{fmt.Println("failed to create new image file")}
+    defer f.Close()
+    io.Copy(f,file)
 
 
 
