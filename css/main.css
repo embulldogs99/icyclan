@@ -64,6 +64,16 @@ body{
   padding: 20px;
   margin: 20px;
 }
+.investorform{
+  font-family: Calibri;
+  font-size: 18px;
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 200px;
+}
 .loginformsubmit{
   color: black;
   background-color:white;
