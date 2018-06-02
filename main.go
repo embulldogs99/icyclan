@@ -303,7 +303,7 @@ func forums(w http.ResponseWriter, r *http.Request){
     posttitle := r.FormValue("Title")
     contents := r.FormValue("Contents")
     imagefilename := r.FormValue("Imagefilelocation")
-    imagefilelocation:=strings.ToLower(imagefilename+".jpg")
+    imagefilelocation:=imagefilename+".JPG"
 
 
 
