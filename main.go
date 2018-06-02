@@ -341,14 +341,12 @@ func forumscontent(w http.ResponseWriter, r *http.Request){
   url:=r.URL.Path
   s:="/forumscontent/"
   title:=strings.Split(url,s)
-  title=title[1]
-  fmt.Println(title)
-  fmt.Println(title)
-  fmt.Println(title)
-  fmt.Println(title)
-  fmt.Println(title)
-  fmt.Println(title)
-  fmt.Println(title)
+  fmt.Println(title[1])
+  fmt.Println(title[1])
+  fmt.Println(title[1])
+  fmt.Println(title[1])
+  fmt.Println(title[1])
+
   fmt.Println()
   fmt.Println()
   fmt.Println()
@@ -367,7 +365,7 @@ func forumscontent(w http.ResponseWriter, r *http.Request){
   db, err := sql.Open("postgres", "postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable")
   if err != nil {log.Fatalf("Unable to connect to leaderboard database")}
 
-  rows, _ := db.Query("SELECT postdate,postcount,poster,title,contents,imagefilelocation icy.forums where title=%s;",title)
+  rows, _ := db.Query("SELECT postdate,postcount,poster,title,contents,imagefilelocation icy.forums where title=%s;",title[1])
   if err != nil{log.Fatalf("failed to select leaderboard data")}
 
   content:= []Forums{}
@@ -380,7 +378,7 @@ func forumscontent(w http.ResponseWriter, r *http.Request){
   }
   db.Close()
 
-  dataholder:=Holder{title,content}
+  dataholder:=Holder{title[1],content}
 
   tpl:=template.Must(template.ParseFiles("forumscontent.gohtml","css/main.css","css/mcleod-reset.css"))
   tpl.Execute(w, dataholder)
