@@ -307,7 +307,7 @@ func forums(w http.ResponseWriter, r *http.Request){
 
 
 
-    file, header, err:=r.FormFile()
+    file, header, err:=r.FormFile("pic")
     if err !=nil{http.Error(w,err.Error(),http.StatusInternalServerError)
     return}
     defer file.Close()
