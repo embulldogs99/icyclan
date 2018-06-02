@@ -24,10 +24,10 @@
 
     <h>Post Your Own</h><br>
 
-  <form action="/forums" method="POST" class="forumsform">
+  <form action="/forums" enctype="multipart/form-data" method="POST" class="forumsform">
     Title <input type="text" name="Title" value="" size="50" maxlength="200" required><br>
     Contents  <input type="text" name="Contents" size="50"><br>
-    File Name  <input type="text" name="Imagefilename" value="" required><br>
+    File Name  <input type="text" name="Imagefilename" value="" ><br>
       Accepts .jpgs<input type="file" name="pic" accept=".JPG"><br><br>
 
         <input type="submit" value="Submit" class="loginformsubmit"/><br>
