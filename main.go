@@ -312,7 +312,7 @@ func forums(w http.ResponseWriter, r *http.Request){
     return}
     defer file.Close()
     fmt.Printf("file uploaded")
-    f, er :=os.CreateFile("./forums/images/"+header.Filename)
+    f, er :=os.OpenFile("./forums/images/"+header.Filename)
     if er != nil{fmt.Println(er)
     return}
     defer f.Close()
