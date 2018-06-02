@@ -52,6 +52,7 @@ func main() {
   }
 
 	http.Handle("/css/", http.StripPrefix("/css/", http.FileServer(http.Dir("./css"))))
+	http.Handle("/forums/images", http.StripPrefix("/forums/images", http.FileServer(http.Dir("./forums/images"))))
   http.HandleFunc("/", serve)
   http.HandleFunc("/login", login)
   http.HandleFunc("/logout", logout)
@@ -365,8 +366,6 @@ func forumscontent(w http.ResponseWriter, r *http.Request){
   db.Close()
 
   dataholder:=Holder{title2,content}
-  fmt.Println(dataholder)
-
   tpl:=template.Must(template.ParseFiles("forumscontent.gohtml","css/main.css","css/mcleod-reset.css"))
   tpl.Execute(w, dataholder)
 }
