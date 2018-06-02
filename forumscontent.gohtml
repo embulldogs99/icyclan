@@ -7,9 +7,9 @@
 <body>
 Test data
   <div class="column">
-    {{range .Holder}}
+    {{range .}}
     <h>{{.Forumstitle}}</h><br>
-    {{.Forumscontent.Postdate.Value}}
+    {{.Postdate.Value}}
     {{.Forumscontent.Postcount.Value}}
     {{.Forumscontent.Poster.Value}}
     {{.Forumscontent.Title.Value}}
