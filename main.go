@@ -351,7 +351,7 @@ func forumscontent(w http.ResponseWriter, r *http.Request){
   db, err := sql.Open("postgres", "postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable")
   if err != nil {log.Fatalf("Unable to connect to postgres")}
 
-  rows,err := db.Query(`SELECT postdate,postcount,poster,title,contents,imagefilelocation FROM icy.forums WHERE title='%s';`,title2)
+  rows,err := db.Query(`SELECT postdate,postcount,poster,title,contents,imagefilelocation FROM icy.forums WHERE title=$1;`,title2)
   if err != nil{log.Fatalf("failed to select leaderboard data")}
 
   content:= []Forums{}
