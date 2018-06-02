@@ -57,7 +57,7 @@ func main() {
   http.HandleFunc("/logout", logout)
   http.HandleFunc("/home", home)
   http.HandleFunc("/forums", forums)
-  http.HandleFunc("/forumscontent", forumscontent)
+  http.HandleFunc("/forumscontent/", forumscontent)
   http.HandleFunc("/signup", signup)
   http.HandleFunc("/joinleaderboard", joinleaderboard)
   http.HandleFunc("/leaderboard", leaderboard)
@@ -310,12 +310,6 @@ func forums(w http.ResponseWriter, r *http.Request){
     if err != nil {log.Fatal(err)}
     postcount:=rowcount+1
 
-    fmt.Println(u)
-    fmt.Println(posttitle)
-    fmt.Println(contents)
-    fmt.Println(postcount)
-    fmt.Println(current_time.Format("2006-01-02"))
-
     _, err = db.Exec(`INSERT INTO icy.forums (postdate,postcount,poster,title,contents,imagefilelocation) VALUES ($1,$2,$3,$4,$5,$6);`,current_time.Format("2006-01-02"),postcount,u.Email,posttitle,contents,imagefilelocation)
     db.Close()
     if err != nil{log.Fatalf("failed to insert new forums post")}
@@ -347,6 +341,7 @@ func forumscontent(w http.ResponseWriter, r *http.Request){
   url:=r.URL.Path
   s:="/forumscontent/"
   title:=strings.SplitAfter(url,s)
+  fmt.Println(title)
 
   type Holder struct{
     Forumstitle []string
@@ -370,9 +365,6 @@ func forumscontent(w http.ResponseWriter, r *http.Request){
   db.Close()
 
   dataholder:=Holder{title,content}
-
-
-
 
   tpl:=template.Must(template.ParseFiles("forumscontent.gohtml","css/main.css","css/mcleod-reset.css"))
   tpl.Execute(w, dataholder)
