@@ -302,10 +302,6 @@ func forums(w http.ResponseWriter, r *http.Request){
     u:=getUser(w,r)
     posttitle := r.FormValue("Title")
     contents := r.FormValue("Contents")
-    imagefilename := r.FormValue("Imagefilelocation")
-    imagefilelocation:=imagefilename+".JPG"
-
-
 
     r.ParseMultipartForm(32 << 20)
     file, handler, err := r.FormFile("pic")
@@ -313,6 +309,7 @@ func forums(w http.ResponseWriter, r *http.Request){
         return}
     defer file.Close()
     fmt.Fprintf(w, "%v", handler.Header)
+    imagefilename := handler.Filename
     f, err := os.OpenFile("forums/images/"+handler.Filename, os.O_WRONLY|os.O_CREATE, 0666)
     if err != nil {fmt.Println(err)
         return}
@@ -330,7 +327,7 @@ func forums(w http.ResponseWriter, r *http.Request){
     if err != nil {fmt.Println("failed to get distinct titles")}
     postcount:=rowcount+1
 
-    _, err = db.Exec(`INSERT INTO icy.forums (postdate,postcount,poster,title,contents,imagefilelocation) VALUES ($1,$2,$3,$4,$5,$6);`,current_time.Format("2006-01-02"),postcount,u.Email,posttitle,contents,imagefilelocation)
+    _, err = db.Exec(`INSERT INTO icy.forums (postdate,postcount,poster,title,contents,imagefilelocation) VALUES ($1,$2,$3,$4,$5,$6);`,current_time.Format("2006-01-02"),postcount,u.Email,posttitle,contents,imagefilename)
     db.Close()
     if err != nil{fmt.Println("failed to insert new forums post")}
 
