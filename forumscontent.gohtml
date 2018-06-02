@@ -14,15 +14,16 @@ Test data
 
     {{range .Forumscontent}}
     <table>
-    {{.Postdate.Value}}
-    {{.Postcount.Value}}
-    {{.Poster.Value}}
-    {{.Title.Value}}
-    {{.Contents.Value}}
-    {{.Imagefilelocation.Value}}
-    {{end}}
-    </table>
+      <tr>
+    <td>{{.Postdate.Value}}</td>
+    <td>{{.Postcount.Value}}</td>
+    <td>{{.Poster.Value}}</td>
+    <td>{{.Title.Value}}</td>
+    <td>{{.Contents.Value}}</td>
+    <td>{{.Imagefilelocation.Value}}</td></tr>
 
+    </table>
+    {{end}}
   </div>
 
 
