@@ -13,6 +13,7 @@
 </div>
 
 <body>
+    <div class="row">
   <div class="column">
     <h>{{.Forumstitle}}</h><br><br>
     {{range .Forumscontent}}
@@ -23,17 +24,18 @@
       {{.Contents.Value}}
       <img src="/forums/images/{{.Imagefilelocation.Value}}"/>
     {{end}}
-
-
+  </div>
+  <div class="column">
     <h>Post a Reply to this Thread</h>
   <form action="/forums" enctype="multipart/form-data" method="POST" class="forumsform">
     <input type="hidden" name="Title" value="{{.Forumstitle}}" size="50" maxlength="200" required><br>
-    Contents  <input type="text" name="Contents" size="50"><br>
-      Accepts .jpgs<input type="file" name="pic" accept=".jpg"><br><br>
+    Message:  <input type="text" name="Contents" size="50"><br>
+      Image: <input type="file" name="pic" accept="image/*"><br><br>
 
         <input type="submit" value="Submit" class="loginformsubmit"/><br><br><br>
 
   </form>
+    </div>
 <br><br><br><br>
   </div>
 
