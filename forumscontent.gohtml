@@ -9,12 +9,14 @@ Test data
   <div class="column">
     {{range .}}
     <h>{{.Forumstitle}}</h><br>
+    {{range .Forumscontent}}
     {{.Postdate.Value}}
     {{.Forumscontent.Postcount.Value}}
     {{.Forumscontent.Poster.Value}}
     {{.Forumscontent.Title.Value}}
     {{.Forumscontent.Contents.Value}}
     {{.Forumscontent.Imagefilelocation.Value}}
+    {{end}}
     {{end}}
 
   </div>
