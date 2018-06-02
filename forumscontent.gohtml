@@ -7,10 +7,21 @@
 <body>
 Test data
   <div class="column">
-    {{range .Forumscontent}}
-    {{.Postdate.Value}}
+    {{range .Forumstitle}}
+    <h>{{.}}</h>
     {{end}}
 
+
+    {{range .Forumscontent}}
+    <table>
+    {{.Postdate.Value}}
+    {{.Postcount.Value}}
+    {{.Poster.Value}}
+    {{.Title.Value}}
+    {{.Contents.Value}}
+    {{.Imagefilelocation.Value}}
+    {{end}}
+    </table>
 
   </div>
 
