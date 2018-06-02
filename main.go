@@ -331,6 +331,7 @@ func forums(w http.ResponseWriter, r *http.Request){
     db.Close()
     if err != nil{fmt.Println("failed to insert new forums post")}
 
+    getUser()
     http.Redirect(w,r,"/forumscontent/"+posttitle,http.StatusSeeOther)
 
   }
@@ -371,7 +372,6 @@ func forumscontent(w http.ResponseWriter, r *http.Request){
   db.Close()
 
   dataholder:=Holder{title2,content}
-  fmt.Println(dataholder)
   tpl:=template.Must(template.ParseFiles("forumscontent.gohtml","css/main.css","css/mcleod-reset.css"))
   tpl.Execute(w, dataholder)
 }
