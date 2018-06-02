@@ -342,6 +342,21 @@ func forumscontent(w http.ResponseWriter, r *http.Request){
   s:="/forumscontent/"
   title:=strings.SplitAfter(url,s)
   fmt.Println(title)
+  fmt.Println(title)
+  fmt.Println(title)
+  fmt.Println(title)
+  fmt.Println(title)
+  fmt.Println(title)
+  fmt.Println(title)
+  fmt.Println()
+  fmt.Println()
+  fmt.Println()
+  fmt.Println()
+  fmt.Println()
+  fmt.Println()
+  fmt.Println()
+  fmt.Println()
+  fmt.Println()
 
   type Holder struct{
     Forumstitle []string
