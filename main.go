@@ -57,7 +57,7 @@ func main() {
   http.HandleFunc("/logout", logout)
   http.HandleFunc("/home", home)
   http.HandleFunc("/forums", forums)
-  http.HandleFunc("/forumscontent/", forumscontent)
+  http.HandleFunc("/forumscontent", forumscontent)
   http.HandleFunc("/signup", signup)
   http.HandleFunc("/joinleaderboard", joinleaderboard)
   http.HandleFunc("/leaderboard", leaderboard)
@@ -343,8 +343,10 @@ func forums(w http.ResponseWriter, r *http.Request){
 
 
 func forumscontent(w http.ResponseWriter, r *http.Request){
+  if !alreadyLoggedIn(r) {http.Redirect(w,r,"/login", http.StatusSeeOther)}
+
   url:=r.URL.Path
-  s:="/forums/images/"
+  s:="/forumscontent/"
   title:=strings.SplitAfter(url,s)
 
   type Holder struct{
@@ -372,7 +374,7 @@ func forumscontent(w http.ResponseWriter, r *http.Request){
 
 
 
-  if !alreadyLoggedIn(r) {http.Redirect(w,r,"/login", http.StatusSeeOther)}
+
   tpl:=template.Must(template.ParseFiles("forumscontent.gohtml","css/main.css","css/mcleod-reset.css"))
   tpl.Execute(w, dataholder)
 }
