@@ -360,7 +360,7 @@ func forumscontent(w http.ResponseWriter, r *http.Request){
   fmt.Println()
 
   type Holder struct{
-    Forumstitle []string
+    Forumstitle string
     Forumscontent []Forums
   }
 
