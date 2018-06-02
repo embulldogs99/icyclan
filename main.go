@@ -254,7 +254,7 @@ func leaderboard(w http.ResponseWriter, r *http.Request){
 
 
 type Forums struct{
-  Postdate sql.NullFloat64
+  Postdate sql.NullString
   Postcount sql.NullFloat64
   Poster sql.NullString
   Title sql.NullString
