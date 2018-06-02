@@ -343,7 +343,6 @@ func forums(w http.ResponseWriter, r *http.Request){
 
 
 func forumscontent(w http.ResponseWriter, r *http.Request){
-  if !alreadyLoggedIn(r) {http.Redirect(w,r,"/login", http.StatusSeeOther)}
 
   url:=r.URL.Path
   s:="/forumscontent/"
