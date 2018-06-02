@@ -7,6 +7,9 @@
 <body>
 Test data
   <div class="column">
+    {{range .Forumstitle}}
+    {{.}}
+    {{end}}
     {{range .Forumscontent}}
     {{.}}
     {{end}}
