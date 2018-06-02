@@ -340,7 +340,7 @@ func forumscontent(w http.ResponseWriter, r *http.Request){
 
   url:=r.URL.Path
   s:="/forumscontent/"
-  title:=strings.Split(strings.Split(url,s)," ")
+  title:=strings.Split(url,s)
   title=title[1]
   fmt.Println(title)
   fmt.Println(title)
