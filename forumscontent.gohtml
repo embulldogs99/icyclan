@@ -5,12 +5,15 @@
 </head>
 
 <body>
-Test data
   <div class="column">
-    {{.Forumstitle}}
+    <h>{{.Forumstitle}}</h><br><br>
     {{range .Forumscontent}}
-    {{.Postdate.Value}}
-    {{.Postcount.Value}}
+    {{.Postdate.Value}}<br>
+    Post Number: {{.Postcount.Value}}<br>
+    OP: {{.Poster.Value}}<br>
+      Title: {{.Title.Value}}<br><br>
+      {{.Contents.Value}}
+      <img src="{{.Imagefilelocation.Value}}"/>
     {{end}}
 
 
